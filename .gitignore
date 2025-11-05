@@ -20,3 +20,7 @@ yarn-error.log
 
 # Server Credentials
 ../.server-credentials
+
+# Scribe API Documentation
+.scribe/
+public/docs/

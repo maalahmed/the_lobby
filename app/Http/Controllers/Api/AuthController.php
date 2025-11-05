@@ -9,10 +9,49 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @group Authentication
+ *
+ * APIs for user authentication and account management
+ */
 class AuthController extends Controller
 {
     /**
      * Register a new user
+     * 
+     * Register a new user account with role assignment (landlord, tenant, or service_provider).
+     * Admin accounts cannot be created through public registration.
+     * 
+     * @unauthenticated
+     * 
+     * @bodyParam name string required The user's full name. Example: John Doe
+     * @bodyParam email string required The user's email address. Example: john@example.com
+     * @bodyParam password string required The user's password (minimum 8 characters). Example: password123
+     * @bodyParam password_confirmation string required Password confirmation. Example: password123
+     * @bodyParam phone string The user's phone number. Example: +97150123456
+     * @bodyParam role string required The user's role. Must be one of: landlord, tenant, service_provider. Example: tenant
+     * 
+     * @response 201 {
+     *   "user": {
+     *     "id": 1,
+     *     "uuid": "550e8400-e29b-41d4-a716-446655440000",
+     *     "name": "John Doe",
+     *     "email": "john@example.com",
+     *     "phone": "+97150123456",
+     *     "status": "active",
+     *     "roles": ["tenant"],
+     *     "created_at": "2025-11-05T10:00:00.000000Z"
+     *   },
+     *   "token": "1|abc123xyz...",
+     *   "message": "User registered successfully"
+     * }
+     * 
+     * @response 422 {
+     *   "message": "The email has already been taken.",
+     *   "errors": {
+     *     "email": ["The email has already been taken."]
+     *   }
+     * }
      */
     public function register(Request $request)
     {
@@ -44,6 +83,42 @@ class AuthController extends Controller
 
     /**
      * Login user
+     * 
+     * Authenticate a user and receive an access token. The token must be included
+     * in the Authorization header for all subsequent authenticated requests.
+     * 
+     * @unauthenticated
+     * 
+     * @bodyParam email string required The user's email address. Example: admin@thelobby.com
+     * @bodyParam password string required The user's password. Example: password
+     * @bodyParam device_name string The device name for token identification. Example: mobile-app
+     * 
+     * @response 200 {
+     *   "user": {
+     *     "id": 1,
+     *     "uuid": "77ef470a-c9b4-495f-9633-1f9517e7763e",
+     *     "name": "System Administrator",
+     *     "email": "admin@thelobby.com",
+     *     "phone": "+97150123456",
+     *     "status": "active",
+     *     "roles": ["admin"],
+     *     "permissions": ["view-users", "create-users", "..."],
+     *     "profile": {
+     *       "first_name": "System",
+     *       "last_name": "Administrator"
+     *     },
+     *     "last_login_at": "2025-11-05T19:58:31.000000Z"
+     *   },
+     *   "token": "2|DCacC2h81yjDmbLgKZ7tMavTNv7E3AQxPiVFlozQ",
+     *   "message": "Login successful"
+     * }
+     * 
+     * @response 422 {
+     *   "message": "The provided credentials are incorrect.",
+     *   "errors": {
+     *     "email": ["The provided credentials are incorrect."]
+     *   }
+     * }
      */
     public function login(Request $request)
     {
