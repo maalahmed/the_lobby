@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserProfile extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
@@ -33,7 +32,6 @@ class UserProfile extends Model
         'emergency_contact' => 'json',
         'preferences' => 'json',
         'documents' => 'json',
-        'deleted_at' => 'datetime',
     ];
 
     /**
