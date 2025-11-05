@@ -30,9 +30,11 @@ class UserSeeder extends Seeder
             'profile_type' => 'admin',
             'first_name' => 'System',
             'last_name' => 'Administrator',
-            'preferred_language' => 'en',
-            'preferred_currency' => 'AED',
-            'timezone' => 'Asia/Dubai',
+            'preferences' => [
+                'language' => 'en',
+                'currency' => 'AED',
+                'timezone' => 'Asia/Dubai',
+            ],
         ]);
 
         // Landlord User
@@ -50,11 +52,15 @@ class UserSeeder extends Seeder
             'profile_type' => 'landlord',
             'first_name' => 'Ahmed',
             'last_name' => 'Al-Mansouri',
-            'preferred_language' => 'ar',
-            'preferred_currency' => 'AED',
-            'timezone' => 'Asia/Dubai',
-            'city' => 'Dubai',
-            'country' => 'UAE',
+            'address' => [
+                'city' => 'Dubai',
+                'country' => 'UAE',
+            ],
+            'preferences' => [
+                'language' => 'ar',
+                'currency' => 'AED',
+                'timezone' => 'Asia/Dubai',
+            ],
         ]);
 
         // Tenant User
@@ -72,9 +78,11 @@ class UserSeeder extends Seeder
             'profile_type' => 'tenant',
             'first_name' => 'Sarah',
             'last_name' => 'Johnson',
-            'preferred_language' => 'en',
-            'preferred_currency' => 'AED',
-            'timezone' => 'Asia/Dubai',
+            'preferences' => [
+                'language' => 'en',
+                'currency' => 'AED',
+                'timezone' => 'Asia/Dubai',
+            ],
         ]);
 
         // Service Provider User
@@ -92,9 +100,11 @@ class UserSeeder extends Seeder
             'profile_type' => 'service_provider',
             'first_name' => 'Quick Fix',
             'last_name' => 'Maintenance',
-            'preferred_language' => 'en',
-            'preferred_currency' => 'AED',
-            'timezone' => 'Asia/Dubai',
+            'preferences' => [
+                'language' => 'en',
+                'currency' => 'AED',
+                'timezone' => 'Asia/Dubai',
+            ],
         ]);
     }
 }
