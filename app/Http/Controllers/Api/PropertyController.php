@@ -49,7 +49,7 @@ class PropertyController extends BaseApiController
         $sortOrder = $request->get('sort_order', 'desc');
         $query->orderBy($sortBy, $sortOrder);
 
-        return $this->paginateResponse($query, PropertyResource::class, 'Properties retrieved successfully');
+        return $this->paginateResponse($query, PropertyResource::class, __('messages.properties_retrieved'));
     }
 
     /**
@@ -89,7 +89,7 @@ class PropertyController extends BaseApiController
 
         return $this->successResponse(
             new PropertyResource($property->load(['owner', 'units', 'amenities'])),
-            'Property created successfully',
+            __('messages.property_created'),
             201
         );
     }
@@ -101,14 +101,14 @@ class PropertyController extends BaseApiController
     {
         // Check authorization
         if (Auth::user()->hasRole('landlord') && $property->owner_id !== Auth::id()) {
-            return $this->errorResponse('Unauthorized access', 403);
+            return $this->errorResponse(__('messages.unauthorized'), 403);
         }
 
         $property->load(['owner', 'manager', 'units', 'amenities', 'leaseContracts', 'maintenanceRequests']);
 
         return $this->successResponse(
             new PropertyResource($property),
-            'Property retrieved successfully'
+            __('messages.properties_retrieved')
         );
     }
 
@@ -119,7 +119,7 @@ class PropertyController extends BaseApiController
     {
         // Check authorization
         if (Auth::user()->hasRole('landlord') && $property->owner_id !== Auth::id()) {
-            return $this->errorResponse('Unauthorized access', 403);
+            return $this->errorResponse(__('messages.unauthorized'), 403);
         }
 
         $validated = $request->validate([
@@ -141,7 +141,7 @@ class PropertyController extends BaseApiController
 
         return $this->successResponse(
             new PropertyResource($property->load(['owner', 'units', 'amenities'])),
-            'Property updated successfully'
+            __('messages.property_updated')
         );
     }
 
@@ -152,11 +152,11 @@ class PropertyController extends BaseApiController
     {
         // Check authorization
         if (Auth::user()->hasRole('landlord') && $property->owner_id !== Auth::id()) {
-            return $this->errorResponse('Unauthorized access', 403);
+            return $this->errorResponse(__('messages.unauthorized'), 403);
         }
 
         $property->delete();
 
-        return $this->successResponse(null, 'Property deleted successfully');
+        return $this->successResponse(null, __('messages.property_deleted'));
     }
 }

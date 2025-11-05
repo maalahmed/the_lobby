@@ -77,7 +77,7 @@ class AuthController extends Controller
         return response()->json([
             'user' => new UserResource($user),
             'token' => $token,
-            'message' => 'User registered successfully',
+            'message' => __('auth.register_success'),
         ], 201);
     }
 
@@ -132,13 +132,13 @@ class AuthController extends Controller
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
+                'email' => [__('auth.failed')],
             ]);
         }
 
         if ($user->status !== 'active') {
             throw ValidationException::withMessages([
-                'email' => ['Your account is inactive. Please contact support.'],
+                'email' => [__('auth.account_inactive')],
             ]);
         }
 
@@ -153,18 +153,18 @@ class AuthController extends Controller
         return response()->json([
             'user' => new UserResource($user->load('roles', 'profile')),
             'token' => $token,
-            'message' => 'Login successful',
+            'message' => __('auth.login_success'),
         ]);
     }
 
     /**
-     * Logout user (Revoke current token)
+     * Logout from current device
      */
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
 
-        return response()->json(['message' => 'Logged out successfully']);
+        return response()->json(['message' => __('auth.logout_success')]);
     }
 
     /**
@@ -174,7 +174,7 @@ class AuthController extends Controller
     {
         $request->user()->tokens()->delete();
 
-        return response()->json(['message' => 'Logged out from all devices successfully']);
+        return response()->json(['message' => __('auth.logout_all_success')]);
     }
 
     /**
@@ -200,7 +200,7 @@ class AuthController extends Controller
 
         return response()->json([
             'user' => new UserResource($request->user()->load('roles', 'profile')),
-            'message' => 'Profile updated successfully',
+            'message' => __('auth.profile_updated'),
         ]);
     }
 
@@ -216,7 +216,7 @@ class AuthController extends Controller
 
         if (!Hash::check($validated['current_password'], $request->user()->password)) {
             throw ValidationException::withMessages([
-                'current_password' => ['The provided password does not match your current password.'],
+                'current_password' => [__('auth.current_password_incorrect')],
             ]);
         }
 
@@ -224,6 +224,6 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return response()->json(['message' => 'Password changed successfully']);
+        return response()->json(['message' => __('auth.password_changed')]);
     }
 }
