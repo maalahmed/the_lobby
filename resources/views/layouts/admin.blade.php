@@ -151,6 +151,7 @@
                              @click.away="userMenuOpen = false"
                              x-cloak
                              class="absolute {{ app()->getLocale() === 'ar' ? 'left-0' : 'right-0' }} mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-50">
+                            {{-- TODO: Uncomment when auth is implemented
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">{{ __('Profile') }}</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">{{ __('Settings') }}</a>
                             <hr class="my-1">
@@ -160,6 +161,8 @@
                                     {{ __('Logout') }}
                                 </button>
                             </form>
+                            --}}
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-500">{{ __('Authentication Coming Soon') }}</a>
                         </div>
                     </div>
                 </div>
