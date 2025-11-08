@@ -17,8 +17,10 @@ class PropertyController extends BaseApiController
         $query = Property::with(['owner', 'units', 'amenities']);
 
         // Filter by owner if landlord role
-        if ($request->user()->hasRole('landlord')) {
-            $query->where('owner_id', $request->user()->id);
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+        if ($user->hasRole('landlord')) {
+            $query->where('owner_id', $user->id);
         }
 
         // Search filters
@@ -100,7 +102,9 @@ class PropertyController extends BaseApiController
     public function show(Property $property)
     {
         // Check authorization
-        if (Auth::user()->hasRole('landlord') && $property->owner_id !== Auth::id()) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        if ($user->hasRole('landlord') && $property->owner_id !== Auth::id()) {
             return $this->errorResponse(__('messages.unauthorized'), 403);
         }
 
@@ -118,7 +122,9 @@ class PropertyController extends BaseApiController
     public function update(Request $request, Property $property)
     {
         // Check authorization
-        if (Auth::user()->hasRole('landlord') && $property->owner_id !== Auth::id()) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        if ($user->hasRole('landlord') && $property->owner_id !== Auth::id()) {
             return $this->errorResponse(__('messages.unauthorized'), 403);
         }
 
@@ -151,7 +157,9 @@ class PropertyController extends BaseApiController
     public function destroy(Property $property)
     {
         // Check authorization
-        if (Auth::user()->hasRole('landlord') && $property->owner_id !== Auth::id()) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        if ($user->hasRole('landlord') && $property->owner_id !== Auth::id()) {
             return $this->errorResponse(__('messages.unauthorized'), 403);
         }
 
