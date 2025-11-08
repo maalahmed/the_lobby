@@ -15,7 +15,8 @@ use App\Livewire\Admin\Dashboard;
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth:sanctum'])->prefix('admin')->name('admin.')->group(function () {
+// TODO: Add proper authentication middleware after implementing login
+Route::prefix('admin')->name('admin.')->group(function () {
     
     // Dashboard
     Route::get('/', Dashboard::class)->name('dashboard');
