@@ -103,4 +103,15 @@ return [
     'message_marked_read' => 'تم وضع علامة مقروء على الرسالة',
     'message_not_found' => 'الرسالة غير موجودة',
 
+    // قواعد التحقق والأعمال
+    'unit_has_active_contracts' => 'لا يمكن حذف الوحدة مع عقود إيجار نشطة',
+    'tenant_has_active_contracts' => 'لا يمكن حذف المستأجر مع عقود إيجار نشطة',
+    'only_draft_contracts_can_be_deleted' => 'يمكن حذف العقود المسودة فقط',
+    'only_draft_invoices_can_be_deleted' => 'يمكن حذف الفواتير المسودة فقط',
+    'completed_payments_cannot_be_deleted' => 'لا يمكن حذف المدفوعات المكتملة لأغراض التدقيق',
+    'cannot_delete_request_with_jobs' => 'لا يمكن حذف طلب الصيانة مع وظائف معينة',
+    'cannot_delete_active_jobs' => 'لا يمكن حذف الوظائف قيد التنفيذ أو المكتملة',
+    'cannot_delete_provider_with_active_jobs' => 'لا يمكن حذف مزود الخدمة مع وظائف نشطة',
+    'notification_deleted' => 'تم حذف الإشعار بنجاح',
+
 ];

@@ -107,4 +107,15 @@ return [
     'message_marked_read' => 'Message marked as read',
     'message_not_found' => 'Message not found',
 
+    // Validation and Business Rules
+    'unit_has_active_contracts' => 'Cannot delete unit with active lease contracts',
+    'tenant_has_active_contracts' => 'Cannot delete tenant with active lease contracts',
+    'only_draft_contracts_can_be_deleted' => 'Only draft contracts can be deleted',
+    'only_draft_invoices_can_be_deleted' => 'Only draft invoices can be deleted',
+    'completed_payments_cannot_be_deleted' => 'Completed payments cannot be deleted for audit purposes',
+    'cannot_delete_request_with_jobs' => 'Cannot delete maintenance request with assigned jobs',
+    'cannot_delete_active_jobs' => 'Cannot delete jobs that are in progress or completed',
+    'cannot_delete_provider_with_active_jobs' => 'Cannot delete service provider with active jobs',
+    'notification_deleted' => 'Notification deleted successfully',
+
 ];
