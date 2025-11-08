@@ -46,7 +46,9 @@ class Dashboard extends Component
             ->take(5)
             ->get();
         
-        return view('livewire.admin.dashboard', compact('stats', 'recentContracts', 'recentPayments', 'recentMaintenance'))
-            ->layout('layouts.admin', ['title' => __('Dashboard')]);
+        /** @var \Illuminate\View\View $view */
+        $view = view('livewire.admin.dashboard', compact('stats', 'recentContracts', 'recentPayments', 'recentMaintenance'));
+        
+        return $view->layout('layouts.admin', ['title' => __('Dashboard')]);
     }
 }
