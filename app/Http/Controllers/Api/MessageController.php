@@ -51,17 +51,17 @@ class MessageController extends Controller
         
         $query = Message::where(function($q) use ($userId) {
             $q->where('sender_id', $userId)
-              ->orWhere('receiver_id', $userId);
-        })->with(['sender', 'receiver']);
+              ->orWhere('recipient_id', $userId);
+        })->with(['sender', 'recipient']);
         
         if ($request->filled('conversation_with')) {
             $query->where(function($q) use ($userId, $request) {
                 $q->where(function($q2) use ($userId, $request) {
                     $q2->where('sender_id', $userId)
-                       ->where('receiver_id', $request->conversation_with);
+                       ->where('recipient_id', $request->conversation_with);
                 })->orWhere(function($q2) use ($userId, $request) {
                     $q2->where('sender_id', $request->conversation_with)
-                       ->where('receiver_id', $userId);
+                       ->where('recipient_id', $userId);
                 });
             });
         }
@@ -70,7 +70,7 @@ class MessageController extends Controller
             if ($request->type === 'sent') {
                 $query->where('sender_id', $userId);
             } elseif ($request->type === 'received') {
-                $query->where('receiver_id', $userId);
+                $query->where('recipient_id', $userId);
             }
         }
         
@@ -109,12 +109,12 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'receiver_id' => 'required|exists:users,id',
+            'recipient_id' => 'required|exists:users,id',
             'subject' => 'nullable|string|max:255',
-            'message' => 'required|string',
-            'parent_message_id' => 'nullable|exists:messages,id',
-            'related_to_type' => 'nullable|in:property,unit,contract,invoice,maintenance',
-            'related_to_id' => 'nullable|string',
+            'body' => 'required|string',
+            'parent_id' => 'nullable|exists:messages,id',
+            'context_type' => 'nullable|in:property,unit,contract,invoice,maintenance',
+            'context_id' => 'nullable|string',
             'attachments' => 'nullable|array',
         ]);
         
@@ -122,7 +122,7 @@ class MessageController extends Controller
         
         $message = Message::create($validated);
         
-        // TODO: Send notification to receiver
+        // TODO: Send notification to recipient
         
         return new MessageResource($message);
     }
@@ -158,11 +158,11 @@ class MessageController extends Controller
         
         $message = Message::where(function($q) use ($userId) {
             $q->where('sender_id', $userId)
-              ->orWhere('receiver_id', $userId);
-        })->with(['sender', 'receiver', 'parentMessage'])->findOrFail($id);
+              ->orWhere('recipient_id', $userId);
+        })->with(['sender', 'recipient', 'parent'])->findOrFail($id);
         
-        // Mark as read if user is the receiver and message is unread
-        if ($message->receiver_id === $userId && !$message->is_read) {
+        // Mark as read if user is the recipient and message is unread
+        if ($message->recipient_id === $userId && !$message->is_read) {
             $message->update([
                 'is_read' => true,
                 'read_at' => now()
@@ -188,7 +188,7 @@ class MessageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $message = Message::where('receiver_id', auth()->id())->findOrFail($id);
+        $message = Message::where('recipient_id', auth()->id())->findOrFail($id);
         
         $message->update([
             'is_read' => true,
@@ -216,7 +216,7 @@ class MessageController extends Controller
         
         $message = Message::where(function($q) use ($userId) {
             $q->where('sender_id', $userId)
-              ->orWhere('receiver_id', $userId);
+              ->orWhere('recipient_id', $userId);
         })->findOrFail($id);
         
         $message->delete();
