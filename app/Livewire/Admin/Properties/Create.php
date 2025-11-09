@@ -99,12 +99,11 @@ class Create extends Component
     {
         $landlords = User::role('Landlord')->get();
 
-        /**
-         * @phpstan-ignore-next-line
-         * @psalm-suppress UndefinedInterfaceMethod
-         */
-        return view('livewire.admin.properties.create', [
+        /** @var \Illuminate\View\View $view */
+        $view = view('livewire.admin.properties.create', [
             'landlords' => $landlords,
-        ])->layout('layouts.admin', ['title' => __('Create Property')]);
+        ]);
+        
+        return $view->layout('layouts.admin', ['title' => __('Create Property')]);
     }
 }
