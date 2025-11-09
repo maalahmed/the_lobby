@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Dashboard;
-// use App\Livewire\Admin\Properties\PropertyIndex;
+use App\Livewire\Admin\Properties\Index as PropertiesIndex;
+use App\Livewire\Admin\Properties\Create as PropertiesCreate;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Invoices\InvoiceIndex;
@@ -22,7 +23,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', Dashboard::class)->name('dashboard');
     
     // Properties Management
-    // Route::get('/properties', PropertyIndex::class)->name('properties.index');
+    Route::prefix('properties')->name('properties.')->group(function () {
+        Route::get('/', PropertiesIndex::class)->name('index');
+        Route::get('/create', PropertiesCreate::class)->name('create');
+        // TODO: Add show, edit routes when components are ready
+        // Route::get('/{property}', Show::class)->name('show');
+        // Route::get('/{property}/edit', Edit::class)->name('edit');
+    });
     
     // Users Management
     // Route::get('/users', UserIndex::class)->name('users.index');
