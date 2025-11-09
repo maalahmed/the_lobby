@@ -115,11 +115,13 @@ class Index extends Component
         // Get landlords for filter dropdown
         $landlords = User::role('Landlord')->get();
 
+        /**
+         * @phpstan-ignore-next-line
+         * @psalm-suppress UndefinedInterfaceMethod
+         */
         return view('livewire.admin.properties.index', [
             'properties' => $properties,
             'landlords' => $landlords,
-        ])
-        /** @phpstan-ignore-next-line */
-        ->layout('layouts.admin', ['title' => __('Properties Management')]);
+        ])->layout('layouts.admin', ['title' => __('Properties Management')]);
     }
 }
