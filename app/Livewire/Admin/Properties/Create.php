@@ -89,7 +89,7 @@ class Create extends Component
             $property = Property::create([
                 'name' => $this->name,
                 'owner_id' => $this->landlord_id,
-                'property_type' => $this->type,
+                'type' => $this->type,  // Fixed: database column is 'type' not 'property_type'
                 'address_line_1' => $this->address,
                 'city' => $this->city,
                 'state' => $this->state,

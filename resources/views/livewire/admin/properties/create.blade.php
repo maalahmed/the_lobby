@@ -18,6 +18,21 @@
 
     <!-- Form -->
     <form wire:submit.prevent="save" class="space-y-6">
+        <!-- Flash Messages -->
+        @if (session()->has('error'))
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                <h3 class="text-sm font-medium text-red-800 mb-2">{{ __('Error') }}</h3>
+                <p class="text-sm text-red-700">{{ session('error') }}</p>
+            </div>
+        @endif
+
+        @if (session()->has('success'))
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                <h3 class="text-sm font-medium text-green-800 mb-2">{{ __('Success') }}</h3>
+                <p class="text-sm text-green-700">{{ session('success') }}</p>
+            </div>
+        @endif
+
         <!-- Validation Errors Summary -->
         @if ($errors->any())
             <div class="bg-red-50 border border-red-200 rounded-lg p-4">
@@ -247,27 +262,83 @@
     @push('scripts')
     <script>
         document.addEventListener('livewire:init', () => {
-            console.log('Livewire initialized');
+            console.log('=== PROPERTY CREATE FORM INITIALIZED ===');
+            console.log('Livewire version:', window.Livewire.version);
+            
+            // Track all Livewire updates
+            Livewire.hook('component.init', ({ component }) => {
+                console.log('Livewire component initialized:', component.name);
+            });
+            
+            Livewire.hook('message.sent', (message, component) => {
+                console.log('=== LIVEWIRE MESSAGE SENT ===', {
+                    componentName: component.name,
+                    updateQueue: message.updateQueue,
+                    payload: message.payload
+                });
+            });
+            
+            Livewire.hook('message.received', (message, component) => {
+                console.log('=== LIVEWIRE MESSAGE RECEIVED ===', {
+                    componentName: component.name,
+                    response: message.response
+                });
+            });
+            
+            Livewire.hook('message.failed', ({ message, component }) => {
+                console.error('=== LIVEWIRE MESSAGE FAILED ===', {
+                    componentName: component.name,
+                    message: message
+                });
+            });
             
             Livewire.on('property-created', () => {
-                console.log('Property created event received');
+                console.log('✅ Property created event received');
             });
         });
         
-        // Log form submission
+        // Log form submission attempts
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded');
+            
             const form = document.querySelector('form');
             if (form) {
+                console.log('Form element found:', form);
+                
                 form.addEventListener('submit', function(e) {
-                    console.log('Form submit event fired');
-                    console.log('Form data:', new FormData(form));
+                    console.log('=== FORM SUBMIT EVENT ===');
+                    console.log('Event type:', e.type);
+                    console.log('Default prevented:', e.defaultPrevented);
+                    
+                    const formData = new FormData(form);
+                    const formObj = {};
+                    formData.forEach((value, key) => {
+                        formObj[key] = value;
+                    });
+                    console.log('Form data object:', formObj);
                 });
+                
+                // Track wire:model bindings
+                const wireModelInputs = form.querySelectorAll('[wire\\:model]');
+                console.log(`Found ${wireModelInputs.length} wire:model bindings`);
+                wireModelInputs.forEach(input => {
+                    console.log(`- ${input.getAttribute('wire:model')}: ${input.type}`);
+                });
+            } else {
+                console.error('Form element not found!');
             }
         });
         
-        // Catch Livewire errors
+        // Catch all Livewire errors
         window.addEventListener('livewire:exception', (event) => {
-            console.error('Livewire exception:', event.detail);
+            console.error('=== LIVEWIRE EXCEPTION ===', event.detail);
+        });
+        
+        // Track Livewire loading states
+        document.addEventListener('livewire:init', () => {
+            Livewire.hook('morph.updated', ({ el, component }) => {
+                console.log('Element updated:', el);
+            });
         });
     </script>
     @endpush
