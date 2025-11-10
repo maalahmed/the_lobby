@@ -97,7 +97,7 @@ class Create extends Component
                 'country' => $this->country,
                 'description' => $this->description,
                 'total_units' => $this->total_units,
-                'year_built' => $this->year_built,
+                'built_year' => $this->year_built,  // Fixed: database column is 'built_year' not 'year_built'
                 'status' => $this->status,
             ]);
 
