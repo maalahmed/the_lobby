@@ -92,12 +92,12 @@ class Create extends Component
                 'type' => $this->type,  // Fixed: database column is 'type' not 'property_type'
                 'address_line_1' => $this->address,
                 'city' => $this->city,
-                'state' => $this->state,
-                'postal_code' => $this->postal_code,
+                'state' => $this->state ?: null,  // Convert empty string to null
+                'postal_code' => $this->postal_code ?: null,  // Convert empty string to null
                 'country' => $this->country,
-                'description' => $this->description,
+                'description' => $this->description ?: null,  // Convert empty string to null
                 'total_units' => $this->total_units,
-                'built_year' => $this->year_built,  // Fixed: database column is 'built_year' not 'year_built'
+                'built_year' => $this->year_built ?: null,  // Convert empty string to null for year field
                 'status' => $this->status,
             ]);
 
