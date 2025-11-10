@@ -203,7 +203,7 @@
                 <!-- State -->
                 <div>
                     <label for="state" class="block text-sm font-medium text-gray-700 mb-1">
-                        {{ __('State/Province') }}
+                        {{ __('State/Province') }} <span class="text-red-500">*</span>
                     </label>
                     <input type="text" 
                            id="state" 

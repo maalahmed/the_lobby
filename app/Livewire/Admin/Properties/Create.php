@@ -18,7 +18,7 @@ class Create extends Component
     public $type = 'residential';
     public $address = '';
     public $city = '';
-    public $state = '';
+    public $state = '';  // Required field per migration
     public $postal_code = '';
     public $country = 'Kuwait';
     public $description = '';
@@ -35,7 +35,7 @@ class Create extends Component
             'type' => 'required|in:residential,commercial,mixed,industrial,villa,building,apartment',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:100',
-            'state' => 'nullable|string|max:100',
+            'state' => 'required|string|max:100',  // Required per migration
             'postal_code' => 'nullable|string|max:20',
             'country' => 'required|string|max:100',
             'description' => 'nullable|string',
@@ -89,15 +89,15 @@ class Create extends Component
             $property = Property::create([
                 'name' => $this->name,
                 'owner_id' => $this->landlord_id,
-                'type' => $this->type,  // Fixed: database column is 'type' not 'property_type'
+                'type' => $this->type,
                 'address_line_1' => $this->address,
                 'city' => $this->city,
-                'state' => $this->state ?: null,  // Convert empty string to null
-                'postal_code' => $this->postal_code ?: null,  // Convert empty string to null
+                'state' => $this->state,  // Required field
+                'postal_code' => $this->postal_code ?: null,  // Nullable
                 'country' => $this->country,
-                'description' => $this->description ?: null,  // Convert empty string to null
+                'description' => $this->description ?: null,  // Nullable
                 'total_units' => $this->total_units,
-                'built_year' => $this->year_built ?: null,  // Convert empty string to null for year field
+                'built_year' => $this->year_built ?: null,  // Nullable
                 'status' => $this->status,
             ]);
 
