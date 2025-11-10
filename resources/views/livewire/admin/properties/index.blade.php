@@ -142,7 +142,7 @@
                                 <div class="text-sm font-medium text-gray-900">{{ $property->name }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $property->landlord->name ?? __('N/A') }}</div>
+                                <div class="text-sm text-gray-900">{{ $property->owner->name ?? __('N/A') }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-2 py-1 text-xs font-medium rounded-full

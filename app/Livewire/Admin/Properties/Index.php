@@ -80,7 +80,7 @@ class Index extends Component
 
     public function render()
     {
-        $query = Property::with(['landlord', 'units'])
+        $query = Property::with(['owner', 'units'])
             ->withCount(['units', 'units as occupied_units_count' => function ($query) {
                 $query->where('status', 'occupied');
             }]);
