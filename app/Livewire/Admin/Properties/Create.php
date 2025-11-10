@@ -31,7 +31,7 @@ class Create extends Component
         return [
             'name' => 'required|string|max:255',
             'landlord_id' => 'required|exists:users,id',
-            'type' => 'required|in:residential,commercial,mixed',
+            'type' => 'required|in:residential,commercial,mixed,industrial,villa,building,apartment',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:100',
             'state' => 'nullable|string|max:100',
@@ -40,7 +40,7 @@ class Create extends Component
             'description' => 'nullable|string',
             'total_units' => 'required|integer|min:1',
             'year_built' => 'nullable|integer|min:1900|max:' . (date('Y') + 1),
-            'status' => 'required|in:active,inactive,maintenance',
+            'status' => 'required|in:active,inactive,under_maintenance,vacant',
             'images.*' => 'nullable|image|max:2048',
         ];
     }
@@ -69,9 +69,9 @@ class Create extends Component
 
         $property = Property::create([
             'name' => $this->name,
-            'landlord_id' => $this->landlord_id,
-            'type' => $this->type,
-            'address' => $this->address,
+            'owner_id' => $this->landlord_id,
+            'property_type' => $this->type,
+            'address_line_1' => $this->address,
             'city' => $this->city,
             'state' => $this->state,
             'postal_code' => $this->postal_code,

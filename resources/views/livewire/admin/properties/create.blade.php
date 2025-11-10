@@ -46,7 +46,7 @@
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('landlord_id') border-red-500 @enderror">
                         <option value="">{{ __('Select Landlord') }}</option>
                         @foreach($landlords as $landlord)
-                            <option value="{{ $landlord->id }}">{{ $landlord->name }} - {{ $landlord->email }}</option>
+                            <option value="{{ $landlord->id }}">{{ $landlord->first_name }} {{ $landlord->last_name }} - {{ $landlord->email }}</option>
                         @endforeach
                     </select>
                     @error('landlord_id')
@@ -65,6 +65,10 @@
                         <option value="residential">{{ __('Residential') }}</option>
                         <option value="commercial">{{ __('Commercial') }}</option>
                         <option value="mixed">{{ __('Mixed') }}</option>
+                        <option value="industrial">{{ __('Industrial') }}</option>
+                        <option value="villa">{{ __('Villa') }}</option>
+                        <option value="building">{{ __('Building') }}</option>
+                        <option value="apartment">{{ __('Apartment') }}</option>
                     </select>
                     @error('type')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -112,7 +116,8 @@
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('status') border-red-500 @enderror">
                         <option value="active">{{ __('Active') }}</option>
                         <option value="inactive">{{ __('Inactive') }}</option>
-                        <option value="maintenance">{{ __('Under Maintenance') }}</option>
+                        <option value="under_maintenance">{{ __('Under Maintenance') }}</option>
+                        <option value="vacant">{{ __('Vacant') }}</option>
                     </select>
                     @error('status')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
