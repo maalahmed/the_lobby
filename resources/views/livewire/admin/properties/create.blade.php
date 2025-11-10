@@ -243,4 +243,32 @@
             </button>
         </div>
     </form>
+
+    @push('scripts')
+    <script>
+        document.addEventListener('livewire:init', () => {
+            console.log('Livewire initialized');
+            
+            Livewire.on('property-created', () => {
+                console.log('Property created event received');
+            });
+        });
+        
+        // Log form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    console.log('Form submit event fired');
+                    console.log('Form data:', new FormData(form));
+                });
+            }
+        });
+        
+        // Catch Livewire errors
+        window.addEventListener('livewire:exception', (event) => {
+            console.error('Livewire exception:', event.detail);
+        });
+    </script>
+    @endpush
 </div>
