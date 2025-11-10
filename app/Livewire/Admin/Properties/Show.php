@@ -10,10 +10,10 @@ class Show extends Component
     public Property $property;
     public $showDeleteModal = false;
 
-    public function mount($id)
+    public function mount(Property $property)
     {
-        $this->property = Property::with(['owner', 'manager', 'units', 'amenities'])
-            ->findOrFail($id);
+        // Load relationships
+        $this->property = $property->load(['owner', 'manager', 'units', 'amenities']);
     }
 
     public function confirmDelete()
