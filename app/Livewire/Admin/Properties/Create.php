@@ -6,6 +6,7 @@ use App\Models\Property;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Log;
 
 class Create extends Component
 {
@@ -65,13 +66,12 @@ class Create extends Component
 
     public function save()
     {
-        $this->validate();
-
-        $property = Property::create([
+        Log::info('Property Create - Save method called');
+        Log::info('Form Data:', [
             'name' => $this->name,
-            'owner_id' => $this->landlord_id,
-            'property_type' => $this->type,
-            'address_line_1' => $this->address,
+            'landlord_id' => $this->landlord_id,
+            'type' => $this->type,
+            'address' => $this->address,
             'city' => $this->city,
             'state' => $this->state,
             'postal_code' => $this->postal_code,
@@ -82,17 +82,50 @@ class Create extends Component
             'status' => $this->status,
         ]);
 
-        // Handle image uploads if Spatie Media Library is configured
-        // if ($this->images) {
-        //     foreach ($this->images as $image) {
-        //         $property->addMedia($image->getRealPath())
-        //             ->toMediaCollection('images');
-        //     }
-        // }
+        try {
+            $this->validate();
+            Log::info('Validation passed');
 
-        session()->flash('success', __('Property created successfully'));
-        
-        return redirect()->route('admin.properties.index');
+            $property = Property::create([
+                'name' => $this->name,
+                'owner_id' => $this->landlord_id,
+                'property_type' => $this->type,
+                'address_line_1' => $this->address,
+                'city' => $this->city,
+                'state' => $this->state,
+                'postal_code' => $this->postal_code,
+                'country' => $this->country,
+                'description' => $this->description,
+                'total_units' => $this->total_units,
+                'year_built' => $this->year_built,
+                'status' => $this->status,
+            ]);
+
+            Log::info('Property created successfully', ['id' => $property->id]);
+
+            // Handle image uploads if Spatie Media Library is configured
+            // if ($this->images) {
+            //     foreach ($this->images as $image) {
+            //         $property->addMedia($image->getRealPath())
+            //             ->toMediaCollection('images');
+            //     }
+            // }
+
+            session()->flash('success', __('Property created successfully'));
+            
+            return redirect()->route('admin.properties.index');
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation failed', ['errors' => $e->errors()]);
+            throw $e;
+        } catch (\Exception $e) {
+            Log::error('Property creation failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            session()->flash('error', __('Failed to create property: ') . $e->getMessage());
+            return;
+        }
     }
 
     public function render()
