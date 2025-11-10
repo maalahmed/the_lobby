@@ -35,7 +35,7 @@ class Edit extends Component
         // Populate form fields
         $this->name = $this->property->name;
         $this->landlord_id = $this->property->owner_id;
-        $this->type = $this->property->property_type;
+        $this->type = $this->property->type;  // Fixed: column is 'type' not 'property_type'
         $this->address = $this->property->address_line_1;
         $this->city = $this->property->city;
         $this->state = $this->property->state;
@@ -43,7 +43,7 @@ class Edit extends Component
         $this->country = $this->property->country;
         $this->description = $this->property->description;
         $this->total_units = $this->property->total_units;
-        $this->year_built = $this->property->year_built;
+        $this->year_built = $this->property->built_year;  // Fixed: column is 'built_year' not 'year_built'
         $this->status = $this->property->status;
     }
 
@@ -55,7 +55,7 @@ class Edit extends Component
             'type' => 'required|in:residential,commercial,mixed,industrial,villa,building,apartment',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:100',
-            'state' => 'nullable|string|max:100',
+            'state' => 'required|string|max:100',  // Fixed: required per migration
             'postal_code' => 'nullable|string|max:20',
             'country' => 'required|string|max:100',
             'description' => 'nullable|string',
@@ -91,15 +91,15 @@ class Edit extends Component
         $this->property->update([
             'name' => $this->name,
             'owner_id' => $this->landlord_id,
-            'property_type' => $this->type,
+            'type' => $this->type,  // Fixed: column is 'type' not 'property_type'
             'address_line_1' => $this->address,
             'city' => $this->city,
-            'state' => $this->state,
-            'postal_code' => $this->postal_code,
+            'state' => $this->state,  // Required field
+            'postal_code' => $this->postal_code ?: null,  // Nullable
             'country' => $this->country,
-            'description' => $this->description,
+            'description' => $this->description ?: null,  // Nullable
             'total_units' => $this->total_units,
-            'year_built' => $this->year_built,
+            'built_year' => $this->year_built ?: null,  // Fixed: column is 'built_year' with null conversion
             'status' => $this->status,
         ]);
 

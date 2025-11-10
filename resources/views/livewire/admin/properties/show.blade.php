@@ -65,7 +65,7 @@
                     
                     <div>
                         <label class="text-sm font-medium text-gray-500">{{ __('Property Type') }}</label>
-                        <p class="mt-1 text-gray-900">{{ __(ucfirst(str_replace('_', ' ', $property->property_type))) }}</p>
+                        <p class="mt-1 text-gray-900">{{ __(ucfirst(str_replace('_', ' ', $property->type))) }}</p>
                     </div>
 
                     <div>
@@ -80,7 +80,7 @@
 
                     <div>
                         <label class="text-sm font-medium text-gray-500">{{ __('Year Built') }}</label>
-                        <p class="mt-1 text-gray-900">{{ $property->year_built ?? '-' }}</p>
+                        <p class="mt-1 text-gray-900">{{ $property->built_year ?? '-' }}</p>
                     </div>
 
                     <div>

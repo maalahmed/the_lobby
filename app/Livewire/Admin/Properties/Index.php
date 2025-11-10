@@ -89,7 +89,7 @@ class Index extends Component
         if ($this->search) {
             $query->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('address', 'like', '%' . $this->search . '%')
+                    ->orWhere('address_line_1', 'like', '%' . $this->search . '%')  // Fixed: column is 'address_line_1'
                     ->orWhere('city', 'like', '%' . $this->search . '%');
             });
         }
@@ -104,7 +104,7 @@ class Index extends Component
         }
 
         if ($this->landlordId) {
-            $query->where('landlord_id', $this->landlordId);
+            $query->where('owner_id', $this->landlordId);  // Fixed: column is 'owner_id' not 'landlord_id'
         }
 
         // Sorting
