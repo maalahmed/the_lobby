@@ -17,7 +17,19 @@
     </div>
 
     <!-- Form -->
-    <form wire:submit="save" class="space-y-6">
+    <form wire:submit.prevent="save" class="space-y-6">
+        <!-- Validation Errors Summary -->
+        @if ($errors->any())
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                <h3 class="text-sm font-medium text-red-800 mb-2">{{ __('Please fix the following errors:') }}</h3>
+                <ul class="list-disc list-inside text-sm text-red-700">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <h2 class="text-lg font-semibold text-gray-900 mb-4">{{ __('Basic Information') }}</h2>
             
@@ -224,8 +236,10 @@
                 {{ __('Cancel') }}
             </a>
             <button type="submit" 
-                    class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                {{ __('Create Property') }}
+                    wire:loading.attr="disabled"
+                    class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-50">
+                <span wire:loading.remove>{{ __('Create Property') }}</span>
+                <span wire:loading>{{ __('Creating...') }}</span>
             </button>
         </div>
     </form>
