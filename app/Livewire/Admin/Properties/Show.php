@@ -12,8 +12,8 @@ class Show extends Component
 
     public function mount(Property $property)
     {
-        // Load relationships
-        $this->property = $property->load(['owner', 'manager', 'units', 'amenities']);
+        // Load relationships (excluding amenities - table doesn't have soft deletes)
+        $this->property = $property->load(['owner', 'manager', 'units']);
     }
 
     public function confirmDelete()
