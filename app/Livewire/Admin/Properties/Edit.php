@@ -28,9 +28,9 @@ class Edit extends Component
     public $status = 'active';
     public $images = [];
 
-    public function mount($property)
+    public function mount(Property $property)
     {
-        $this->property = Property::findOrFail($property);
+        $this->property = $property;
         
         // Populate form fields
         $this->name = $this->property->name;
