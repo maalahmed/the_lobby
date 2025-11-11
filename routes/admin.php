@@ -14,6 +14,10 @@ use App\Livewire\Admin\Tenants\Index as TenantsIndex;
 use App\Livewire\Admin\Tenants\Create as TenantsCreate;
 use App\Livewire\Admin\Tenants\Show as TenantsShow;
 use App\Livewire\Admin\Tenants\Edit as TenantsEdit;
+use App\Livewire\Admin\LeaseContracts\Index as LeaseContractsIndex;
+use App\Livewire\Admin\LeaseContracts\Create as LeaseContractsCreate;
+use App\Livewire\Admin\LeaseContracts\Show as LeaseContractsShow;
+use App\Livewire\Admin\LeaseContracts\Edit as LeaseContractsEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Invoices\InvoiceIndex;
@@ -54,6 +58,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', TenantsCreate::class)->name('create');
         Route::get('/{tenant}', TenantsShow::class)->name('show');
         Route::get('/{tenant}/edit', TenantsEdit::class)->name('edit');
+    });
+    
+    // Lease Contracts Management
+    Route::prefix('lease-contracts')->name('lease-contracts.')->group(function () {
+        Route::get('/', LeaseContractsIndex::class)->name('index');
+        Route::get('/create', LeaseContractsCreate::class)->name('create');
+        Route::get('/{contract}', LeaseContractsShow::class)->name('show');
+        Route::get('/{contract}/edit', LeaseContractsEdit::class)->name('edit');
     });
     
     // Users Management
