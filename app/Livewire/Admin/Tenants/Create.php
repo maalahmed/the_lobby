@@ -87,7 +87,6 @@ class Create extends Component
                     'email' => $this->email,
                     'phone' => $this->phone,
                     'password' => bcrypt($this->password),
-                    'role' => 'tenant',
                 ]);
                 $userId = $user->id;
             } else {
@@ -150,7 +149,6 @@ class Create extends Component
     public function render()
     {
         $users = User::whereDoesntHave('tenant')
-            ->where('role', 'tenant')
             ->select('id', 'name', 'email')
             ->get();
 
