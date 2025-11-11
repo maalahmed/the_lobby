@@ -8,6 +8,7 @@ use App\Models\LeaseContract;
 use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\MaintenanceRequest;
+use App\Models\Tenant;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -22,8 +23,8 @@ class Dashboard extends Component
             'occupied_units' => PropertyUnit::where('status', 'occupied')->count(),
             'available_units' => PropertyUnit::where('status', 'available')->count(),
             'active_contracts' => LeaseContract::where('status', 'active')->count(),
-            'total_tenants' => User::role('tenant')->count(),
-            'total_landlords' => User::role('landlord')->count(),
+            'total_tenants' => Tenant::count(),
+            'total_landlords' => 0, // TODO: Implement landlords when role system is added
             'pending_invoices' => Invoice::whereIn('status', ['draft', 'sent'])->count(),
             'overdue_invoices' => Invoice::where('status', 'overdue')->count(),
             'total_revenue' => Payment::where('status', 'completed')->sum('amount'),
