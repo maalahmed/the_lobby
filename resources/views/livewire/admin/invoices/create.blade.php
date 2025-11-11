@@ -140,7 +140,7 @@
 
                             <div class="mb-4 bg-gray-50 p-4 rounded-lg">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Total Amount') }}</label>
-                                <div class="text-2xl font-bold text-gray-900">{{ number_format($total_amount, 2) }}</div>
+                                <div class="text-2xl font-bold text-gray-900">{{ number_format((float)$total_amount, 2) }}</div>
                                 <p class="text-xs text-gray-500 mt-1">{{ __('Calculated: Subtotal + Tax - Discount') }}</p>
                             </div>
                         </div>

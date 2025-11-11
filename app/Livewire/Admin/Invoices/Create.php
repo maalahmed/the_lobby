@@ -27,7 +27,7 @@ class Create extends Component
     public $subtotal = '';
     public $tax_amount = 0;
     public $discount_amount = 0;
-    public $total_amount = '';
+    public $total_amount = 0;
 
     // Dates
     public $invoice_date = '';
