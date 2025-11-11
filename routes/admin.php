@@ -18,9 +18,12 @@ use App\Livewire\Admin\LeaseContracts\Index as LeaseContractsIndex;
 use App\Livewire\Admin\LeaseContracts\Create as LeaseContractsCreate;
 use App\Livewire\Admin\LeaseContracts\Show as LeaseContractsShow;
 use App\Livewire\Admin\LeaseContracts\Edit as LeaseContractsEdit;
+use App\Livewire\Admin\Invoices\Index as InvoicesIndex;
+use App\Livewire\Admin\Invoices\Create as InvoicesCreate;
+use App\Livewire\Admin\Invoices\Show as InvoicesShow;
+use App\Livewire\Admin\Invoices\Edit as InvoicesEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
-// use App\Livewire\Admin\Invoices\InvoiceIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
 // use App\Livewire\Admin\Reports\ReportIndex;
 
@@ -66,6 +69,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', LeaseContractsCreate::class)->name('create');
         Route::get('/{contract}', LeaseContractsShow::class)->name('show');
         Route::get('/{contract}/edit', LeaseContractsEdit::class)->name('edit');
+    });
+    
+    // Invoices Management
+    Route::prefix('invoices')->name('invoices.')->group(function () {
+        Route::get('/', InvoicesIndex::class)->name('index');
+        Route::get('/create', InvoicesCreate::class)->name('create');
+        Route::get('/{invoice}', InvoicesShow::class)->name('show');
+        Route::get('/{invoice}/edit', InvoicesEdit::class)->name('edit');
     });
     
     // Users Management

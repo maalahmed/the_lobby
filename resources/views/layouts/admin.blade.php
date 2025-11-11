@@ -91,6 +91,15 @@
                 {{ __('Lease Contracts') }}
             </a>
             
+            <!-- Invoices -->
+            <a href="{{ route('admin.invoices.index') }}" 
+               class="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.invoices.*') ? 'bg-gray-800 text-white' : '' }}">
+                <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-3' : 'mr-3' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"/>
+                </svg>
+                {{ __('Invoices') }}
+            </a>
+            
             {{-- TODO: Uncomment when routes are created
             <a href="{{ route('admin.users.index') }}" 
                class="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.users.*') ? 'bg-gray-800 text-white' : '' }}">
