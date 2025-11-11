@@ -89,7 +89,7 @@ class Edit extends Component
         // Load units for selected property
         if ($this->property_id) {
             $this->units = PropertyUnit::where('property_id', $this->property_id)
-                ->select('id', 'unit_number', 'rent', 'status')
+                ->select('id', 'unit_number', 'rent_amount', 'security_deposit', 'status')
                 ->orderBy('unit_number')
                 ->get();
         }
@@ -99,7 +99,7 @@ class Edit extends Component
     {
         if ($value) {
             $this->units = PropertyUnit::where('property_id', $value)
-                ->select('id', 'unit_number', 'rent', 'status')
+                ->select('id', 'unit_number', 'rent_amount', 'security_deposit', 'status')
                 ->orderBy('unit_number')
                 ->get();
         } else {

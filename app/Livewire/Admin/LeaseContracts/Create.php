@@ -61,7 +61,7 @@ class Create extends Component
     {
         if ($value) {
             $this->units = PropertyUnit::where('property_id', $value)
-                ->select('id', 'unit_number', 'rent', 'status')
+                ->select('id', 'unit_number', 'rent_amount', 'security_deposit', 'status')
                 ->orderBy('unit_number')
                 ->get();
             $this->unit_id = '';
@@ -76,8 +76,8 @@ class Create extends Component
         if ($value) {
             $unit = PropertyUnit::find($value);
             if ($unit && empty($this->rent_amount)) {
-                $this->rent_amount = $unit->rent;
-                $this->security_deposit = $unit->security_deposit ?? ($unit->rent * 1); // Default 1 month rent
+                $this->rent_amount = $unit->rent_amount;
+                $this->security_deposit = $unit->security_deposit ?? ($unit->rent_amount * 1); // Default 1 month rent
             }
         }
     }

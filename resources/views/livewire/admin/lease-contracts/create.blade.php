@@ -38,7 +38,7 @@
                                         <option value="">{{ __('Select Unit') }}</option>
                                         @foreach($units as $unit)
                                             <option value="{{ $unit->id }}">
-                                                {{ $unit->unit_number }} - {{ number_format($unit->rent, 2) }} 
+                                                {{ $unit->unit_number }} - {{ number_format($unit->rent_amount, 2) }} 
                                                 @if($unit->status !== 'available')
                                                     ({{ ucfirst($unit->status) }})
                                                 @endif
