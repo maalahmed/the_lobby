@@ -12,33 +12,40 @@ class Payment extends Model
 
     protected $fillable = [
         'uuid',
-        'payment_number',
+        'payment_reference',
         'invoice_id',
         'tenant_id',
         'property_id',
         'amount',
         'currency',
-        'payment_date',
         'payment_method',
-        'payment_gateway',
-        'transaction_id',
+        'gateway_name',
+        'gateway_transaction_id',
         'gateway_response',
         'status',
-        'verified_by',
+        'verification_status',
+        'payment_date',
+        'processed_at',
         'verified_at',
         'bank_name',
-        'bank_transaction_ref',
         'check_number',
-        'check_date',
-        'receipt_url',
+        'bank_reference',
         'notes',
+        'receipt_url',
+        'refunded_amount',
+        'refunded_at',
+        'refund_reason',
+        'created_by',
+        'verified_by',
     ];
 
     protected $casts = [
         'payment_date' => 'date',
-        'check_date' => 'date',
+        'processed_at' => 'datetime',
         'verified_at' => 'datetime',
+        'refunded_at' => 'datetime',
         'amount' => 'decimal:2',
+        'refunded_amount' => 'decimal:2',
         'gateway_response' => 'json',
         'deleted_at' => 'datetime',
     ];
@@ -54,8 +61,8 @@ class Payment extends Model
             if (empty($payment->uuid)) {
                 $payment->uuid = \Illuminate\Support\Str::uuid();
             }
-            if (empty($payment->payment_number)) {
-                $payment->payment_number = 'PAY-' . date('Y') . '-' . str_pad(Payment::count() + 1, 6, '0', STR_PAD_LEFT);
+            if (empty($payment->payment_reference)) {
+                $payment->payment_reference = 'PAY-' . date('Y') . '-' . str_pad(Payment::count() + 1, 6, '0', STR_PAD_LEFT);
             }
         });
     }
@@ -90,5 +97,29 @@ class Payment extends Model
     public function verifier()
     {
         return $this->belongsTo(User::class, 'verified_by');
+    }
+
+    /**
+     * Get the user who created the payment.
+     */
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * Check if payment is refunded
+     */
+    public function isRefunded()
+    {
+        return $this->status === 'refunded' || $this->refunded_amount > 0;
+    }
+
+    /**
+     * Get remaining refundable amount
+     */
+    public function getRefundableAmountAttribute()
+    {
+        return $this->amount - $this->refunded_amount;
     }
 }

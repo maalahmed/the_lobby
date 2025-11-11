@@ -22,6 +22,10 @@ use App\Livewire\Admin\Invoices\Index as InvoicesIndex;
 use App\Livewire\Admin\Invoices\Create as InvoicesCreate;
 use App\Livewire\Admin\Invoices\Show as InvoicesShow;
 use App\Livewire\Admin\Invoices\Edit as InvoicesEdit;
+use App\Livewire\Admin\Payments\Index as PaymentsIndex;
+use App\Livewire\Admin\Payments\Create as PaymentsCreate;
+use App\Livewire\Admin\Payments\Show as PaymentsShow;
+use App\Livewire\Admin\Payments\Edit as PaymentsEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -77,6 +81,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', InvoicesCreate::class)->name('create');
         Route::get('/{invoice}', InvoicesShow::class)->name('show');
         Route::get('/{invoice}/edit', InvoicesEdit::class)->name('edit');
+    });
+    
+    // Payments Management
+    Route::prefix('payments')->name('payments.')->group(function () {
+        Route::get('/', PaymentsIndex::class)->name('index');
+        Route::get('/create', PaymentsCreate::class)->name('create');
+        Route::get('/{payment}', PaymentsShow::class)->name('show');
+        Route::get('/{payment}/edit', PaymentsEdit::class)->name('edit');
     });
     
     // Users Management

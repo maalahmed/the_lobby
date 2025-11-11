@@ -99,6 +99,15 @@
                 </svg>
                 {{ __('Invoices') }}
             </a>
+
+            <!-- Payments -->
+            <a href="{{ route('admin.payments.index') }}" 
+               class="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.payments.*') ? 'bg-gray-800 text-white' : '' }}">
+                <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-3' : 'mr-3' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+                {{ __('Payments') }}
+            </a>
             
             {{-- TODO: Uncomment when routes are created
             <a href="{{ route('admin.users.index') }}" 
