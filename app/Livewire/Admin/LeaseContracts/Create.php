@@ -61,8 +61,7 @@ class Create extends Component
     {
         if ($value) {
             $this->units = PropertyUnit::where('property_id', $value)
-                ->where('status', 'available')
-                ->select('id', 'unit_number', 'rent')
+                ->select('id', 'unit_number', 'rent', 'status')
                 ->orderBy('unit_number')
                 ->get();
             $this->unit_id = '';

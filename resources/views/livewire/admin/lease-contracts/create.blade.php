@@ -34,10 +34,15 @@
                                 </div>
                                 <div>
                                     <label for="unit_id" class="block text-sm font-medium text-gray-700">{{ __('Unit') }} <span class="text-red-500">*</span></label>
-                                    <select wire:model.live="unit_id" id="unit_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" {{ empty($units) ? 'disabled' : '' }}>
+                                    <select wire:model.live="unit_id" id="unit_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" {{ empty($property_id) ? 'disabled' : '' }}>
                                         <option value="">{{ __('Select Unit') }}</option>
                                         @foreach($units as $unit)
-                                            <option value="{{ $unit->id }}">{{ $unit->unit_number }} ({{ number_format($unit->rent, 2) }})</option>
+                                            <option value="{{ $unit->id }}">
+                                                {{ $unit->unit_number }} - {{ number_format($unit->rent, 2) }} 
+                                                @if($unit->status !== 'available')
+                                                    ({{ ucfirst($unit->status) }})
+                                                @endif
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('unit_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
