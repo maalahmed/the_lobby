@@ -6,6 +6,10 @@ use App\Livewire\Admin\Properties\Index as PropertiesIndex;
 use App\Livewire\Admin\Properties\Create as PropertiesCreate;
 use App\Livewire\Admin\Properties\Show as PropertiesShow;
 use App\Livewire\Admin\Properties\Edit as PropertiesEdit;
+use App\Livewire\Admin\Units\Index as UnitsIndex;
+use App\Livewire\Admin\Units\Create as UnitsCreate;
+use App\Livewire\Admin\Units\Show as UnitsShow;
+use App\Livewire\Admin\Units\Edit as UnitsEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Invoices\InvoiceIndex;
@@ -30,6 +34,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', PropertiesCreate::class)->name('create');
         Route::get('/{property}', PropertiesShow::class)->name('show');
         Route::get('/{property}/edit', PropertiesEdit::class)->name('edit');
+    });
+    
+    // Units Management
+    Route::prefix('units')->name('units.')->group(function () {
+        Route::get('/', UnitsIndex::class)->name('index');
+        Route::get('/create', UnitsCreate::class)->name('create');
+        Route::get('/{unit}', UnitsShow::class)->name('show');
+        Route::get('/{unit}/edit', UnitsEdit::class)->name('edit');
     });
     
     // Users Management
