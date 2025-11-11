@@ -16,30 +16,31 @@ class PropertyUnit extends Model implements HasMedia
         'uuid',
         'property_id',
         'unit_number',
-        'unit_type',
-        'floor_number',
+        'floor',  // Fixed: matches migration
+        'type',  // Fixed: matches migration
+        'area',  // Fixed: matches migration
         'bedrooms',
         'bathrooms',
-        'area_sqft',
-        'area_sqm',
+        'balconies',  // Added: from migration
+        'parking_spaces',  // Added: from migration
         'rent_amount',
-        'rent_currency',
+        'security_deposit',  // Fixed: matches migration
         'rent_frequency',
-        'deposit_amount',
-        'furnished_status',
-        'available_from',
+        'furnished',  // Fixed: matches migration
+        'amenities',  // Added: from migration
+        'features',
         'status',
+        'available_from',
         'description',
         'description_ar',
-        'features',
     ];
 
     protected $casts = [
         'available_from' => 'date',
         'rent_amount' => 'decimal:2',
-        'deposit_amount' => 'decimal:2',
-        'area_sqft' => 'decimal:2',
-        'area_sqm' => 'decimal:2',
+        'security_deposit' => 'decimal:2',  // Fixed: matches migration
+        'area' => 'decimal:2',  // Fixed: matches migration
+        'amenities' => 'json',  // Added: from migration
         'features' => 'json',
         'deleted_at' => 'datetime',
     ];
