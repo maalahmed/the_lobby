@@ -10,6 +10,10 @@ use App\Livewire\Admin\Units\Index as UnitsIndex;
 use App\Livewire\Admin\Units\Create as UnitsCreate;
 use App\Livewire\Admin\Units\Show as UnitsShow;
 use App\Livewire\Admin\Units\Edit as UnitsEdit;
+use App\Livewire\Admin\Tenants\Index as TenantsIndex;
+use App\Livewire\Admin\Tenants\Create as TenantsCreate;
+use App\Livewire\Admin\Tenants\Show as TenantsShow;
+use App\Livewire\Admin\Tenants\Edit as TenantsEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Invoices\InvoiceIndex;
@@ -42,6 +46,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', UnitsCreate::class)->name('create');
         Route::get('/{unit}', UnitsShow::class)->name('show');
         Route::get('/{unit}/edit', UnitsEdit::class)->name('edit');
+    });
+    
+    // Tenants Management
+    Route::prefix('tenants')->name('tenants.')->group(function () {
+        Route::get('/', TenantsIndex::class)->name('index');
+        Route::get('/create', TenantsCreate::class)->name('create');
+        Route::get('/{tenant}', TenantsShow::class)->name('show');
+        Route::get('/{tenant}/edit', TenantsEdit::class)->name('edit');
     });
     
     // Users Management
