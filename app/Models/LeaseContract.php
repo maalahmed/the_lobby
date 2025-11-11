@@ -19,51 +19,45 @@ class LeaseContract extends Model
         'landlord_id',
         'start_date',
         'end_date',
+        'signed_date',
+        'move_in_date',
+        'move_out_date',
         'rent_amount',
-        'rent_currency',
+        'security_deposit',
+        'broker_commission',
         'rent_frequency',
-        'deposit_amount',
-        'deposit_held_by',
-        'late_fee_percentage',
-        'late_fee_grace_days',
         'payment_due_day',
-        'payment_method_allowed',
-        'auto_renew',
-        'renewal_notice_days',
-        'early_termination_allowed',
-        'early_termination_penalty',
-        'maintenance_responsibility',
+        'late_fee_amount',
+        'late_fee_grace_days',
+        'terms_conditions',
+        'special_clauses',
+        'renewal_terms',
         'utilities_included',
-        'pet_allowed',
-        'smoking_allowed',
-        'subletting_allowed',
-        'special_terms',
+        'maintenance_responsibilities',
         'status',
-        'signed_by_tenant',
-        'signed_by_landlord',
-        'tenant_signature_date',
-        'landlord_signature_date',
-        'contract_document_url',
-        'notes',
+        'termination_reason',
+        'termination_date',
+        'tenant_signature',
+        'landlord_signature',
+        'created_by',
     ];
 
     protected $casts = [
         'start_date' => 'date',
         'end_date' => 'date',
+        'signed_date' => 'date',
+        'move_in_date' => 'date',
+        'move_out_date' => 'date',
+        'termination_date' => 'date',
         'rent_amount' => 'decimal:2',
-        'deposit_amount' => 'decimal:2',
-        'late_fee_percentage' => 'decimal:2',
-        'early_termination_penalty' => 'decimal:2',
-        'auto_renew' => 'boolean',
-        'early_termination_allowed' => 'boolean',
-        'pet_allowed' => 'boolean',
-        'smoking_allowed' => 'boolean',
-        'subletting_allowed' => 'boolean',
-        'signed_by_tenant' => 'boolean',
-        'signed_by_landlord' => 'boolean',
-        'tenant_signature_date' => 'datetime',
-        'landlord_signature_date' => 'datetime',
+        'security_deposit' => 'decimal:2',
+        'broker_commission' => 'decimal:2',
+        'late_fee_amount' => 'decimal:2',
+        'renewal_terms' => 'json',
         'utilities_included' => 'json',
+        'maintenance_responsibilities' => 'json',
+        'tenant_signature' => 'json',
+        'landlord_signature' => 'json',
         'deleted_at' => 'datetime',
     ];
 
@@ -114,6 +108,14 @@ class LeaseContract extends Model
     public function landlord()
     {
         return $this->belongsTo(User::class, 'landlord_id');
+    }
+
+    /**
+     * Get the user who created the contract.
+     */
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     /**
