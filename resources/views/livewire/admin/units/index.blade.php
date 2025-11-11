@@ -20,7 +20,7 @@
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('Unit Type') }}</label>
-                            <select wire:model.live="filterType" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <select wire:model.live="type" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">{{ __('All Types') }}</option>
                                 <option value="studio">{{ __('Studio') }}</option>
                                 <option value="1br">{{ __('1 Bedroom') }}</option>
@@ -37,7 +37,7 @@
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('Status') }}</label>
-                            <select wire:model.live="filterStatus" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <select wire:model.live="status" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">{{ __('All Statuses') }}</option>
                                 <option value="available">{{ __('Available') }}</option>
                                 <option value="occupied">{{ __('Occupied') }}</option>
@@ -48,7 +48,7 @@
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">{{ __('Property') }}</label>
-                            <select wire:model.live="filterProperty" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <select wire:model.live="propertyId" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="">{{ __('All Properties') }}</option>
                                 @foreach(\App\Models\Property::select('id', 'name')->get() as $property)
                                     <option value="{{ $property->id }}">{{ $property->name }}</option>

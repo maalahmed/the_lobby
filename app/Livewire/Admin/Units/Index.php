@@ -18,6 +18,8 @@ class Index extends Component
     public $sortField = 'created_at';
     public $sortDirection = 'desc';
     public $showFilters = false;
+    public $showDeleteModal = false;
+    public $deletingUnitId = null;
 
     protected $queryString = [
         'search' => ['except' => ''],
@@ -62,18 +64,32 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function deleteUnit($id)
+    public function confirmDelete($id)
     {
-        $unit = PropertyUnit::findOrFail($id);
+        $this->deletingUnitId = $id;
+        $this->showDeleteModal = true;
+    }
+
+    public function delete()
+    {
+        if (!$this->deletingUnitId) {
+            return;
+        }
+
+        $unit = PropertyUnit::findOrFail($this->deletingUnitId);
         
         // Check if unit has active contracts
         if ($unit->leaseContracts()->where('status', 'active')->exists()) {
             session()->flash('error', __('Cannot delete unit with active lease contracts'));
+            $this->showDeleteModal = false;
+            $this->deletingUnitId = null;
             return;
         }
 
         $unit->delete();
         session()->flash('success', __('Unit deleted successfully'));
+        $this->showDeleteModal = false;
+        $this->deletingUnitId = null;
     }
 
     public function render()
