@@ -48,7 +48,7 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function sortBy($field)
+    public function sortBy(string $field)
     {
         if ($this->sortField === $field) {
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
