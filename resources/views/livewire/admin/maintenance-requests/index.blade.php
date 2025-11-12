@@ -97,7 +97,7 @@
                         <td class="px-6 py-4">
                             <div class="text-sm font-medium text-gray-900">{{ $request->title }}</div>
                             @if($request->tenant)
-                                <div class="text-xs text-gray-500">{{ $request->tenant->user->name }}</div>
+                                <div class="text-xs text-gray-500">{{ $request->tenant->user->name ?? __('N/A') }}</div>
                             @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">

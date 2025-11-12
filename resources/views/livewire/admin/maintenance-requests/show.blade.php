@@ -112,8 +112,8 @@
                     <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
                         <div>
                             <p class="text-sm text-gray-600">{{ __('Tenant') }}</p>
-                            <p class="font-medium">{{ $request->tenant->user->name }}</p>
-                            <p class="text-sm text-gray-500">{{ $request->tenant->user->email }}</p>
+                            <p class="font-medium">{{ $request->tenant->user->name ?? __('N/A') }}</p>
+                            <p class="text-sm text-gray-500">{{ $request->tenant->user->email ?? '' }}</p>
                         </div>
                         <a href="{{ route('admin.tenants.show', $request->tenant) }}" class="text-indigo-600 hover:text-indigo-900">
                             {{ __('View') }}
@@ -275,11 +275,19 @@
                 <h2 class="text-lg font-semibold mb-4">{{ __('People') }}</h2>
                 
                 <div class="space-y-3">
+                    @if($request->requester)
                     <div>
                         <p class="text-sm text-gray-600">{{ __('Requested By') }}</p>
                         <p class="font-medium">{{ $request->requester->name }}</p>
                         <p class="text-xs text-gray-500">{{ $request->created_at->format('M d, Y') }}</p>
                     </div>
+                    @else
+                    <div>
+                        <p class="text-sm text-gray-600">{{ __('Requested By') }}</p>
+                        <p class="font-medium text-gray-400">{{ __('User Deleted') }}</p>
+                        <p class="text-xs text-gray-500">{{ $request->created_at->format('M d, Y') }}</p>
+                    </div>
+                    @endif
 
                     @if($request->assignee)
                     <div class="pt-3 border-t">
