@@ -26,6 +26,10 @@ use App\Livewire\Admin\Payments\Index as PaymentsIndex;
 use App\Livewire\Admin\Payments\Create as PaymentsCreate;
 use App\Livewire\Admin\Payments\Show as PaymentsShow;
 use App\Livewire\Admin\Payments\Edit as PaymentsEdit;
+use App\Livewire\Admin\MaintenanceRequests\Index as MaintenanceRequestsIndex;
+use App\Livewire\Admin\MaintenanceRequests\Create as MaintenanceRequestsCreate;
+use App\Livewire\Admin\MaintenanceRequests\Show as MaintenanceRequestsShow;
+use App\Livewire\Admin\MaintenanceRequests\Edit as MaintenanceRequestsEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -89,6 +93,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', PaymentsCreate::class)->name('create');
         Route::get('/{payment}', PaymentsShow::class)->name('show');
         Route::get('/{payment}/edit', PaymentsEdit::class)->name('edit');
+    });
+    
+    // Maintenance Requests Management
+    Route::prefix('maintenance-requests')->name('maintenance-requests.')->group(function () {
+        Route::get('/', MaintenanceRequestsIndex::class)->name('index');
+        Route::get('/create', MaintenanceRequestsCreate::class)->name('create');
+        Route::get('/{request}', MaintenanceRequestsShow::class)->name('show');
+        Route::get('/{request}/edit', MaintenanceRequestsEdit::class)->name('edit');
     });
     
     // Users Management
