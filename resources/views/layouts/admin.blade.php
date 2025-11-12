@@ -33,11 +33,30 @@
     
     @livewireStyles
 </head>
-<body class="bg-gray-100 font-sans antialiased" x-data="{ sidebarOpen: false }">
+<body class="bg-gray-100 font-sans antialiased" 
+      x-data="{ 
+          sidebarOpen: false, 
+          desktopSidebarOpen: localStorage.getItem('desktopSidebarOpen') !== 'false'
+      }"
+      x-init="
+          $watch('desktopSidebarOpen', value => {
+              localStorage.setItem('desktopSidebarOpen', value);
+          });
+      ">
     
     <!-- Sidebar -->
-    <div class="fixed inset-y-0 {{ app()->getLocale() === 'ar' ? 'right-0' : 'left-0' }} z-50 w-64 bg-gray-900 transform transition-transform duration-300 lg:translate-x-0"
-         :class="sidebarOpen ? 'translate-x-0' : '{{ app()->getLocale() === 'ar' ? 'translate-x-full' : '-translate-x-full' }} lg:translate-x-0'">
+    <div class="fixed inset-y-0 {{ app()->getLocale() === 'ar' ? 'right-0' : 'left-0' }} z-50 w-64 bg-gray-900 transform transition-transform duration-300"
+         :class="{
+             'translate-x-0': sidebarOpen || (desktopSidebarOpen && window.innerWidth >= 1024),
+             '{{ app()->getLocale() === 'ar' ? 'translate-x-full' : '-translate-x-full' }}': !sidebarOpen && (!desktopSidebarOpen || window.innerWidth < 1024)
+         }"
+         x-init="
+             window.addEventListener('resize', () => {
+                 if (window.innerWidth >= 1024) {
+                     sidebarOpen = false;
+                 }
+             });
+         ">
         
         <!-- Logo -->
         <div class="flex items-center justify-center h-16 bg-gray-800">
@@ -165,21 +184,36 @@
     </div>
     
     <!-- Main Content -->
-    <div class="{{ app()->getLocale() === 'ar' ? 'lg:mr-64' : 'lg:ml-64' }}">
+    <div class="transition-all duration-300"
+         :class="{
+             '{{ app()->getLocale() === 'ar' ? 'lg:mr-64' : 'lg:ml-64' }}': desktopSidebarOpen,
+             '{{ app()->getLocale() === 'ar' ? 'lg:mr-0' : 'lg:ml-0' }}': !desktopSidebarOpen
+         }">
         
         <!-- Top Navigation Bar -->
         <header class="bg-white shadow-sm">
             <div class="flex items-center justify-between px-4 py-3">
-                <!-- Mobile Menu Button -->
-                <button @click="sidebarOpen = !sidebarOpen" 
-                        class="lg:hidden text-gray-600 hover:text-gray-900">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-                
-                <!-- Page Title -->
-                <h2 class="text-xl font-semibold text-gray-800">{{ $title ?? 'Dashboard' }}</h2>
+                <div class="flex items-center space-x-4">
+                    <!-- Mobile Menu Button -->
+                    <button @click="sidebarOpen = !sidebarOpen" 
+                            class="lg:hidden text-gray-600 hover:text-gray-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                    
+                    <!-- Desktop Sidebar Toggle Button -->
+                    <button @click="desktopSidebarOpen = !desktopSidebarOpen" 
+                            class="hidden lg:block text-gray-600 hover:text-gray-900"
+                            title="{{ __('Toggle Sidebar') }}">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                    
+                    <!-- Page Title -->
+                    <h2 class="text-xl font-semibold text-gray-800">{{ $title ?? 'Dashboard' }}</h2>
+                </div>
                 
                 <!-- User Menu -->
                 <div class="flex items-center space-x-4" x-data="{ userMenuOpen: false }">
