@@ -30,6 +30,10 @@ use App\Livewire\Admin\MaintenanceRequests\Index as MaintenanceRequestsIndex;
 use App\Livewire\Admin\MaintenanceRequests\Create as MaintenanceRequestsCreate;
 use App\Livewire\Admin\MaintenanceRequests\Show as MaintenanceRequestsShow;
 use App\Livewire\Admin\MaintenanceRequests\Edit as MaintenanceRequestsEdit;
+use App\Livewire\Admin\MaintenanceJobs\Index as MaintenanceJobsIndex;
+use App\Livewire\Admin\MaintenanceJobs\Create as MaintenanceJobsCreate;
+use App\Livewire\Admin\MaintenanceJobs\Show as MaintenanceJobsShow;
+use App\Livewire\Admin\MaintenanceJobs\Edit as MaintenanceJobsEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -101,6 +105,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', MaintenanceRequestsCreate::class)->name('create');
         Route::get('/{request}', MaintenanceRequestsShow::class)->name('show');
         Route::get('/{request}/edit', MaintenanceRequestsEdit::class)->name('edit');
+    });
+    
+    // Maintenance Jobs Management
+    Route::prefix('maintenance-jobs')->name('maintenance-jobs.')->group(function () {
+        Route::get('/', MaintenanceJobsIndex::class)->name('index');
+        Route::get('/create', MaintenanceJobsCreate::class)->name('create');
+        Route::get('/{job}', MaintenanceJobsShow::class)->name('show');
+        Route::get('/{job}/edit', MaintenanceJobsEdit::class)->name('edit');
     });
     
     // Users Management
