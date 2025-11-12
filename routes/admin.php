@@ -34,6 +34,10 @@ use App\Livewire\Admin\MaintenanceJobs\Index as MaintenanceJobsIndex;
 use App\Livewire\Admin\MaintenanceJobs\Create as MaintenanceJobsCreate;
 use App\Livewire\Admin\MaintenanceJobs\Show as MaintenanceJobsShow;
 use App\Livewire\Admin\MaintenanceJobs\Edit as MaintenanceJobsEdit;
+use App\Livewire\Admin\ServiceProviders\Index as ServiceProvidersIndex;
+use App\Livewire\Admin\ServiceProviders\Create as ServiceProvidersCreate;
+use App\Livewire\Admin\ServiceProviders\Show as ServiceProvidersShow;
+use App\Livewire\Admin\ServiceProviders\Edit as ServiceProvidersEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -113,6 +117,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', MaintenanceJobsCreate::class)->name('create');
         Route::get('/{job}', MaintenanceJobsShow::class)->name('show');
         Route::get('/{job}/edit', MaintenanceJobsEdit::class)->name('edit');
+    });
+    
+    // Service Providers Management
+    Route::prefix('service-providers')->name('service-providers.')->group(function () {
+        Route::get('/', ServiceProvidersIndex::class)->name('index');
+        Route::get('/create', ServiceProvidersCreate::class)->name('create');
+        Route::get('/{provider}', ServiceProvidersShow::class)->name('show');
+        Route::get('/{provider}/edit', ServiceProvidersEdit::class)->name('edit');
     });
     
     // Users Management
