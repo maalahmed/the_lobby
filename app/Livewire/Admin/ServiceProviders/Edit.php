@@ -99,7 +99,7 @@ class Edit extends Component
 
     public function render()
     {
-        $users = User::where('role', 'service_provider')
+        $users = User::where('status', 'active')
             ->orderBy('name')
             ->get();
 
