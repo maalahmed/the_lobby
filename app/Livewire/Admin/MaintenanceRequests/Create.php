@@ -98,10 +98,26 @@ class Create extends Component
 
         $validated['requested_by'] = Auth::id();
 
-        // Convert empty time strings to null
-        foreach (['preferred_time_start', 'preferred_time_end', 'scheduled_time_start', 'scheduled_time_end'] as $timeField) {
-            if (isset($validated[$timeField]) && $validated[$timeField] === '') {
-                $validated[$timeField] = null;
+        // Convert empty strings to null for nullable fields
+        $nullableFields = [
+            'unit_id',
+            'tenant_id', 
+            'assigned_to',
+            'preferred_date',
+            'preferred_time_start', 
+            'preferred_time_end', 
+            'scheduled_date',
+            'scheduled_time_start', 
+            'scheduled_time_end',
+            'access_instructions',
+            'estimated_cost',
+            'recurring_frequency',
+            'next_due_date'
+        ];
+        
+        foreach ($nullableFields as $field) {
+            if (isset($validated[$field]) && $validated[$field] === '') {
+                $validated[$field] = null;
             }
         }
 
