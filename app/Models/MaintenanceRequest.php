@@ -15,43 +15,55 @@ class MaintenanceRequest extends Model
         'request_number',
         'property_id',
         'unit_id',
-        'reported_by',
-        'assigned_to',
-        'category',
-        'priority',
         'title',
         'description',
-        'location_details',
+        'category',
+        'priority',
+        'requested_by',
+        'tenant_id',
+        'assigned_to',
         'status',
+        'preferred_date',
+        'preferred_time_start',
+        'preferred_time_end',
         'scheduled_date',
-        'scheduled_time',
-        'completed_at',
-        'tenant_available_from',
-        'tenant_available_to',
+        'scheduled_time_start',
+        'scheduled_time_end',
         'access_instructions',
+        'tenant_present_required',
+        'keys_required',
         'estimated_cost',
-        'actual_cost',
-        'cost_covered_by',
+        'approved_cost',
+        'final_cost',
+        'cost_approval_required',
+        'cost_approved_by',
+        'cost_approved_at',
+        'completed_at',
         'completion_notes',
-        'completion_photos',
-        'tenant_rating',
+        'tenant_satisfaction_rating',
         'tenant_feedback',
+        'initial_photos',
+        'completion_photos',
         'is_recurring',
         'recurring_frequency',
-        'next_occurrence_date',
+        'next_due_date',
     ];
 
     protected $casts = [
+        'preferred_date' => 'date',
         'scheduled_date' => 'date',
-        'scheduled_time' => 'datetime',
         'completed_at' => 'datetime',
-        'tenant_available_from' => 'datetime',
-        'tenant_available_to' => 'datetime',
-        'next_occurrence_date' => 'date',
+        'cost_approved_at' => 'datetime',
+        'next_due_date' => 'date',
         'estimated_cost' => 'decimal:2',
-        'actual_cost' => 'decimal:2',
+        'approved_cost' => 'decimal:2',
+        'final_cost' => 'decimal:2',
+        'initial_photos' => 'json',
         'completion_photos' => 'json',
         'is_recurring' => 'boolean',
+        'tenant_present_required' => 'boolean',
+        'keys_required' => 'boolean',
+        'cost_approval_required' => 'boolean',
         'deleted_at' => 'datetime',
     ];
 
@@ -89,11 +101,19 @@ class MaintenanceRequest extends Model
     }
 
     /**
-     * Get the user who reported the request.
+     * Get the user who requested the maintenance.
      */
-    public function reporter()
+    public function requester()
     {
-        return $this->belongsTo(User::class, 'reported_by');
+        return $this->belongsTo(User::class, 'requested_by');
+    }
+
+    /**
+     * Get the tenant associated with the request.
+     */
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
     }
 
     /**
@@ -105,10 +125,36 @@ class MaintenanceRequest extends Model
     }
 
     /**
+     * Get the user who approved the cost.
+     */
+    public function costApprover()
+    {
+        return $this->belongsTo(User::class, 'cost_approved_by');
+    }
+
+    /**
      * Get the maintenance jobs for the request.
      */
     public function jobs()
     {
         return $this->hasMany(MaintenanceJob::class);
+    }
+
+    /**
+     * Check if request is overdue
+     */
+    public function isOverdue()
+    {
+        return $this->scheduled_date && 
+               $this->scheduled_date->isPast() && 
+               !in_array($this->status, ['completed', 'cancelled']);
+    }
+
+    /**
+     * Check if cost approval is pending
+     */
+    public function needsCostApproval()
+    {
+        return $this->cost_approval_required && !$this->cost_approved_at;
     }
 }
