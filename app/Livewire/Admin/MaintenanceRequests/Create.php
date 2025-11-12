@@ -98,6 +98,13 @@ class Create extends Component
 
         $validated['requested_by'] = Auth::id();
 
+        // Convert empty time strings to null
+        foreach (['preferred_time_start', 'preferred_time_end', 'scheduled_time_start', 'scheduled_time_end'] as $timeField) {
+            if (isset($validated[$timeField]) && $validated[$timeField] === '') {
+                $validated[$timeField] = null;
+            }
+        }
+
         $request = MaintenanceRequest::create($validated);
 
         session()->flash('message', 'Maintenance request created successfully.');

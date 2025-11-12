@@ -152,6 +152,13 @@ class Edit extends Component
             'next_due_date' => 'nullable|date',
         ]);
 
+        // Convert empty time strings to null
+        foreach (['preferred_time_start', 'preferred_time_end', 'scheduled_time_start', 'scheduled_time_end'] as $timeField) {
+            if (isset($validated[$timeField]) && $validated[$timeField] === '') {
+                $validated[$timeField] = null;
+            }
+        }
+
         // Handle status change to completed
         if ($this->status === 'completed' && $this->request->status !== 'completed') {
             $validated['completed_at'] = now();
