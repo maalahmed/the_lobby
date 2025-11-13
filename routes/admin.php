@@ -147,8 +147,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('system-settings')->name('system-settings.')->group(function () {
         Route::get('/', SystemSettingsIndex::class)->name('index');
         Route::get('/create', SystemSettingsCreate::class)->name('create');
-        Route::get('/{setting}', SystemSettingsShow::class)->name('show');
         Route::get('/{setting}/edit', SystemSettingsEdit::class)->name('edit');
+        Route::get('/{setting}', SystemSettingsShow::class)->name('show');
     });
     
     // Users Management
