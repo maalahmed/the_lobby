@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\SystemSettings;
 
 use App\Models\SystemSetting;
 use Livewire\Component;
+use Illuminate\Support\Facades\Log;
 
 class Show extends Component
 {
@@ -11,7 +12,19 @@ class Show extends Component
 
     public function mount($setting)
     {
-        $this->setting = SystemSetting::findOrFail($setting);
+        Log::info('SystemSettings Show mount called', [
+            'setting_param' => $setting,
+            'setting_type' => gettype($setting),
+            'is_model' => $setting instanceof SystemSetting
+        ]);
+        
+        if ($setting instanceof SystemSetting) {
+            $this->setting = $setting;
+        } else {
+            $this->setting = SystemSetting::findOrFail($setting);
+        }
+        
+        Log::info('SystemSettings Show mount completed', ['setting_id' => $this->setting->id]);
     }
 
     public function delete()

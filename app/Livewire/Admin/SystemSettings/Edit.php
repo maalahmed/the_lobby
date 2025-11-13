@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\SystemSettings;
 
 use App\Models\SystemSetting;
 use Livewire\Component;
+use Illuminate\Support\Facades\Log;
 
 class Edit extends Component
 {
@@ -19,7 +20,17 @@ class Edit extends Component
 
     public function mount($setting)
     {
-        $this->setting = SystemSetting::findOrFail($setting);
+        Log::info('SystemSettings Edit mount called', [
+            'setting_param' => $setting,
+            'setting_type' => gettype($setting),
+            'is_model' => $setting instanceof SystemSetting
+        ]);
+        
+        if ($setting instanceof SystemSetting) {
+            $this->setting = $setting;
+        } else {
+            $this->setting = SystemSetting::findOrFail($setting);
+        }
         
         $this->key = $this->setting->key;
         $this->value = $this->setting->value;
@@ -28,6 +39,8 @@ class Edit extends Component
         $this->description = $this->setting->description;
         $this->is_public = $this->setting->is_public;
         $this->is_editable = $this->setting->is_editable;
+        
+        Log::info('SystemSettings Edit mount completed', ['setting_id' => $this->setting->id]);
     }
 
     protected function rules()
