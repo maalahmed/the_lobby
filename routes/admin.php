@@ -46,6 +46,8 @@ use App\Livewire\Admin\SystemSettings\Index as SystemSettingsIndex;
 use App\Livewire\Admin\SystemSettings\Create as SystemSettingsCreate;
 use App\Livewire\Admin\SystemSettings\Show as SystemSettingsShow;
 use App\Livewire\Admin\SystemSettings\Edit as SystemSettingsEdit;
+use App\Livewire\Admin\AuditLogs\Index as AuditLogsIndex;
+use App\Livewire\Admin\AuditLogs\Show as AuditLogsShow;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -149,6 +151,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', SystemSettingsCreate::class)->name('create');
         Route::get('/{setting}/edit', SystemSettingsEdit::class)->name('edit');
         Route::get('/{setting}', SystemSettingsShow::class)->name('show');
+    });
+    
+    // Audit Logs (Read-Only)
+    Route::prefix('audit-logs')->name('audit-logs.')->group(function () {
+        Route::get('/', AuditLogsIndex::class)->name('index');
+        Route::get('/{log}', AuditLogsShow::class)->name('show');
     });
     
     // Users Management
