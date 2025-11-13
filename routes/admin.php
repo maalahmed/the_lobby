@@ -52,6 +52,10 @@ use App\Livewire\Admin\Messages\Index as MessagesIndex;
 use App\Livewire\Admin\Messages\Create as MessagesCreate;
 use App\Livewire\Admin\Messages\Show as MessagesShow;
 use App\Livewire\Admin\Messages\Edit as MessagesEdit;
+use App\Livewire\Admin\Notifications\Index as NotificationsIndex;
+use App\Livewire\Admin\Notifications\Create as NotificationsCreate;
+use App\Livewire\Admin\Notifications\Show as NotificationsShow;
+use App\Livewire\Admin\Notifications\Edit as NotificationsEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -169,6 +173,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', MessagesCreate::class)->name('create');
         Route::get('/{message}', MessagesShow::class)->name('show');
         Route::get('/{message}/edit', MessagesEdit::class)->name('edit');
+    });
+    
+    // Notifications Management
+    Route::prefix('notifications')->name('notifications.')->group(function () {
+        Route::get('/', NotificationsIndex::class)->name('index');
+        Route::get('/create', NotificationsCreate::class)->name('create');
+        Route::get('/{notification}', NotificationsShow::class)->name('show');
+        Route::get('/{notification}/edit', NotificationsEdit::class)->name('edit');
     });
     
     // Users Management
