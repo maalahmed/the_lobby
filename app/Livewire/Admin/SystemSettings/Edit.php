@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Livewire\Admin\SystemSettings;
+
+use App\Models\SystemSetting;
+use Livewire\Component;
+
+class Edit extends Component
+{
+    public SystemSetting $setting;
+    
+    public $key;
+    public $value;
+    public $type;
+    public $group;
+    public $description;
+    public $is_public;
+    public $is_editable;
+
+    public function mount($setting)
+    {
+        $this->setting = SystemSetting::findOrFail($setting);
+        
+        $this->key = $this->setting->key;
+        $this->value = $this->setting->value;
+        $this->type = $this->setting->type;
+        $this->group = $this->setting->group;
+        $this->description = $this->setting->description;
+        $this->is_public = $this->setting->is_public;
+        $this->is_editable = $this->setting->is_editable;
+    }
+
+    protected function rules()
+    {
+        return [
+            'key' => 'required|string|max:100|unique:system_settings,key,' . $this->setting->id,
+            'value' => 'nullable',
+            'type' => 'required|in:string,integer,boolean,json,array',
+            'group' => 'nullable|string|max:50',
+            'description' => 'nullable|string',
+            'is_public' => 'boolean',
+            'is_editable' => 'boolean',
+        ];
+    }
+
+    public function update()
+    {
+        $this->validate();
+
+        $this->setting->update([
+            'key' => $this->key,
+            'value' => $this->value ?: null,
+            'type' => $this->type,
+            'group' => $this->group ?: null,
+            'description' => $this->description ?: null,
+            'is_public' => $this->is_public,
+            'is_editable' => $this->is_editable,
+        ]);
+
+        session()->flash('success', 'Setting updated successfully.');
+        return redirect()->route('admin.system-settings.index');
+    }
+
+    public function render()
+    {
+        return view('livewire.admin.system-settings.edit');
+    }
+}

@@ -42,6 +42,10 @@ use App\Livewire\Admin\UserProfiles\Index as UserProfilesIndex;
 use App\Livewire\Admin\UserProfiles\Create as UserProfilesCreate;
 use App\Livewire\Admin\UserProfiles\Show as UserProfilesShow;
 use App\Livewire\Admin\UserProfiles\Edit as UserProfilesEdit;
+use App\Livewire\Admin\SystemSettings\Index as SystemSettingsIndex;
+use App\Livewire\Admin\SystemSettings\Create as SystemSettingsCreate;
+use App\Livewire\Admin\SystemSettings\Show as SystemSettingsShow;
+use App\Livewire\Admin\SystemSettings\Edit as SystemSettingsEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -137,6 +141,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', UserProfilesCreate::class)->name('create');
         Route::get('/{profile}', UserProfilesShow::class)->name('show');
         Route::get('/{profile}/edit', UserProfilesEdit::class)->name('edit');
+    });
+    
+    // System Settings Management
+    Route::prefix('system-settings')->name('system-settings.')->group(function () {
+        Route::get('/', SystemSettingsIndex::class)->name('index');
+        Route::get('/create', SystemSettingsCreate::class)->name('create');
+        Route::get('/{setting}', SystemSettingsShow::class)->name('show');
+        Route::get('/{setting}/edit', SystemSettingsEdit::class)->name('edit');
     });
     
     // Users Management
