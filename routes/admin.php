@@ -38,6 +38,10 @@ use App\Livewire\Admin\ServiceProviders\Index as ServiceProvidersIndex;
 use App\Livewire\Admin\ServiceProviders\Create as ServiceProvidersCreate;
 use App\Livewire\Admin\ServiceProviders\Show as ServiceProvidersShow;
 use App\Livewire\Admin\ServiceProviders\Edit as ServiceProvidersEdit;
+use App\Livewire\Admin\UserProfiles\Index as UserProfilesIndex;
+use App\Livewire\Admin\UserProfiles\Create as UserProfilesCreate;
+use App\Livewire\Admin\UserProfiles\Show as UserProfilesShow;
+use App\Livewire\Admin\UserProfiles\Edit as UserProfilesEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -125,6 +129,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', ServiceProvidersCreate::class)->name('create');
         Route::get('/{provider}', ServiceProvidersShow::class)->name('show');
         Route::get('/{provider}/edit', ServiceProvidersEdit::class)->name('edit');
+    });
+    
+    // User Profiles Management
+    Route::prefix('user-profiles')->name('user-profiles.')->group(function () {
+        Route::get('/', UserProfilesIndex::class)->name('index');
+        Route::get('/create', UserProfilesCreate::class)->name('create');
+        Route::get('/{profile}', UserProfilesShow::class)->name('show');
+        Route::get('/{profile}/edit', UserProfilesEdit::class)->name('edit');
     });
     
     // Users Management
