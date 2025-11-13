@@ -60,6 +60,17 @@ class Edit extends Component
     {
         $this->validate();
 
+        Log::info('SystemSettings Edit update called', [
+            'setting_id' => $this->setting->id,
+            'key' => $this->key,
+            'value' => $this->value,
+            'type' => $this->type,
+            'group' => $this->group,
+            'description' => $this->description,
+            'is_public' => $this->is_public,
+            'is_editable' => $this->is_editable,
+        ]);
+
         $this->setting->update([
             'key' => $this->key,
             'value' => $this->value ?: null,
@@ -69,6 +80,8 @@ class Edit extends Component
             'is_public' => $this->is_public,
             'is_editable' => $this->is_editable,
         ]);
+
+        Log::info('SystemSettings Edit update completed', ['setting_id' => $this->setting->id]);
 
         session()->flash('success', 'Setting updated successfully.');
         return redirect()->route('admin.system-settings.index');
