@@ -45,7 +45,7 @@
       ">
     
     <!-- Sidebar -->
-    <div class="fixed inset-y-0 {{ app()->getLocale() === 'ar' ? 'right-0' : 'left-0' }} z-50 w-64 bg-gray-900 transform transition-transform duration-300"
+    <div class="fixed inset-y-0 {{ app()->getLocale() === 'ar' ? 'right-0' : 'left-0' }} z-50 w-64 bg-gray-900 transform transition-transform duration-300 flex flex-col"
          :class="{
              'translate-x-0': sidebarOpen || (desktopSidebarOpen && window.innerWidth >= 1024),
              '{{ app()->getLocale() === 'ar' ? 'translate-x-full' : '-translate-x-full' }}': !sidebarOpen && (!desktopSidebarOpen || window.innerWidth < 1024)
@@ -59,12 +59,12 @@
          ">
         
         <!-- Logo -->
-        <div class="flex items-center justify-center h-16 bg-gray-800">
+        <div class="flex items-center justify-center h-16 bg-gray-800 flex-shrink-0">
             <h1 class="text-2xl font-bold text-white">The Lobby</h1>
         </div>
         
         <!-- Navigation -->
-        <nav class="mt-5 px-2 space-y-1">
+        <nav class="flex-1 mt-5 px-2 space-y-1 overflow-y-auto pb-4">
             <a href="{{ route('admin.dashboard') }}" 
                class="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.dashboard') ? 'bg-gray-800 text-white' : '' }}">
                 <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-3' : 'mr-3' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
