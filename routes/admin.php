@@ -48,6 +48,10 @@ use App\Livewire\Admin\SystemSettings\Show as SystemSettingsShow;
 use App\Livewire\Admin\SystemSettings\Edit as SystemSettingsEdit;
 use App\Livewire\Admin\AuditLogs\Index as AuditLogsIndex;
 use App\Livewire\Admin\AuditLogs\Show as AuditLogsShow;
+use App\Livewire\Admin\Messages\Index as MessagesIndex;
+use App\Livewire\Admin\Messages\Create as MessagesCreate;
+use App\Livewire\Admin\Messages\Show as MessagesShow;
+use App\Livewire\Admin\Messages\Edit as MessagesEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -157,6 +161,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('audit-logs')->name('audit-logs.')->group(function () {
         Route::get('/', AuditLogsIndex::class)->name('index');
         Route::get('/{log}', AuditLogsShow::class)->name('show');
+    });
+    
+    // Messages Management
+    Route::prefix('messages')->name('messages.')->group(function () {
+        Route::get('/', MessagesIndex::class)->name('index');
+        Route::get('/create', MessagesCreate::class)->name('create');
+        Route::get('/{message}', MessagesShow::class)->name('show');
+        Route::get('/{message}/edit', MessagesEdit::class)->name('edit');
     });
     
     // Users Management
