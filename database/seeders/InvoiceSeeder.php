@@ -23,16 +23,22 @@ class InvoiceSeeder extends Seeder
                 $isPaid = $i > 0; // Current month unpaid, past months paid
                 
                 Invoice::create([
-                    'lease_contract_id' => $contract->id,
+                    'contract_id' => $contract->id,
                     'tenant_id' => $contract->tenant_id,
+                    'property_id' => $contract->property_id,
+                    'unit_id' => $contract->unit_id,
                     'invoice_number' => 'INV-' . date('Y') . '-' . str_pad($contract->id * 100 + $i, 6, '0', STR_PAD_LEFT),
-                    'issue_date' => $dueDate->copy()->subDays(5),
+                    'type' => 'rent',
+                    'invoice_date' => $dueDate->copy()->subDays(5),
                     'due_date' => $dueDate,
-                    'amount' => $contract->rent_amount / 12, // Monthly rent
+                    'service_period_start' => $dueDate->copy()->startOfMonth(),
+                    'service_period_end' => $dueDate->copy()->endOfMonth(),
+                    'subtotal' => $contract->rent_amount / 12, // Monthly rent
                     'tax_amount' => 0,
                     'total_amount' => $contract->rent_amount / 12,
-                    'status' => $isPaid ? 'paid' : 'pending',
-                    'paid_date' => $isPaid ? $dueDate->copy()->addDays(2) : null,
+                    'paid_amount' => $isPaid ? $contract->rent_amount / 12 : 0,
+                    'status' => $isPaid ? 'paid' : 'sent',
+                    'paid_at' => $isPaid ? $dueDate->copy()->addDays(2) : null,
                     'notes' => 'Monthly rent for ' . $dueDate->format('F Y'),
                 ]);
             }

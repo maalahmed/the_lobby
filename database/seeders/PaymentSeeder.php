@@ -20,11 +20,15 @@ class PaymentSeeder extends Seeder
             Payment::create([
                 'invoice_id' => $invoice->id,
                 'tenant_id' => $invoice->tenant_id,
+                'property_id' => $invoice->property_id,
                 'amount' => $invoice->total_amount,
-                'payment_date' => $invoice->paid_date,
+                'currency' => 'AED',
+                'payment_date' => $invoice->paid_at ? $invoice->paid_at->format('Y-m-d') : now()->format('Y-m-d'),
                 'payment_method' => $this->getRandomPaymentMethod(),
-                'transaction_id' => 'TXN-' . strtoupper(uniqid()),
+                'gateway_transaction_id' => 'TXN-' . strtoupper(uniqid()),
                 'status' => 'completed',
+                'verification_status' => 'verified',
+                'processed_at' => $invoice->paid_at,
                 'notes' => 'Payment for ' . $invoice->invoice_number,
             ]);
         }
@@ -32,7 +36,7 @@ class PaymentSeeder extends Seeder
 
     private function getRandomPaymentMethod(): string
     {
-        $methods = ['bank_transfer', 'credit_card', 'cash', 'cheque'];
+        $methods = ['bank_transfer', 'card', 'cash', 'check'];
         return $methods[array_rand($methods)];
     }
 }
