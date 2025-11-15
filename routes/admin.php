@@ -56,6 +56,7 @@ use App\Livewire\Admin\Notifications\Index as NotificationsIndex;
 use App\Livewire\Admin\Notifications\Create as NotificationsCreate;
 use App\Livewire\Admin\Notifications\Show as NotificationsShow;
 use App\Livewire\Admin\Notifications\Edit as NotificationsEdit;
+use App\Livewire\Admin\Vacancies\Dashboard as VacanciesDashboard;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -194,6 +195,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     
     // Maintenance Management
     // Route::get('/maintenance', MaintenanceIndex::class)->name('maintenance.index');
+    
+    // Vacancy Management
+    Route::get('/vacancies', VacanciesDashboard::class)->name('vacancies.dashboard');
     
     // Reports
     // Route::get('/reports', ReportIndex::class)->name('reports');
