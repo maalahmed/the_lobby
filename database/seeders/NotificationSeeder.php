@@ -15,8 +15,14 @@ class NotificationSeeder extends Seeder
     public function run(): void
     {
         $landlord = User::where('email', 'landlord@thelobby.com')->first();
-        $tenant1 = User::where('email', 'tenant1@thelobby.com')->first();
-        $tenant2 = User::where('email', 'tenant2@thelobby.com')->first();
+        $tenants = User::role('tenant')->limit(2)->get();
+
+        if (!$landlord || $tenants->count() < 2) {
+            return; // Skip if users don't exist
+        }
+
+        $tenant1 = $tenants[0];
+        $tenant2 = $tenants[1];
 
         // Payment reminder - Tenant 1 (unread)
         Notification::create([
