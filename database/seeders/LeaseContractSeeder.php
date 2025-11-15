@@ -5,8 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\LeaseContract;
-use App\Models\Unit;
+use App\Models\PropertyUnit;
 use App\Models\Tenant;
+use App\Models\User;
 
 class LeaseContractSeeder extends Seeder
 {
@@ -15,24 +16,29 @@ class LeaseContractSeeder extends Seeder
      */
     public function run(): void
     {
-        $units = Unit::where('status', 'occupied')->limit(10)->get();
-        $tenants = Tenant::where('status', 'active')->get();
+        $occupiedUnits = PropertyUnit::where('status', 'occupied')->get();
+        $activeTenants = Tenant::where('status', 'active')->get();
+        $landlord = User::role('landlord')->first();
 
-        foreach ($tenants as $index => $tenant) {
-            if (isset($units[$index])) {
-                LeaseContract::create([
-                    'unit_id' => $units[$index]->id,
-                    'tenant_id' => $tenant->id,
-                    'start_date' => $tenant->lease_start_date,
-                    'end_date' => $tenant->lease_end_date,
-                    'rent_amount' => $tenant->rent_amount,
-                    'deposit_amount' => $tenant->deposit_amount,
-                    'payment_frequency' => 'monthly',
-                    'payment_day' => 1,
-                    'contract_terms' => 'Standard residential lease agreement terms and conditions apply.',
-                    'status' => 'active',
-                    'signed_date' => $tenant->lease_start_date,
-                ]);
+        if ($landlord && $activeTenants->count() > 0 && $occupiedUnits->count() > 0) {
+            foreach ($activeTenants as $index => $tenant) {
+                if (isset($occupiedUnits[$index])) {
+                    LeaseContract::create([
+                        'property_id' => $occupiedUnits[$index]->property_id,
+                        'unit_id' => $occupiedUnits[$index]->id,
+                        'tenant_id' => $tenant->id,
+                        'landlord_id' => $landlord->id,
+                        'start_date' => $tenant->lease_start_date,
+                        'end_date' => $tenant->lease_end_date,
+                        'signed_date' => now()->subDays(rand(30, 60)),
+                        'rent_amount' => $tenant->rent_amount,
+                        'security_deposit' => $tenant->security_deposit,
+                        'rent_frequency' => 'annual',
+                        'payment_due_day' => 1,
+                        'terms_conditions' => 'Standard lease agreement terms and conditions apply.',
+                        'status' => 'active',
+                    ]);
+                }
             }
         }
     }
