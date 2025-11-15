@@ -14,7 +14,17 @@ class PropertySeeder extends Seeder
      */
     public function run(): void
     {
+        // Get landlord user, or fallback to any user with landlord email
         $landlord = User::role('landlord')->first();
+        
+        if (!$landlord) {
+            $landlord = User::where('email', 'landlord@thelobby.com')->first();
+        }
+        
+        if (!$landlord) {
+            $this->command->error('No landlord user found. Please run UserSeeder first.');
+            return;
+        }
 
         $properties = [
             [
