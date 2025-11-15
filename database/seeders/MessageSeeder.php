@@ -16,8 +16,14 @@ class MessageSeeder extends Seeder
     {
         $admin = User::where('email', 'admin@thelobby.com')->first();
         $landlord = User::where('email', 'landlord@thelobby.com')->first();
-        $tenant1 = User::where('email', 'tenant1@thelobby.com')->first();
-        $tenant2 = User::where('email', 'tenant2@thelobby.com')->first();
+        $tenants = User::role('tenant')->limit(2)->get();
+
+        if (!$admin || !$landlord || $tenants->count() < 2) {
+            return; // Skip if users don't exist
+        }
+
+        $tenant1 = $tenants[0];
+        $tenant2 = $tenants[1];
 
         // Thread 1: Tenant requesting AC maintenance
         $message1 = Message::create([
