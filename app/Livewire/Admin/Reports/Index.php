@@ -101,7 +101,7 @@ class Index extends Component
             'occupied' => PropertyUnit::where('status', 'occupied')->count(),
             'available' => PropertyUnit::where('status', 'available')->count(),
             'maintenance' => PropertyUnit::where('status', 'maintenance')->count(),
-            'rate' => PropertyUnit::count() > 0 
+            'rate' => PropertyUnit::count() > 0
                 ? round((PropertyUnit::where('status', 'occupied')->count() / PropertyUnit::count()) * 100, 1)
                 : 0,
         ];
@@ -112,7 +112,7 @@ class Index extends Component
         $totalCollected = Payment::where('status', 'completed')
             ->whereBetween('created_at', [$start, $end])
             ->sum('amount');
-        $collectionRate = $totalInvoiced > 0 
+        $collectionRate = $totalInvoiced > 0
             ? round(($totalCollected / $totalInvoiced) * 100, 1)
             : 0;
 
@@ -123,14 +123,14 @@ class Index extends Component
             $month = Carbon::now()->subMonths($i);
             $monthStart = $month->copy()->startOfMonth();
             $monthEnd = $month->copy()->endOfMonth();
-            
+
             $monthlyRevenue[] = [
                 'month' => $month->format('M'),
                 'amount' => Payment::where('status', 'completed')
                     ->whereBetween('created_at', [$monthStart, $monthEnd])
                     ->sum('amount'),
             ];
-            
+
             $monthlyExpenses[] = [
                 'month' => $month->format('M'),
                 'amount' => MaintenanceJob::whereBetween('completed_at', [$monthStart, $monthEnd])

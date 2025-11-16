@@ -24,13 +24,13 @@
                         <option value="custom">Custom Range</option>
                     </select>
                 </div>
-                
+
                 @if($dateRange === 'custom')
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
                     <input type="date" wire:model.live="startDate" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">End Date</label>
                     <input type="date" wire:model.live="endDate" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
@@ -138,7 +138,7 @@
             <!-- Occupancy Status -->
             <div class="bg-white rounded-xl shadow-sm p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-6">Occupancy Status</h3>
-                
+
                 <div class="mb-6">
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-sm font-medium text-gray-700">Overall Occupancy Rate</span>
@@ -187,7 +187,7 @@
             <!-- Top Properties by Revenue -->
             <div class="bg-white rounded-xl shadow-sm p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-6">Top Properties by Revenue</h3>
-                
+
                 @if($topProperties->count() > 0)
                     <div class="space-y-4">
                         @foreach($topProperties as $index => $property)
