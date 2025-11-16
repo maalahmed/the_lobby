@@ -113,21 +113,23 @@ class Create extends Component
     private function createOffer($status)
     {
         return LeaseRenewalOffer::create([
-            'lease_contract_id' => $this->lease->id,
+            'current_contract_id' => $this->lease->id,
             'property_id' => $this->lease->property_id,
             'unit_id' => $this->lease->unit_id,
             'tenant_id' => $this->lease->tenant_id,
             'landlord_id' => $this->lease->landlord_id,
+            'offer_date' => now(),
             'current_rent_amount' => $this->current_rent_amount,
             'proposed_rent_amount' => $this->proposed_rent_amount,
             'rent_increase_percentage' => $this->rent_increase_percentage,
-            'proposed_lease_duration' => $this->proposed_lease_duration,
+            'proposed_duration_months' => $this->proposed_lease_duration,
             'proposed_start_date' => $this->proposed_start_date,
             'proposed_end_date' => $this->proposed_end_date,
             'offer_expiry_date' => $this->offer_expiry_date,
-            'terms_and_conditions' => $this->terms_and_conditions,
-            'notes' => $this->notes,
+            'special_terms' => $this->terms_and_conditions,
+            'landlord_notes' => $this->notes,
             'status' => $status,
+            'sent_at' => $status === 'sent' ? now() : null,
         ]);
     }
 
