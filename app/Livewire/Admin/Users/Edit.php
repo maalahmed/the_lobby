@@ -22,7 +22,7 @@ class Edit extends Component
     public function mount($userId)
     {
         $user = User::with('roles')->findOrFail($userId);
-        
+
         $this->userId = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
@@ -70,7 +70,7 @@ class Edit extends Component
         $user->syncRoles([$this->role]);
 
         session()->flash('message', 'User updated successfully.');
-        
+
         return redirect()->route('admin.users.index');
     }
 

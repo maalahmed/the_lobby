@@ -51,7 +51,7 @@ class Index extends Component
     public function toggleStatus($userId)
     {
         $user = User::findOrFail($userId);
-        
+
         // Don't allow deactivating yourself
         if ($user->id === auth()->id()) {
             session()->flash('error', 'You cannot deactivate your own account.');
@@ -67,7 +67,7 @@ class Index extends Component
     public function deleteUser($userId)
     {
         $user = User::findOrFail($userId);
-        
+
         // Don't allow deleting yourself
         if ($user->id === auth()->id()) {
             session()->flash('error', 'You cannot delete your own account.');
@@ -75,8 +75,8 @@ class Index extends Component
         }
 
         // Check for related records
-        if ($user->properties()->count() > 0 || 
-            $user->leaseContracts()->count() > 0 || 
+        if ($user->properties()->count() > 0 ||
+            $user->leaseContracts()->count() > 0 ||
             $user->maintenanceRequests()->count() > 0) {
             session()->flash('error', 'Cannot delete user with associated records.');
             return;

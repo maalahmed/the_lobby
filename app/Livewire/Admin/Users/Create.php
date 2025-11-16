@@ -47,7 +47,7 @@ class Create extends Component
         $user->assignRole($this->role);
 
         session()->flash('message', 'User created successfully.');
-        
+
         return redirect()->route('admin.users.index');
     }
 

@@ -17,9 +17,9 @@
                 <!-- Name -->
                 <div class="mb-6">
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-2">{{ __('Name') }} *</label>
-                    <input type="text" 
-                           id="name" 
-                           wire:model="name" 
+                    <input type="text"
+                           id="name"
+                           wire:model="name"
                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror">
                     @error('name')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -29,9 +29,9 @@
                 <!-- Email -->
                 <div class="mb-6">
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-2">{{ __('Email') }} *</label>
-                    <input type="email" 
-                           id="email" 
-                           wire:model="email" 
+                    <input type="email"
+                           id="email"
+                           wire:model="email"
                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror">
                     @error('email')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -41,9 +41,9 @@
                 <!-- Phone -->
                 <div class="mb-6">
                     <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">{{ __('Phone') }}</label>
-                    <input type="text" 
-                           id="phone" 
-                           wire:model="phone" 
+                    <input type="text"
+                           id="phone"
+                           wire:model="phone"
                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('phone') border-red-500 @enderror">
                     @error('phone')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -53,9 +53,9 @@
                 <!-- Password -->
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-gray-700 mb-2">{{ __('New Password') }} <span class="text-gray-500">({{ __('leave blank to keep current') }})</span></label>
-                    <input type="password" 
-                           id="password" 
-                           wire:model="password" 
+                    <input type="password"
+                           id="password"
+                           wire:model="password"
                            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('password') border-red-500 @enderror">
                     @error('password')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -66,9 +66,9 @@
                 @if($password)
                     <div class="mb-6">
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">{{ __('Confirm New Password') }} *</label>
-                        <input type="password" 
-                               id="password_confirmation" 
-                               wire:model="password_confirmation" 
+                        <input type="password"
+                               id="password_confirmation"
+                               wire:model="password_confirmation"
                                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 @endif
@@ -76,8 +76,8 @@
                 <!-- Role -->
                 <div class="mb-6">
                     <label for="role" class="block text-sm font-medium text-gray-700 mb-2">{{ __('Role') }} *</label>
-                    <select id="role" 
-                            wire:model="role" 
+                    <select id="role"
+                            wire:model="role"
                             class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('role') border-red-500 @enderror">
                         <option value="">{{ __('Select Role') }}</option>
                         @foreach($roles as $roleOption)
@@ -92,8 +92,8 @@
                 <!-- Status -->
                 <div class="mb-6">
                     <label for="status" class="block text-sm font-medium text-gray-700 mb-2">{{ __('Status') }} *</label>
-                    <select id="status" 
-                            wire:model="status" 
+                    <select id="status"
+                            wire:model="status"
                             class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('status') border-red-500 @enderror">
                         <option value="active">{{ __('Active') }}</option>
                         <option value="inactive">{{ __('Inactive') }}</option>
@@ -106,8 +106,8 @@
                 <!-- Language Preference -->
                 <div class="mb-6">
                     <label for="language_preference" class="block text-sm font-medium text-gray-700 mb-2">{{ __('Language Preference') }} *</label>
-                    <select id="language_preference" 
-                            wire:model="language_preference" 
+                    <select id="language_preference"
+                            wire:model="language_preference"
                             class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('language_preference') border-red-500 @enderror">
                         <option value="en">{{ __('English') }}</option>
                         <option value="ar">{{ __('Arabic') }}</option>
@@ -119,11 +119,11 @@
 
                 <!-- Actions -->
                 <div class="flex justify-end gap-4 pt-6 border-t border-gray-200">
-                    <a href="{{ route('admin.users.index') }}" 
+                    <a href="{{ route('admin.users.index') }}"
                        class="px-6 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors">
                         {{ __('Cancel') }}
                     </a>
-                    <button type="submit" 
+                    <button type="submit"
                             class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
                         {{ __('Update User') }}
                     </button>

@@ -84,11 +84,11 @@
         <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div class="flex-1 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <!-- Search -->
-                <input type="text" 
-                       wire:model.live.debounce.300ms="search" 
+                <input type="text"
+                       wire:model.live.debounce.300ms="search"
                        placeholder="{{ __('Search users...') }}"
                        class="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                
+
                 <!-- Role Filter -->
                 <select wire:model.live="roleFilter" class="px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     <option value="">{{ __('All Roles') }}</option>
@@ -105,7 +105,7 @@
                 </select>
             </div>
 
-            <a href="{{ route('admin.users.create') }}" 
+            <a href="{{ route('admin.users.create') }}"
                class="inline-flex items-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition-colors">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
@@ -191,7 +191,7 @@
                                     @endforeach
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <button wire:click="toggleStatus({{ $user->id }})" 
+                                    <button wire:click="toggleStatus({{ $user->id }})"
                                             class="px-2 py-1 text-xs font-medium rounded-full border cursor-pointer transition-colors
                                                 @if($user->status === 'active') bg-green-100 text-green-700 border-green-200 hover:bg-green-200
                                                 @else bg-gray-100 text-gray-700 border-gray-200 hover:bg-gray-200
@@ -203,9 +203,9 @@
                                     {{ $user->created_at->format('M d, Y') }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{{ route('admin.users.edit', $user->id) }}" 
+                                    <a href="{{ route('admin.users.edit', $user->id) }}"
                                        class="text-blue-600 hover:text-blue-700 mr-3">{{ __('Edit') }}</a>
-                                    <button wire:click="deleteUser({{ $user->id }})" 
+                                    <button wire:click="deleteUser({{ $user->id }})"
                                             wire:confirm="Are you sure you want to delete this user?"
                                             class="text-red-600 hover:text-red-700">{{ __('Delete') }}</button>
                                 </td>
