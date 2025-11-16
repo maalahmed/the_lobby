@@ -146,7 +146,7 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                    <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">
+                                    <a href="{{ route('admin.lease-renewals.create', $lease->id) }}" class="text-blue-600 hover:text-blue-900 mr-3">
                                         {{ __('Create Offer') }}
                                     </a>
                                     <a href="{{ route('admin.lease-contracts.show', $lease->id) }}" class="text-gray-600 hover:text-gray-900">
@@ -203,7 +203,7 @@
                                             <span class="font-medium">{{ __('Proposed Rent:') }}</span> {{ number_format($offer->proposed_rent_amount, 2) }} AED
                                         </div>
                                         <div>
-                                            <span class="font-medium">{{ __('Increase:') }}</span> 
+                                            <span class="font-medium">{{ __('Increase:') }}</span>
                                             <span class="{{ $offer->rent_increase_percentage > 0 ? 'text-red-600' : 'text-green-600' }}">
                                                 {{ $offer->rent_increase_percentage > 0 ? '+' : '' }}{{ number_format($offer->rent_increase_percentage, 1) }}%
                                             </span>

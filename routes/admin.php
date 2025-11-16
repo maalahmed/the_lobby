@@ -59,6 +59,7 @@ use App\Livewire\Admin\Notifications\Edit as NotificationsEdit;
 use App\Livewire\Admin\Vacancies\Dashboard as VacanciesDashboard;
 use App\Livewire\Admin\Vacancies\Calendar as VacanciesCalendar;
 use App\Livewire\Admin\LeaseRenewals\Index as LeaseRenewalsIndex;
+use App\Livewire\Admin\LeaseRenewals\Create as LeaseRenewalsCreate;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -204,6 +205,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Lease Renewals
     Route::get('/lease-renewals', LeaseRenewalsIndex::class)->name('lease-renewals.index');
+    Route::get('/lease-renewals/create/{leaseId}', LeaseRenewalsCreate::class)->name('lease-renewals.create');
 
     // Reports
     // Route::get('/reports', ReportIndex::class)->name('reports');
