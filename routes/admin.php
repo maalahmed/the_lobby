@@ -66,7 +66,7 @@ use App\Livewire\Admin\Users\Edit as UsersEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
-// use App\Livewire\Admin\Reports\ReportIndex;
+use App\Livewire\Admin\Reports\Index as ReportsIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -218,7 +218,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     // Reports
-    // Route::get('/reports', ReportIndex::class)->name('reports');
+    Route::get('/reports', ReportsIndex::class)->name('reports');
 });
 
 // Language Switcher
