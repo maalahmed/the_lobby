@@ -67,7 +67,7 @@ class LeaseContract extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($contract) {
             if (empty($contract->uuid)) {
                 $contract->uuid = \Illuminate\Support\Str::uuid();
@@ -80,6 +80,8 @@ class LeaseContract extends Model
 
     /**
      * Get the property for the contract.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Property, LeaseContract>
      */
     public function property()
     {
@@ -88,6 +90,8 @@ class LeaseContract extends Model
 
     /**
      * Get the unit for the contract.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<PropertyUnit, LeaseContract>
      */
     public function unit()
     {
@@ -96,6 +100,8 @@ class LeaseContract extends Model
 
     /**
      * Get the tenant for the contract.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Tenant, LeaseContract>
      */
     public function tenant()
     {
@@ -104,6 +110,8 @@ class LeaseContract extends Model
 
     /**
      * Get the landlord for the contract.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, LeaseContract>
      */
     public function landlord()
     {
@@ -112,6 +120,8 @@ class LeaseContract extends Model
 
     /**
      * Get the user who created the contract.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, LeaseContract>
      */
     public function creator()
     {
@@ -120,9 +130,21 @@ class LeaseContract extends Model
 
     /**
      * Get the invoices for the contract.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Invoice>
      */
     public function invoices()
     {
         return $this->hasMany(Invoice::class, 'contract_id');
+    }
+
+    /**
+     * Get the renewal offers for the contract.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<LeaseRenewalOffer>
+     */
+    public function renewalOffers()
+    {
+        return $this->hasMany(LeaseRenewalOffer::class, 'contract_id');
     }
 }

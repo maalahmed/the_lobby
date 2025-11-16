@@ -45,6 +45,7 @@ class SendRenewalReminders extends Command
                 })
                 ->get();
 
+            /** @var LeaseContract $lease */
             foreach ($leases as $lease) {
                 if ($lease->landlord) {
                     $lease->landlord->notify(new LeaseRenewalReminderNotification($lease, $days));
