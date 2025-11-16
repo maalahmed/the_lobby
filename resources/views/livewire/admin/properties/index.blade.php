@@ -7,7 +7,7 @@
                     <h1 class="text-2xl font-bold text-gray-900">{{ __('Properties') }}</h1>
                     <p class="mt-1 text-sm text-gray-600">{{ __('Manage all properties in the system') }}</p>
                 </div>
-                <a href="{{ route('admin.properties.create') }}" 
+                <a href="{{ route('admin.properties.create') }}"
                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
                     <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-2' : 'mr-2' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
@@ -20,7 +20,7 @@
     <div class="mb-6 bg-white rounded-lg shadow-sm border border-gray-200">
         <div class="p-4">
             <div class="flex items-center justify-between mb-4">
-                <button @click="$wire.showFilters = !$wire.showFilters" 
+                <button @click="$wire.showFilters = !$wire.showFilters"
                         class="text-sm font-medium text-gray-700 hover:text-gray-900">
                     <span class="flex items-center">
                         <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-2' : 'mr-2' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -38,8 +38,8 @@
 
             <!-- Search -->
             <div class="mb-4">
-                <input type="text" 
-                       wire:model.live.debounce.300ms="search" 
+                <input type="text"
+                       wire:model.live.debounce.300ms="search"
                        placeholder="{{ __('Search by name, address, or city...') }}"
                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
             </div>
@@ -102,7 +102,7 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th wire:click="sortBy('name')" 
+                        <th wire:click="sortBy('name')"
                             class="px-6 py-3 {{ app()->getLocale() === 'ar' ? 'text-right' : 'text-left' }} text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100">
                             <div class="flex items-center">
                                 {{ __('Property Name') }}
@@ -176,20 +176,20 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm">
                                 <div class="flex items-center space-x-2 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : '' }}">
-                                    <a href="{{ route('admin.properties.show', $property->id) }}" 
+                                    <a href="{{ route('admin.properties.show', $property->id) }}"
                                        class="text-blue-600 hover:text-blue-900" title="{{ __('View') }}">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                         </svg>
                                     </a>
-                                    <a href="{{ route('admin.properties.edit', $property->id) }}" 
+                                    <a href="{{ route('admin.properties.edit', $property->id) }}"
                                        class="text-yellow-600 hover:text-yellow-900" title="{{ __('Edit') }}">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                         </svg>
                                     </a>
-                                    <button wire:click="deleteProperty({{ $property->id }})" 
+                                    <button wire:click="deleteProperty({{ $property->id }})"
                                             wire:confirm="{{ __('Are you sure you want to delete this property?') }}"
                                             class="text-red-600 hover:text-red-900" title="{{ __('Delete') }}">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
