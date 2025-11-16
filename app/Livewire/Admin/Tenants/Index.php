@@ -112,6 +112,6 @@ class Index extends Component
             'tenants' => $tenants,
         ]);
         
-        return $view]);
+        return $view;
     }
 }

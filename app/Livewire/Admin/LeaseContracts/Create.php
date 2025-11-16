@@ -158,6 +158,6 @@ class Create extends Component
         /** @var \Illuminate\View\View $view */
         $view = view('livewire.admin.lease-contracts.create');
         
-        return $view]);
+        return $view;
     }
 }

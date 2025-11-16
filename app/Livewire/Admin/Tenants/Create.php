@@ -157,6 +157,6 @@ class Create extends Component
             'users' => $users,
         ]);
         
-        return $view]);
+        return $view;
     }
 }

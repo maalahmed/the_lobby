@@ -62,7 +62,7 @@ class Index extends Component
     {
         if ($this->deleteId) {
             $invoice = Invoice::find($this->deleteId);
-            
+
             if ($invoice) {
                 // Check if invoice has payments
                 if ($invoice->payments()->exists()) {
@@ -74,7 +74,7 @@ class Index extends Component
                 $invoice->delete();
                 session()->flash('message', 'Invoice deleted successfully.');
             }
-            
+
             $this->deleteId = null;
         }
     }
@@ -120,6 +120,6 @@ class Index extends Component
         return view('livewire.admin.invoices.index', [
             'invoices' => $invoices,
             'properties' => $properties,
-        ])]);
+        ]);
     }
 }

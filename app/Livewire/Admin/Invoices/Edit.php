@@ -204,7 +204,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.invoices.edit')
-            ]);
+        return view('livewire.admin.invoices.edit');
     }
 }

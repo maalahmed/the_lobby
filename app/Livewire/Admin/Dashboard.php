@@ -30,26 +30,23 @@ class Dashboard extends Component
             'total_revenue' => Payment::where('status', 'completed')->sum('amount'),
             'pending_maintenance' => MaintenanceRequest::whereIn('status', ['pending', 'in_progress'])->count(),
         ];
-        
+
         // Recent activities
         $recentContracts = LeaseContract::with(['tenant', 'unit.property'])
             ->latest()
             ->take(5)
             ->get();
-            
+
         $recentPayments = Payment::with(['invoice.contract.tenant'])
             ->latest()
             ->take(5)
             ->get();
-            
+
         $recentMaintenance = MaintenanceRequest::with(['unit.property', 'tenant'])
             ->latest()
             ->take(5)
             ->get();
-        
-        /** @var \Illuminate\View\View $view */
-        $view = view('livewire.admin.dashboard', compact('stats', 'recentContracts', 'recentPayments', 'recentMaintenance'));
-        
-        return $view]);
+
+        return view('livewire.admin.dashboard', compact('stats', 'recentContracts', 'recentPayments', 'recentMaintenance'));
     }
 }

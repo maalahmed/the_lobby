@@ -137,6 +137,6 @@ class Create extends Component
             'landlords' => $landlords,
         ]);
         
-        return $view]);
+        return $view;
     }
 }
