@@ -1,3 +1,7 @@
+@section('header')
+    System Setting Details
+@endsection
+
 <div>
     <div class="mb-6">
         <div class="flex items-center justify-between">

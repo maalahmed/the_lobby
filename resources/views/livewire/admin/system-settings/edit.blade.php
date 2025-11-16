@@ -1,3 +1,7 @@
+@section('header')
+    Edit System Setting
+@endsection
+
 <div>
     <div class="mb-6">
         <div class="flex items-center">

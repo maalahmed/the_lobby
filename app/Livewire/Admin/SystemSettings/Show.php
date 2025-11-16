@@ -41,6 +41,6 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.admin.system-settings.show')->layout('layouts.admin');
+        return view('livewire.admin.system-settings.show');
     }
 }
