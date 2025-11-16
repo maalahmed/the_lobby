@@ -29,6 +29,25 @@
 
     <style>
         [x-cloak] { display: none !important; }
+
+        @media (min-width: 1024px) {
+            .main-content-wrapper {
+                margin-left: 16rem;
+            }
+
+            [dir='rtl'] .main-content-wrapper {
+                margin-left: 0;
+                margin-right: 16rem;
+            }
+
+            .desktop-sidebar-collapsed .main-content-wrapper {
+                margin-left: 0 !important;
+            }
+
+            [dir='rtl'] .desktop-sidebar-collapsed .main-content-wrapper {
+                margin-right: 0 !important;
+            }
+        }
     </style>
 
     @livewireStyles
@@ -42,7 +61,8 @@
           $watch('desktopSidebarOpen', value => {
               localStorage.setItem('desktopSidebarOpen', value);
           });
-      ">
+      "
+      :class="{ 'desktop-sidebar-collapsed': !desktopSidebarOpen }">
 
     <!-- Sidebar -->
     <div class="fixed inset-y-0 {{ app()->getLocale() === 'ar' ? 'right-0' : 'left-0' }} z-50 w-64 bg-gray-900 transform transition-transform duration-300 flex flex-col"
@@ -266,15 +286,7 @@
     </div>
 
     <!-- Main Content -->
-    @php
-        $desktopMarginClass = app()->getLocale() === 'ar' ? 'lg:mr-64' : 'lg:ml-64';
-        $collapsedMarginClass = app()->getLocale() === 'ar' ? 'lg:mr-0' : 'lg:ml-0';
-    @endphp
-    <div class="transition-all duration-300 {{ $desktopMarginClass }}"
-         :class="{
-             '{{ $desktopMarginClass }}': desktopSidebarOpen,
-             '{{ $collapsedMarginClass }}': !desktopSidebarOpen
-         }">
+    <div class="main-content-wrapper transition-all duration-300">
 
         <!-- Top Navigation Bar -->
         <header class="bg-white shadow-sm">
