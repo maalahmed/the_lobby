@@ -11,20 +11,20 @@ class Notification extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'uuid',
         'user_id',
         'type',
         'title',
-        'title_ar',
         'message',
-        'message_ar',
         'data',
         'notifiable_type',
         'notifiable_id',
+        'priority',
+        'is_actionable',
+        'action_url',
         'channels',
         'read_at',
         'sent_at',
-        'failed_at',
-        'failure_reason',
     ];
 
     protected $casts = [
