@@ -266,7 +266,11 @@
     </div>
 
     <!-- Main Content -->
-    <div class="transition-all duration-300 {{ app()->getLocale() === 'ar' ? 'lg:mr-64' : 'lg:ml-64' }}">
+    <div class="transition-all duration-300"
+         :class="{
+             '{{ app()->getLocale() === 'ar' ? 'lg:mr-64' : 'lg:ml-64' }}': desktopSidebarOpen,
+             '{{ app()->getLocale() === 'ar' ? 'lg:mr-0' : 'lg:ml-0' }}': !desktopSidebarOpen
+         }">
 
         <!-- Top Navigation Bar -->
         <header class="bg-white shadow-sm">
