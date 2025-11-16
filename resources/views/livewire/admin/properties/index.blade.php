@@ -1,20 +1,20 @@
-<div class="p-6">
-    <!-- Header -->
-    <div class="mb-6 flex items-center justify-between">
-        <div>
+<div>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h1 class="text-2xl font-bold text-gray-900">{{ __('Properties') }}</h1>
-            <p class="mt-1 text-sm text-gray-600">{{ __('Manage all properties in the system') }}</p>
-        </div>
-        <a href="{{ route('admin.properties.create') }}" 
-           class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-            <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-2' : 'mr-2' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-            </svg>
-            {{ __('Add Property') }}
-        </a>
-    </div>
+            <!-- Header -->
+            <div class="mb-6 flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">{{ __('Properties') }}</h1>
+                    <p class="mt-1 text-sm text-gray-600">{{ __('Manage all properties in the system') }}</p>
+                </div>
+                <a href="{{ route('admin.properties.create') }}" 
+                   class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-2' : 'mr-2' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    {{ __('Add Property') }}
+                </a>
+            </div>
 
     <!-- Filters -->
     <div class="mb-6 bg-white rounded-lg shadow-sm border border-gray-200">
@@ -223,6 +223,6 @@
             {{ $properties->links() }}
         </div>
     </div>
-    </div>
         </div>
+    </div>
 </div>
