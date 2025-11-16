@@ -132,6 +132,6 @@ class Edit extends Component
             'properties' => $properties,
         ]);
         
-        return $view;
+        return $view->layout('layouts.admin');
     }
 }

@@ -89,6 +89,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.system-settings.edit');
+        return view('livewire.admin.system-settings.edit')->layout('layouts.admin');
     }
 }

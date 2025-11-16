@@ -101,6 +101,6 @@ class Dashboard extends Component
             'units' => $units,
             'properties' => $properties,
             'stats' => $stats,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

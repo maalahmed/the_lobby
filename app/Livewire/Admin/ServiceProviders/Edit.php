@@ -105,6 +105,6 @@ class Edit extends Component
 
         return view('livewire.admin.service-providers.edit', [
             'users' => $users,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

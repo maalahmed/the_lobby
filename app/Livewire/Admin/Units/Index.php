@@ -136,6 +136,6 @@ class Index extends Component
             'properties' => $properties,
         ]);
         
-        return $view;
+        return $view->layout('layouts.admin');
     }
 }

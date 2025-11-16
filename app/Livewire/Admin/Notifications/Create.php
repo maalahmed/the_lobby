@@ -72,6 +72,6 @@ class Create extends Component
 
         return view('livewire.admin.notifications.create', [
             'users' => $users,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

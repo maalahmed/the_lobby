@@ -63,6 +63,6 @@ class Index extends Component
 
         return view('livewire.admin.service-providers.index', [
             'providers' => $providers,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

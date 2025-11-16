@@ -34,6 +34,6 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.admin.notifications.show');
+        return view('livewire.admin.notifications.show')->layout('layouts.admin');
     }
 }

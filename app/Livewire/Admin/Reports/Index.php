@@ -161,6 +161,6 @@ class Index extends Component
             'monthlyExpenses' => $monthlyExpenses,
             'topProperties' => $topProperties,
             'netIncome' => $revenue['total'] - $expenses['total'],
-        ]);
+        ])->layout('layouts.admin');
     }
 }

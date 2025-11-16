@@ -121,6 +121,6 @@ class Index extends Component
             'landlords' => $landlords,
         ]);
         
-        return $view;
+        return $view->layout('layouts.admin');
     }
 }

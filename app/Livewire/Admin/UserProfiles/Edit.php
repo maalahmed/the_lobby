@@ -85,6 +85,6 @@ class Edit extends Component
 
         return view('livewire.admin.user-profiles.edit', [
             'users' => $users,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

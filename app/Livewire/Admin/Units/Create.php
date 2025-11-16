@@ -137,6 +137,6 @@ class Create extends Component
             'properties' => $properties,
         ]);
         
-        return $view;
+        return $view->layout('layouts.admin');
     }
 }

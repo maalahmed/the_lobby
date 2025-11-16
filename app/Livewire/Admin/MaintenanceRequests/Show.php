@@ -37,6 +37,6 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.admin.maintenance-requests.show');
+        return view('livewire.admin.maintenance-requests.show')->layout('layouts.admin');
     }
 }

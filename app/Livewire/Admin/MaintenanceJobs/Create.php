@@ -83,6 +83,6 @@ class Create extends Component
         return view('livewire.admin.maintenance-jobs.create', [
             'maintenanceRequests' => $maintenanceRequests,
             'serviceProviders' => $serviceProviders,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

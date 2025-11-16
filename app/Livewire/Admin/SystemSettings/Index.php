@@ -56,6 +56,6 @@ class Index extends Component
 
         return view('livewire.admin.system-settings.index', [
             'settings' => $settings,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

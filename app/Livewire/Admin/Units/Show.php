@@ -41,6 +41,6 @@ class Show extends Component
         /** @var \Illuminate\View\View $view */
         $view = view('livewire.admin.units.show');
         
-        return $view;
+        return $view->layout('layouts.admin');
     }
 }

@@ -29,6 +29,6 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.admin.payments.show');
+        return view('livewire.admin.payments.show')->layout('layouts.admin');
     }
 }

@@ -72,6 +72,6 @@ class Edit extends Component
 
         return view('livewire.admin.messages.edit', [
             'users' => $users,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

@@ -80,6 +80,6 @@ class Edit extends Component
 
         return view('livewire.admin.users.edit', [
             'roles' => $roles,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

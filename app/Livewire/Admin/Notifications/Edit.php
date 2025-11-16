@@ -92,6 +92,6 @@ class Edit extends Component
 
         return view('livewire.admin.notifications.edit', [
             'users' => $users,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

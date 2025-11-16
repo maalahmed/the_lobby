@@ -107,6 +107,6 @@ class Index extends Component
             'renewalOffers' => $renewalOffers,
             'properties' => $properties,
             'stats' => $stats,
-        ]);
+        ])->layout('layouts.admin');
     }
 }
