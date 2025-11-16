@@ -4,9 +4,11 @@ namespace App\Livewire\Admin\Payments;
 
 use App\Models\Payment;
 use App\Models\Property;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Layout('layouts.admin')]
 class Index extends Component
 {
     use WithPagination;
