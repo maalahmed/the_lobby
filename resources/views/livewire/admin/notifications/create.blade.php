@@ -20,7 +20,7 @@
                     <label for="user_id" class="block text-sm font-medium text-gray-700">
                         {{ __('User') }} <span class="text-red-500">*</span>
                     </label>
-                    <select wire:model="user_id" 
+                    <select wire:model="user_id"
                             id="user_id"
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                         <option value="">{{ __('Select user') }}</option>
@@ -36,8 +36,8 @@
                     <label for="type" class="block text-sm font-medium text-gray-700">
                         {{ __('Type') }} <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" 
-                           wire:model="type" 
+                    <input type="text"
+                           wire:model="type"
                            id="type"
                            placeholder="e.g., payment_reminder, maintenance_update"
                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
@@ -49,8 +49,8 @@
                     <label for="title" class="block text-sm font-medium text-gray-700">
                         {{ __('Title') }} <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" 
-                           wire:model="title" 
+                    <input type="text"
+                           wire:model="title"
                            id="title"
                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     @error('title') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
@@ -61,7 +61,7 @@
                     <label for="message" class="block text-sm font-medium text-gray-700">
                         {{ __('Message') }} <span class="text-red-500">*</span>
                     </label>
-                    <textarea wire:model="message" 
+                    <textarea wire:model="message"
                               id="message"
                               rows="4"
                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
@@ -74,7 +74,7 @@
                         <label for="priority" class="block text-sm font-medium text-gray-700">
                             {{ __('Priority') }} <span class="text-red-500">*</span>
                         </label>
-                        <select wire:model="priority" 
+                        <select wire:model="priority"
                                 id="priority"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                             <option value="low">{{ __('Low') }}</option>
@@ -89,8 +89,8 @@
                         <label for="action_url" class="block text-sm font-medium text-gray-700">
                             {{ __('Action URL') }}
                         </label>
-                        <input type="url" 
-                               wire:model="action_url" 
+                        <input type="url"
+                               wire:model="action_url"
                                id="action_url"
                                placeholder="https://..."
                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
@@ -138,7 +138,7 @@
                     <label for="data" class="block text-sm font-medium text-gray-700">
                         {{ __('Additional Data (JSON)') }}
                     </label>
-                    <textarea wire:model="data" 
+                    <textarea wire:model="data"
                               id="data"
                               rows="3"
                               placeholder='{"key": "value"}'
@@ -152,8 +152,8 @@
                         <label for="notifiable_type" class="block text-sm font-medium text-gray-700">
                             {{ __('Related To (Type)') }}
                         </label>
-                        <input type="text" 
-                               wire:model="notifiable_type" 
+                        <input type="text"
+                               wire:model="notifiable_type"
                                id="notifiable_type"
                                placeholder="e.g., Property, Invoice"
                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
@@ -164,8 +164,8 @@
                         <label for="notifiable_id" class="block text-sm font-medium text-gray-700">
                             {{ __('Related To (ID)') }}
                         </label>
-                        <input type="number" 
-                               wire:model="notifiable_id" 
+                        <input type="number"
+                               wire:model="notifiable_id"
                                id="notifiable_id"
                                placeholder="e.g., 123"
                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
@@ -175,11 +175,11 @@
 
                 <!-- Actions -->
                 <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
-                    <a href="{{ route('admin.notifications.index') }}" 
+                    <a href="{{ route('admin.notifications.index') }}"
                        class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
                         {{ __('Cancel') }}
                     </a>
-                    <button type="submit" 
+                    <button type="submit"
                             class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
                         {{ __('Send Notification') }}
                     </button>

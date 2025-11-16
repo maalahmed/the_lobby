@@ -44,6 +44,7 @@ class Create extends Component
         $this->validate();
 
         $notification = Notification::create([
+            'uuid' => \Illuminate\Support\Str::uuid(),
             'user_id' => $this->user_id,
             'type' => $this->type,
             'title' => $this->title,
