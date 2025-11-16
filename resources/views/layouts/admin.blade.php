@@ -220,7 +220,7 @@
                 {{ __('Lease Renewals') }}
             </a>
 
-            {{-- TODO: Uncomment when routes are created
+            <!-- Users -->
             <a href="{{ route('admin.users.index') }}"
                class="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.users.*') ? 'bg-gray-800 text-white' : '' }}">
                 <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-3' : 'mr-3' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -229,6 +229,7 @@
                 {{ __('Users') }}
             </a>
 
+            {{-- TODO: Uncomment when routes are created
             <a href="{{ route('admin.contracts.index') }}"
                class="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.contracts.*') ? 'bg-gray-800 text-white' : '' }}">
                 <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-3' : 'mr-3' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">

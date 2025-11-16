@@ -60,6 +60,9 @@ use App\Livewire\Admin\Vacancies\Dashboard as VacanciesDashboard;
 use App\Livewire\Admin\Vacancies\Calendar as VacanciesCalendar;
 use App\Livewire\Admin\LeaseRenewals\Index as LeaseRenewalsIndex;
 use App\Livewire\Admin\LeaseRenewals\Create as LeaseRenewalsCreate;
+use App\Livewire\Admin\Users\Index as UsersIndex;
+use App\Livewire\Admin\Users\Create as UsersCreate;
+use App\Livewire\Admin\Users\Edit as UsersEdit;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -206,6 +209,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Lease Renewals
     Route::get('/lease-renewals', LeaseRenewalsIndex::class)->name('lease-renewals.index');
     Route::get('/lease-renewals/create/{leaseId}', LeaseRenewalsCreate::class)->name('lease-renewals.create');
+
+    // Users Management
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/', UsersIndex::class)->name('index');
+        Route::get('/create', UsersCreate::class)->name('create');
+        Route::get('/{userId}/edit', UsersEdit::class)->name('edit');
+    });
 
     // Reports
     // Route::get('/reports', ReportIndex::class)->name('reports');
