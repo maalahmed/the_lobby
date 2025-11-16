@@ -1,4 +1,6 @@
 <div>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class="mb-6 flex justify-between items-center">
         <h1 class="text-3xl font-bold text-gray-800">{{ __('Edit Payment') }}: {{ $payment->payment_reference }}</h1>
         <a href="{{ route('admin.payments.show', $payment) }}" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
@@ -213,4 +215,6 @@
             </div>
         </form>
     </div>
+    </div>
+        </div>
 </div>

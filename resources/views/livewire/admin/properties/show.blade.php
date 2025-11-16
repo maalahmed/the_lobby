@@ -1,4 +1,6 @@
 <div class="p-6">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <!-- Header -->
     <div class="mb-6 flex items-center justify-between">
         <div>
@@ -398,4 +400,6 @@
             <span class="block sm:inline">{{ session('error') }}</span>
         </div>
     @endif
+    </div>
+        </div>
 </div>
