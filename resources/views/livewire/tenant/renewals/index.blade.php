@@ -1,8 +1,8 @@
-<div>
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ __('My Renewal Offers') }}</h1>
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">{{ __('My Renewal Offers') }}</h1>
             <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                 {{ __('View and respond to lease renewal offers from your landlord') }}
             </p>
@@ -55,7 +55,7 @@
 
         <!-- Filter -->
         <div class="mb-6">
-            <select wire:model.live="statusFilter" class="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 dark:text-white">
+            <select wire:model.live="statusFilter" class="block w-full md:w-64 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 <option value="all">{{ __('All Offers') }}</option>
                 <option value="sent">{{ __('New Offers') }}</option>
                 <option value="viewed">{{ __('Viewed') }}</option>

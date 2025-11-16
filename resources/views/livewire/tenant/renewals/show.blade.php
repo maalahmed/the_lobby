@@ -1,14 +1,14 @@
-<div>
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Header -->
         <div class="mb-6">
-            <a href="{{ route('tenant.renewals.index') }}" class="text-blue-600 hover:text-blue-700 mb-4 inline-flex items-center">
+            <a href="{{ route('tenant.renewals.index') }}" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mb-4 inline-flex items-center">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                 </svg>
                 {{ __('Back to Offers') }}
             </a>
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mt-4">{{ __('Renewal Offer Details') }}</h1>
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white mt-4">{{ __('Renewal Offer Details') }}</h1>
         </div>
 
         @if(session()->has('message'))
