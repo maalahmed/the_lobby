@@ -13,7 +13,7 @@ class Calendar extends Component
     public $selectedProperty = '';
     public $currentMonth;
     public $currentYear;
-    
+
     protected $queryString = ['selectedProperty', 'currentMonth', 'currentYear'];
 
     public function mount()
@@ -46,11 +46,11 @@ class Calendar extends Component
     {
         $startOfMonth = Carbon::create($this->currentYear, $this->currentMonth, 1)->startOfDay();
         $endOfMonth = $startOfMonth->copy()->endOfMonth()->endOfDay();
-        
+
         // Get start of calendar (previous month days if needed)
         $startOfCalendar = $startOfMonth->copy()->startOfWeek();
         $endOfCalendar = $endOfMonth->copy()->endOfWeek();
-        
+
         $query = LeaseContract::with(['unit.property', 'tenant'])
             ->where(function ($q) use ($startOfCalendar, $endOfCalendar) {
                 $q->whereBetween('start_date', [$startOfCalendar, $endOfCalendar])
@@ -70,7 +70,7 @@ class Calendar extends Component
         // Build calendar grid
         $weeks = [];
         $currentDate = $startOfCalendar->copy();
-        
+
         while ($currentDate <= $endOfCalendar) {
             $week = [];
             for ($i = 0; $i < 7; $i++) {
@@ -85,7 +85,7 @@ class Calendar extends Component
                     'leases' => $dayLeases,
                     'eventCount' => $dayLeases->count(),
                 ];
-                
+
                 $currentDate->addDay();
             }
             $weeks[] = $week;

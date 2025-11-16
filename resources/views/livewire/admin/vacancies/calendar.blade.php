@@ -28,14 +28,14 @@
                     <button wire:click="previousMonth" class="px-4 py-2 ~bg-gray-200 ~text-gray-700 rounded-lg hover:~bg-gray-300">
                         ← {{ __('Previous') }}
                     </button>
-                    
+
                     <div class="flex items-center gap-4">
                         <h3 class="text-xl font-semibold">{{ $calendarData['monthName'] }}</h3>
                         <button wire:click="today" class="px-3 py-1 text-sm ~bg-blue-100 ~text-blue-700 rounded-lg hover:~bg-blue-200">
                             {{ __('Today') }}
                         </button>
                     </div>
-                    
+
                     <button wire:click="nextMonth" class="px-4 py-2 ~bg-gray-200 ~text-gray-700 rounded-lg hover:~bg-gray-300">
                         {{ __('Next') }} →
                     </button>
@@ -93,7 +93,7 @@
                                         $displayedLeases = $day['leases']->take($displayLimit);
                                         $remainingCount = $day['eventCount'] - $displayLimit;
                                     @endphp
-                                    
+
                                     @foreach($displayedLeases as $lease)
                                         @php
                                             $isStart = $lease->start_date->isSameDay($day['date']);
@@ -105,8 +105,8 @@
                                                 default => 'bg-gray-500'
                                             };
                                         @endphp
-                                        
-                                        <div 
+
+                                        <div
                                             class="text-xs px-2 py-1 rounded {{ $statusColor }} text-white truncate cursor-pointer hover:opacity-80"
                                             title="{{ $lease->unit->property->name }} - Unit {{ $lease->unit->unit_number }} - {{ $lease->tenant->user->name }}"
                                         >
