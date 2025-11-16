@@ -83,9 +83,9 @@
 
     <!-- Alerts -->
     @if($stats['overdue_invoices'] > 0 || $stats['pending_maintenance'] > 0)
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         @if($stats['overdue_invoices'] > 0)
-        <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded">
+        <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded-lg">
             <div class="flex">
                 <div class="flex-shrink-0">
                     <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
@@ -101,7 +101,7 @@
         @endif
 
         @if($stats['pending_maintenance'] > 0)
-        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
             <div class="flex">
                 <div class="flex-shrink-0">
                     <svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
