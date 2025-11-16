@@ -64,14 +64,27 @@ class LeaseRenewalReminderNotification extends Notification implements ShouldQue
      */
     public function toArray(object $notifiable): array
     {
+        $propertyName = $this->lease->unit->property->name ?? 'Property';
+        $unitNumber = $this->lease->unit->unit_number ?? '';
+        
         return [
-            'lease_id' => $this->lease->id,
-            'property_id' => $this->lease->property_id,
-            'unit_id' => $this->lease->unit_id,
-            'tenant_id' => $this->lease->tenant_id,
-            'days_remaining' => $this->daysRemaining,
-            'expiration_date' => $this->lease->end_date->toDateString(),
-            'message' => "Lease expiring in {$this->daysRemaining} days",
+            'type' => 'lease_renewal_reminder',
+            'title' => "Lease Expiring in {$this->daysRemaining} Days",
+            'message' => "Lease for {$propertyName} - Unit {$unitNumber} expires on {$this->lease->end_date->format('F j, Y')}",
+            'data' => [
+                'lease_id' => $this->lease->id,
+                'property_id' => $this->lease->property_id,
+                'unit_id' => $this->lease->unit_id,
+                'tenant_id' => $this->lease->tenant_id,
+                'days_remaining' => $this->daysRemaining,
+                'expiration_date' => $this->lease->end_date->toDateString(),
+                'current_rent' => $this->lease->rent_amount,
+            ],
+            'notifiable_type' => 'App\\Models\\LeaseContract',
+            'notifiable_id' => $this->lease->id,
+            'priority' => $this->daysRemaining <= 15 ? 'high' : 'normal',
+            'is_actionable' => true,
+            'action_url' => route('admin.lease-renewals.create', $this->lease->id),
         ];
     }
 }
