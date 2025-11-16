@@ -1,4 +1,6 @@
 <div>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class="mb-6">
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-semibold text-gray-900">{{ __('User Profiles') }}</h1>
@@ -111,4 +113,6 @@
             {{ $profiles->links() }}
         </div>
     </div>
+    </div>
+        </div>
 </div>
