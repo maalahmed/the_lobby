@@ -1,4 +1,4 @@
-<div class="container mx-auto px-4 py-8">
+<div>
     <div class="mb-6 flex justify-between items-center">
         <h1 class="text-3xl font-bold text-gray-800">{{ __('Payment Details') }}: {{ $payment->payment_reference }}</h1>
         <div class="space-x-2">

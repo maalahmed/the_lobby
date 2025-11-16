@@ -1,4 +1,4 @@
-<div class="container mx-auto px-4 py-8">
+<div>
     <div class="mb-6 flex justify-between items-center">
         <h1 class="text-3xl font-bold text-gray-800">{{ __('Record New Payment') }}</h1>
         <a href="{{ route('admin.payments.index') }}" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
