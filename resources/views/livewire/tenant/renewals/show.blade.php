@@ -70,7 +70,7 @@
         <!-- Rental Terms Comparison -->
         <div class="~bg-white dark:~bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ __('Rental Terms') }}</h2>
-            
+
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead>
@@ -139,17 +139,17 @@
         @if(in_array($offer->status, ['sent', 'viewed']) && $offer->offer_expiry_date >= now())
             <div class="~bg-white dark:~bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">{{ __('Your Response') }}</h2>
-                
+
                 <div class="space-y-4">
                     <!-- Accept Button -->
-                    <button wire:click="acceptOffer" 
+                    <button wire:click="acceptOffer"
                             wire:confirm="Are you sure you want to accept this renewal offer?"
                             class="w-full px-6 py-3 ~bg-green-600 hover:~bg-green-700 text-white font-semibold rounded-lg shadow-sm">
                         {{ __('Accept Offer') }}
                     </button>
 
                     <!-- Counter Offer Toggle -->
-                    <button wire:click="$toggle('showCounterOfferForm')" 
+                    <button wire:click="$toggle('showCounterOfferForm')"
                             type="button"
                             class="w-full px-6 py-3 ~bg-yellow-600 hover:~bg-yellow-700 text-white font-semibold rounded-lg shadow-sm">
                         {{ __('Make Counter Offer') }}
@@ -161,8 +161,8 @@
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     {{ __('Counter Offer Amount (AED)') }}
                                 </label>
-                                <input type="number" 
-                                       wire:model="counter_offer_amount" 
+                                <input type="number"
+                                       wire:model="counter_offer_amount"
                                        step="0.01"
                                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:~bg-gray-800 dark:text-white">
                                 @error('counter_offer_amount') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
@@ -172,13 +172,13 @@
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     {{ __('Notes (optional)') }}
                                 </label>
-                                <textarea wire:model="tenant_response_notes" 
+                                <textarea wire:model="tenant_response_notes"
                                           rows="3"
                                           class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:~bg-gray-800 dark:text-white"></textarea>
                                 @error('tenant_response_notes') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            <button wire:click="submitCounterOffer" 
+                            <button wire:click="submitCounterOffer"
                                     class="w-full px-6 py-3 ~bg-yellow-600 hover:~bg-yellow-700 text-white font-semibold rounded-lg shadow-sm">
                                 {{ __('Submit Counter Offer') }}
                             </button>
@@ -194,13 +194,13 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 {{ __('Reason for rejection (required)') }}
                             </label>
-                            <textarea wire:model="tenant_response_notes" 
+                            <textarea wire:model="tenant_response_notes"
                                       rows="3"
                                       placeholder="{{ __('Please explain why you are rejecting this offer...') }}"
                                       class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg dark:~bg-gray-800 dark:text-white mb-4"></textarea>
                             @error('tenant_response_notes') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
-                            <button wire:click="rejectOffer" 
+                            <button wire:click="rejectOffer"
                                     wire:confirm="Are you sure you want to reject this renewal offer?"
                                     class="w-full px-6 py-3 ~bg-red-600 hover:~bg-red-700 text-white font-semibold rounded-lg shadow-sm">
                                 {{ __('Confirm Rejection') }}
