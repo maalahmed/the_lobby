@@ -16,7 +16,7 @@ class Dashboard extends Component
     public $selectedProperty = '';
     public $selectedStatus = '';
     public $searchTerm = '';
-    
+
     protected $queryString = ['selectedProperty', 'selectedStatus', 'searchTerm'];
 
     public function updatingSearchTerm()
@@ -38,7 +38,7 @@ class Dashboard extends Component
     {
         $unit = PropertyUnit::findOrFail($unitId);
         $unit->update(['status' => $newStatus]);
-        
+
         session()->flash('message', 'Unit status updated successfully.');
     }
 
@@ -49,10 +49,10 @@ class Dashboard extends Component
         $occupiedUnits = PropertyUnit::where('status', 'occupied')->count();
         $maintenanceUnits = PropertyUnit::where('status', 'maintenance')->count();
         $reservedUnits = PropertyUnit::where('status', 'reserved')->count();
-        
+
         $occupancyRate = $totalUnits > 0 ? round(($occupiedUnits / $totalUnits) * 100, 1) : 0;
         $vacancyRate = $totalUnits > 0 ? round(($availableUnits / $totalUnits) * 100, 1) : 0;
-        
+
         // Upcoming vacancies (leases ending in next 60 days)
         $upcomingVacancies = LeaseContract::where('status', 'active')
             ->whereBetween('end_date', [now(), now()->addDays(60)])
@@ -73,7 +73,7 @@ class Dashboard extends Component
     public function render()
     {
         $properties = Property::where('status', 'active')->get();
-        
+
         $units = PropertyUnit::with(['property', 'leaseContracts' => function($query) {
             $query->where('status', 'active')->latest();
         }])

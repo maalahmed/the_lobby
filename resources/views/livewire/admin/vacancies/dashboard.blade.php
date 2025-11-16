@@ -1,7 +1,15 @@
 <div>
-    <div class="mb-6">
-        <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200">Vacancy Management</h2>
-        <p class="text-gray-600 dark:text-gray-400">Monitor unit availability and occupancy rates</p>
+    <div class="mb-6 flex items-center justify-between">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200">Vacancy Management</h2>
+            <p class="text-gray-600 dark:text-gray-400">Monitor unit availability and occupancy rates</p>
+        </div>
+        <a href="{{ route('admin.vacancies.calendar') }}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            Calendar View
+        </a>
     </div>
 
     @if (session()->has('message'))
@@ -81,9 +89,9 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search</label>
-                <input 
-                    type="text" 
-                    wire:model.live="searchTerm" 
+                <input
+                    type="text"
+                    wire:model.live="searchTerm"
                     placeholder="Search by unit or property..."
                     class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200"
                 >
@@ -91,7 +99,7 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Property</label>
-                <select 
+                <select
                     wire:model.live="selectedProperty"
                     class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200"
                 >
@@ -104,7 +112,7 @@
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
-                <select 
+                <select
                     wire:model.live="selectedStatus"
                     class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200"
                 >
@@ -154,7 +162,7 @@
                                 <div class="text-xs text-gray-500">{{ ucfirst(str_replace('_', ' ', $unit->rent_frequency)) }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <select 
+                                <select
                                     wire:change="updateUnitStatus({{ $unit->id }}, $event.target.value)"
                                     class="text-sm rounded-full px-3 py-1 font-semibold
                                         {{ $unit->status === 'available' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : '' }}

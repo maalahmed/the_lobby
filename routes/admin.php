@@ -57,6 +57,7 @@ use App\Livewire\Admin\Notifications\Create as NotificationsCreate;
 use App\Livewire\Admin\Notifications\Show as NotificationsShow;
 use App\Livewire\Admin\Notifications\Edit as NotificationsEdit;
 use App\Livewire\Admin\Vacancies\Dashboard as VacanciesDashboard;
+use App\Livewire\Admin\Vacancies\Calendar as VacanciesCalendar;
 // use App\Livewire\Admin\Users\UserIndex;
 // use App\Livewire\Admin\Contracts\ContractIndex;
 // use App\Livewire\Admin\Maintenance\MaintenanceIndex;
@@ -70,10 +71,10 @@ use App\Livewire\Admin\Vacancies\Dashboard as VacanciesDashboard;
 
 // TODO: Add proper authentication middleware after implementing login
 Route::prefix('admin')->name('admin.')->group(function () {
-    
+
     // Dashboard
     Route::get('/', Dashboard::class)->name('dashboard');
-    
+
     // Properties Management
     Route::prefix('properties')->name('properties.')->group(function () {
         Route::get('/', PropertiesIndex::class)->name('index');
@@ -81,7 +82,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{property}', PropertiesShow::class)->name('show');
         Route::get('/{property}/edit', PropertiesEdit::class)->name('edit');
     });
-    
+
     // Units Management
     Route::prefix('units')->name('units.')->group(function () {
         Route::get('/', UnitsIndex::class)->name('index');
@@ -89,7 +90,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{unit}', UnitsShow::class)->name('show');
         Route::get('/{unit}/edit', UnitsEdit::class)->name('edit');
     });
-    
+
     // Tenants Management
     Route::prefix('tenants')->name('tenants.')->group(function () {
         Route::get('/', TenantsIndex::class)->name('index');
@@ -97,7 +98,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{tenant}', TenantsShow::class)->name('show');
         Route::get('/{tenant}/edit', TenantsEdit::class)->name('edit');
     });
-    
+
     // Lease Contracts Management
     Route::prefix('lease-contracts')->name('lease-contracts.')->group(function () {
         Route::get('/', LeaseContractsIndex::class)->name('index');
@@ -105,7 +106,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{contract}', LeaseContractsShow::class)->name('show');
         Route::get('/{contract}/edit', LeaseContractsEdit::class)->name('edit');
     });
-    
+
     // Invoices Management
     Route::prefix('invoices')->name('invoices.')->group(function () {
         Route::get('/', InvoicesIndex::class)->name('index');
@@ -113,7 +114,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{invoice}', InvoicesShow::class)->name('show');
         Route::get('/{invoice}/edit', InvoicesEdit::class)->name('edit');
     });
-    
+
     // Payments Management
     Route::prefix('payments')->name('payments.')->group(function () {
         Route::get('/', PaymentsIndex::class)->name('index');
@@ -121,7 +122,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{payment}', PaymentsShow::class)->name('show');
         Route::get('/{payment}/edit', PaymentsEdit::class)->name('edit');
     });
-    
+
     // Maintenance Requests Management
     Route::prefix('maintenance-requests')->name('maintenance-requests.')->group(function () {
         Route::get('/', MaintenanceRequestsIndex::class)->name('index');
@@ -129,7 +130,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{request}', MaintenanceRequestsShow::class)->name('show');
         Route::get('/{request}/edit', MaintenanceRequestsEdit::class)->name('edit');
     });
-    
+
     // Maintenance Jobs Management
     Route::prefix('maintenance-jobs')->name('maintenance-jobs.')->group(function () {
         Route::get('/', MaintenanceJobsIndex::class)->name('index');
@@ -137,7 +138,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{job}', MaintenanceJobsShow::class)->name('show');
         Route::get('/{job}/edit', MaintenanceJobsEdit::class)->name('edit');
     });
-    
+
     // Service Providers Management
     Route::prefix('service-providers')->name('service-providers.')->group(function () {
         Route::get('/', ServiceProvidersIndex::class)->name('index');
@@ -145,7 +146,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{provider}', ServiceProvidersShow::class)->name('show');
         Route::get('/{provider}/edit', ServiceProvidersEdit::class)->name('edit');
     });
-    
+
     // User Profiles Management
     Route::prefix('user-profiles')->name('user-profiles.')->group(function () {
         Route::get('/', UserProfilesIndex::class)->name('index');
@@ -153,7 +154,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{profile}', UserProfilesShow::class)->name('show');
         Route::get('/{profile}/edit', UserProfilesEdit::class)->name('edit');
     });
-    
+
     // System Settings Management
     Route::prefix('system-settings')->name('system-settings.')->group(function () {
         Route::get('/', SystemSettingsIndex::class)->name('index');
@@ -161,13 +162,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{setting}/edit', SystemSettingsEdit::class)->name('edit');
         Route::get('/{setting}', SystemSettingsShow::class)->name('show');
     });
-    
+
     // Audit Logs (Read-Only)
     Route::prefix('audit-logs')->name('audit-logs.')->group(function () {
         Route::get('/', AuditLogsIndex::class)->name('index');
         Route::get('/{log}', AuditLogsShow::class)->name('show');
     });
-    
+
     // Messages Management
     Route::prefix('messages')->name('messages.')->group(function () {
         Route::get('/', MessagesIndex::class)->name('index');
@@ -175,7 +176,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{message}', MessagesShow::class)->name('show');
         Route::get('/{message}/edit', MessagesEdit::class)->name('edit');
     });
-    
+
     // Notifications Management
     Route::prefix('notifications')->name('notifications.')->group(function () {
         Route::get('/', NotificationsIndex::class)->name('index');
@@ -183,22 +184,23 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{notification}', NotificationsShow::class)->name('show');
         Route::get('/{notification}/edit', NotificationsEdit::class)->name('edit');
     });
-    
+
     // Users Management
     // Route::get('/users', UserIndex::class)->name('users.index');
-    
+
     // Contracts Management
     // Route::get('/contracts', ContractIndex::class)->name('contracts.index');
-    
+
     // Invoices Management
     // Route::get('/invoices', InvoiceIndex::class)->name('invoices.index');
-    
+
     // Maintenance Management
     // Route::get('/maintenance', MaintenanceIndex::class)->name('maintenance.index');
-    
+
     // Vacancy Management
     Route::get('/vacancies', VacanciesDashboard::class)->name('vacancies.dashboard');
-    
+    Route::get('/vacancies/calendar', VacanciesCalendar::class)->name('vacancies.calendar');
+
     // Reports
     // Route::get('/reports', ReportIndex::class)->name('reports');
 });
