@@ -44,56 +44,67 @@
                     @error('type') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
 
-                <!-- Title (English & Arabic) -->
+                <!-- Title -->
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700">
+                        {{ __('Title') }} <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" 
+                           wire:model="title" 
+                           id="title"
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    @error('title') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                </div>
+
+                <!-- Message -->
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700">
+                        {{ __('Message') }} <span class="text-red-500">*</span>
+                    </label>
+                    <textarea wire:model="message" 
+                              id="message"
+                              rows="4"
+                              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    @error('message') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                </div>
+
+                <!-- Priority & Action -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="title" class="block text-sm font-medium text-gray-700">
-                            {{ __('Title (English)') }} <span class="text-red-500">*</span>
+                        <label for="priority" class="block text-sm font-medium text-gray-700">
+                            {{ __('Priority') }} <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" 
-                               wire:model="title" 
-                               id="title"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                        @error('title') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        <select wire:model="priority" 
+                                id="priority"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                            <option value="low">{{ __('Low') }}</option>
+                            <option value="normal">{{ __('Normal') }}</option>
+                            <option value="high">{{ __('High') }}</option>
+                            <option value="urgent">{{ __('Urgent') }}</option>
+                        </select>
+                        @error('priority') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
-                        <label for="title_ar" class="block text-sm font-medium text-gray-700">
-                            {{ __('Title (Arabic)') }}
+                        <label for="action_url" class="block text-sm font-medium text-gray-700">
+                            {{ __('Action URL') }}
                         </label>
-                        <input type="text" 
-                               wire:model="title_ar" 
-                               id="title_ar"
-                               dir="rtl"
+                        <input type="url" 
+                               wire:model="action_url" 
+                               id="action_url"
+                               placeholder="https://..."
                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                        @error('title_ar') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        @error('action_url') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
-                <!-- Message (English & Arabic) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700">
-                            {{ __('Message (English)') }} <span class="text-red-500">*</span>
-                        </label>
-                        <textarea wire:model="message" 
-                                  id="message"
-                                  rows="4"
-                                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        @error('message') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                    </div>
-
-                    <div>
-                        <label for="message_ar" class="block text-sm font-medium text-gray-700">
-                            {{ __('Message (Arabic)') }}
-                        </label>
-                        <textarea wire:model="message_ar" 
-                                  id="message_ar"
-                                  rows="4"
-                                  dir="rtl"
-                                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        @error('message_ar') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                    </div>
+                <!-- Is Actionable -->
+                <div>
+                    <label class="flex items-center">
+                        <input type="checkbox" wire:model="is_actionable" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                        <span class="ml-2 text-sm text-gray-700">{{ __('Is Actionable (requires user action)') }}</span>
+                    </label>
+                    @error('is_actionable') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
 
                 <!-- Channels -->
