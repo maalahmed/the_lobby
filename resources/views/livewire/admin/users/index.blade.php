@@ -1,7 +1,7 @@
-<div class="min-h-screen bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div>
+    <div class="max-w-7xl mx-auto">
         <!-- Header -->
-        <div class="mb-8">
+        <div class="mb-6">
             <h1 class="text-2xl font-semibold text-gray-800">{{ __('User Management') }}</h1>
             <p class="mt-2 text-sm text-gray-600">
                 {{ __('Manage system users and their roles') }}
@@ -22,7 +22,7 @@
         @endif
 
         <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
             <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
                 <div class="flex items-center justify-between">
                     <div>
