@@ -29,3 +29,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Include admin routes
+require __DIR__.'/admin.php';
+
+// Tenant renewal portal routes
+use App\Livewire\Tenant\Renewals\Index as TenantRenewalsIndex;
+use App\Livewire\Tenant\Renewals\Show as TenantRenewalsShow;
+
+Route::middleware(['auth'])->prefix('tenant')->name('tenant.')->group(function () {
+    Route::get('/renewals', TenantRenewalsIndex::class)->name('renewals.index');
+    Route::get('/renewals/{offerId}', TenantRenewalsShow::class)->name('renewals.show');
+});
