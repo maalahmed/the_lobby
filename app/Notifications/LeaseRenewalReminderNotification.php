@@ -41,7 +41,7 @@ class LeaseRenewalReminderNotification extends Notification implements ShouldQue
     {
         $propertyName = $this->lease->unit->property->name ?? 'your property';
         $unitNumber = $this->lease->unit->unit_number ?? '';
-        
+
         return (new MailMessage)
             ->subject("Lease Expiring in {$this->daysRemaining} Days - Action Required")
             ->greeting("Hello {$notifiable->name},")
@@ -66,7 +66,7 @@ class LeaseRenewalReminderNotification extends Notification implements ShouldQue
     {
         $propertyName = $this->lease->unit->property->name ?? 'Property';
         $unitNumber = $this->lease->unit->unit_number ?? '';
-        
+
         return [
             'type' => 'lease_renewal_reminder',
             'title' => "Lease Expiring in {$this->daysRemaining} Days",

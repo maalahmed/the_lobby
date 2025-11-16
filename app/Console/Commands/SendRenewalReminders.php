@@ -35,7 +35,7 @@ class SendRenewalReminders extends Command
 
         foreach ($reminderDays as $days) {
             $targetDate = Carbon::today()->addDays($days);
-            
+
             // Find leases expiring on the target date that haven't been reminded for this period
             $leases = LeaseContract::with(['unit.property', 'tenant.user', 'landlord'])
                 ->where('end_date', $targetDate->toDateString())
@@ -49,14 +49,14 @@ class SendRenewalReminders extends Command
                 if ($lease->landlord) {
                     $lease->landlord->notify(new LeaseRenewalReminderNotification($lease, $days));
                     $sentCount++;
-                    
+
                     $this->info("Sent {$days}-day reminder for lease #{$lease->id} to {$lease->landlord->name}");
                 }
             }
         }
 
         $this->info("Total reminders sent: {$sentCount}");
-        
+
         return Command::SUCCESS;
     }
 }
