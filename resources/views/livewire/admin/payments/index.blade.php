@@ -1,10 +1,12 @@
 <div>
-    <div class="mb-6 flex justify-between items-center">
-        <h1 class="text-3xl font-bold text-gray-800">{{ __('Payments Management') }}</h1>
-        <a href="{{ route('admin.payments.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
-            {{ __('Record New Payment') }}
-        </a>
-    </div>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mb-6 flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-gray-800">{{ __('Payments Management') }}</h1>
+                <a href="{{ route('admin.payments.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                    {{ __('Record New Payment') }}
+                </a>
+            </div>
 
     @if (session()->has('message'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -117,7 +119,7 @@
                             <div class="text-sm text-gray-900">{{ $payment->payment_date->format('M d, Y') }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                                 @if($payment->status === 'completed') bg-green-100 text-green-800
                                 @elseif($payment->status === 'pending') bg-yellow-100 text-yellow-800
                                 @elseif($payment->status === 'processing') bg-blue-100 text-blue-800
@@ -129,7 +131,7 @@
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                                 @if($payment->verification_status === 'verified') bg-green-100 text-green-800
                                 @elseif($payment->verification_status === 'pending') bg-yellow-100 text-yellow-800
                                 @elseif($payment->verification_status === 'rejected') bg-red-100 text-red-800
@@ -158,5 +160,7 @@
     <!-- Pagination -->
     <div class="mt-4">
         {{ $payments->links() }}
+    </div>
+        </div>
     </div>
 </div>
