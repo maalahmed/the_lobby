@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Tenant\Renewals\Index as TenantRenewalsIndex;
+use App\Livewire\Tenant\Renewals\Show as TenantRenewalsShow;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +32,6 @@ require __DIR__.'/admin.php';
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->prefix('tenant')->name('tenant.')->group(function () {
-    use App\Livewire\Tenant\Renewals\Index as TenantRenewalsIndex;
-    use App\Livewire\Tenant\Renewals\Show as TenantRenewalsShow;
-    
     Route::get('/renewals', TenantRenewalsIndex::class)->name('renewals.index');
     Route::get('/renewals/{offerId}', TenantRenewalsShow::class)->name('renewals.show');
 });
