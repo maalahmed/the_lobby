@@ -266,10 +266,14 @@
     </div>
 
     <!-- Main Content -->
-    <div class="transition-all duration-300"
+    @php
+        $desktopMarginClass = app()->getLocale() === 'ar' ? 'lg:mr-64' : 'lg:ml-64';
+        $collapsedMarginClass = app()->getLocale() === 'ar' ? 'lg:mr-0' : 'lg:ml-0';
+    @endphp
+    <div class="transition-all duration-300 {{ $desktopMarginClass }}"
          :class="{
-             '{{ app()->getLocale() === 'ar' ? 'lg:mr-64' : 'lg:ml-64' }}': desktopSidebarOpen,
-             '{{ app()->getLocale() === 'ar' ? 'lg:mr-0' : 'lg:ml-0' }}': !desktopSidebarOpen
+             '{{ $desktopMarginClass }}': desktopSidebarOpen,
+             '{{ $collapsedMarginClass }}': !desktopSidebarOpen
          }">
 
         <!-- Top Navigation Bar -->
