@@ -83,6 +83,6 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.tenant.renewals.show')->layout('layouts.tenant');
+        return view('livewire.tenant.renewals.show')->layout('layouts.admin');
     }
 }
