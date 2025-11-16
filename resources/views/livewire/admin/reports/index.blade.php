@@ -2,11 +2,11 @@
     Financial Reports
 @endsection
 
-<div class="min-h-screen bg-gray-50 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div>
+    <div class="max-w-7xl mx-auto">
         <!-- Header -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Financial Reports</h1>
+        <div class="mb-6">
+            <h1 class="text-2xl font-semibold text-gray-800">Financial Reports</h1>
             <p class="mt-2 text-gray-600">Comprehensive overview of revenue, expenses, and occupancy metrics</p>
         </div>
 

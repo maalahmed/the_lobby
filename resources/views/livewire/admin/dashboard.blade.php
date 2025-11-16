@@ -1,6 +1,6 @@
 <div>
     <!-- Stats Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         <!-- Total Properties -->
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center">
@@ -133,7 +133,7 @@
                             <p class="text-sm font-medium text-gray-900">{{ $contract->tenant->name ?? __('N/A') }}</p>
                             <p class="text-sm text-gray-500">{{ $contract->unit->property->name ?? '' }} - {{ $contract->unit->unit_number ?? '' }}</p>
                         </div>
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full 
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full
                             @if($contract->status === 'active') bg-green-100 text-green-800
                             @elseif($contract->status === 'draft') bg-gray-100 text-gray-800
                             @else bg-red-100 text-red-800

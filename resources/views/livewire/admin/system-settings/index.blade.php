@@ -2,10 +2,10 @@
     System Settings
 @endsection
 
-<div class="min-h-screen bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div>
+    <div class="max-w-7xl mx-auto">
         <!-- Header -->
-        <div class="mb-8 flex justify-between items-center">
+        <div class="mb-6 flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-semibold text-gray-800">{{ __('System Settings') }}</h1>
                 <p class="mt-2 text-sm text-gray-600">
