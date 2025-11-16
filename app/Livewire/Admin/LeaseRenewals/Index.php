@@ -17,7 +17,7 @@ class Index extends Component
     public $selectedStatus = '';
     public $searchTerm = '';
     public $showExpiringOnly = false;
-    
+
     protected $queryString = ['selectedProperty', 'selectedStatus', 'searchTerm', 'showExpiringOnly'];
 
     public function updatingSearchTerm()
@@ -60,7 +60,7 @@ class Index extends Component
     public function render()
     {
         $properties = Property::orderBy('name')->get();
-        
+
         // Get expiring leases
         $expiringQuery = LeaseContract::with(['unit.property', 'tenant.user'])
             ->where('status', 'active')

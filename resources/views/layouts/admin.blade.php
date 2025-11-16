@@ -211,6 +211,15 @@
                 {{ __('Vacancy Management') }}
             </a>
 
+            <!-- Lease Renewals -->
+            <a href="{{ route('admin.lease-renewals.index') }}"
+               class="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.lease-renewals.*') ? 'bg-gray-800 text-white' : '' }}">
+                <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-3' : 'mr-3' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                {{ __('Lease Renewals') }}
+            </a>
+
             {{-- TODO: Uncomment when routes are created
             <a href="{{ route('admin.users.index') }}"
                class="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.users.*') ? 'bg-gray-800 text-white' : '' }}">
