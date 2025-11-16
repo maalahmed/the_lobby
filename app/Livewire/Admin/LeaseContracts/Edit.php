@@ -204,6 +204,6 @@ class Edit extends Component
         /** @var \Illuminate\View\View $view */
         $view = view('livewire.admin.lease-contracts.edit');
         
-        return $view->layout('layouts.admin', ['title' => __('Edit Lease Contract')]);
+        return $view]);
     }
 }

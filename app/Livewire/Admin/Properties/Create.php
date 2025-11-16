@@ -137,6 +137,6 @@ class Create extends Component
             'landlords' => $landlords,
         ]);
         
-        return $view->layout('layouts.admin', ['title' => __('Create Property')]);
+        return $view]);
     }
 }

@@ -77,6 +77,6 @@ class Index extends Component
 
         return view('livewire.admin.messages.index', [
             'messages' => $messages,
-        ])->layout('layouts.admin');
+        ]);
     }
 }

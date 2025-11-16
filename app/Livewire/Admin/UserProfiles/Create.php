@@ -68,6 +68,6 @@ class Create extends Component
 
         return view('livewire.admin.user-profiles.create', [
             'users' => $users,
-        ])->layout('layouts.admin');
+        ]);
     }
 }

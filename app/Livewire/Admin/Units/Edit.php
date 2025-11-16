@@ -132,6 +132,6 @@ class Edit extends Component
             'properties' => $properties,
         ]);
         
-        return $view->layout('layouts.admin', ['title' => __('Edit Unit')]);
+        return $view]);
     }
 }

@@ -207,6 +207,6 @@ class Edit extends Component
             'properties' => $properties,
             'tenants' => $tenants,
             'users' => $users,
-        ])->layout('layouts.admin', ['title' => 'Edit Maintenance Request']);
+        ]);
     }
 }

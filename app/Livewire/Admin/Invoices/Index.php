@@ -120,6 +120,6 @@ class Index extends Component
         return view('livewire.admin.invoices.index', [
             'invoices' => $invoices,
             'properties' => $properties,
-        ])->layout('layouts.admin', ['title' => __('Invoices Management')]);
+        ])]);
     }
 }

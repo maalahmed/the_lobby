@@ -149,6 +149,6 @@ class Edit extends Component
         /** @var \Illuminate\View\View $view */
         $view = view('livewire.admin.tenants.edit');
         
-        return $view->layout('layouts.admin', ['title' => __('Edit Tenant')]);
+        return $view]);
     }
 }

@@ -20,6 +20,6 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.admin.audit-logs.show')->layout('layouts.admin');
+        return view('livewire.admin.audit-logs.show');
     }
 }

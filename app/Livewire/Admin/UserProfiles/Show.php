@@ -23,6 +23,6 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.admin.user-profiles.show')->layout('layouts.admin');
+        return view('livewire.admin.user-profiles.show');
     }
 }

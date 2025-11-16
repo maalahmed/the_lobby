@@ -125,6 +125,6 @@ class Edit extends Component
             'landlords' => $landlords,
         ]);
         
-        return $view->layout('layouts.admin', ['title' => __('Edit Property')]);
+        return $view]);
     }
 }

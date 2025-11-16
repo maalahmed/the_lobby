@@ -59,6 +59,6 @@ class Index extends Component
 
         return view('livewire.admin.user-profiles.index', [
             'profiles' => $profiles,
-        ])->layout('layouts.admin');
+        ]);
     }
 }

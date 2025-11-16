@@ -57,6 +57,6 @@ class Create extends Component
 
         return view('livewire.admin.users.create', [
             'roles' => $roles,
-        ])->layout('layouts.admin', ['title' => 'Create User']);
+        ]);
     }
 }

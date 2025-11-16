@@ -106,6 +106,6 @@ class Calendar extends Component
         return view('livewire.admin.vacancies.calendar', [
             'properties' => $properties,
             'calendarData' => $calendarData,
-        ])->layout('layouts.admin');
+        ]);
     }
 }

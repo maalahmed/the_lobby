@@ -57,6 +57,6 @@ class Create extends Component
 
         return view('livewire.admin.messages.create', [
             'users' => $users,
-        ])->layout('layouts.admin');
+        ]);
     }
 }

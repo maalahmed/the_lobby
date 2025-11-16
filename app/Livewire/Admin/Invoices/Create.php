@@ -182,6 +182,6 @@ class Create extends Component
     public function render()
     {
         return view('livewire.admin.invoices.create')
-            ->layout('layouts.admin', ['title' => __('Create Invoice')]);
+            ]);
     }
 }

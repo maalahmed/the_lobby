@@ -28,7 +28,7 @@ class Index extends Component
     public function delete($id)
     {
         $setting = SystemSetting::findOrFail($id);
-        
+
         if (!$setting->is_editable) {
             session()->flash('error', 'This setting cannot be deleted.');
             return;

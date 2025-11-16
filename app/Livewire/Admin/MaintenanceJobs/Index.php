@@ -74,6 +74,6 @@ class Index extends Component
             'jobs' => $jobs,
             'serviceProviders' => $serviceProviders,
             'maintenanceRequests' => $maintenanceRequests,
-        ])->layout('layouts.admin', ['title' => 'Maintenance Jobs']);
+        ]);
     }
 }

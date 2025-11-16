@@ -127,6 +127,6 @@ class Index extends Component
             'properties' => $properties,
         ]);
         
-        return $view->layout('layouts.admin', ['title' => __('Lease Contracts Management')]);
+        return $view]);
     }
 }

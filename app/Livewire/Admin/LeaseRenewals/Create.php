@@ -135,6 +135,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.admin.lease-renewals.create')->layout('layouts.admin');
+        return view('livewire.admin.lease-renewals.create');
     }
 }

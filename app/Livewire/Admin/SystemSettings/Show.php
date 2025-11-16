@@ -17,13 +17,13 @@ class Show extends Component
             'setting_type' => gettype($setting),
             'is_model' => $setting instanceof SystemSetting
         ]);
-        
+
         if ($setting instanceof SystemSetting) {
             $this->setting = $setting;
         } else {
             $this->setting = SystemSetting::findOrFail($setting);
         }
-        
+
         Log::info('SystemSettings Show mount completed', ['setting_id' => $this->setting->id]);
     }
 

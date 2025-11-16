@@ -174,6 +174,6 @@ class Edit extends Component
             'invoices' => $invoices,
             'tenants' => $tenants,
             'properties' => $properties,
-        ])->layout('layouts.admin', ['title' => 'Edit Payment']);
+        ]);
     }
 }

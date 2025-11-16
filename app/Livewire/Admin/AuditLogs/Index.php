@@ -107,6 +107,6 @@ class Index extends Component
             'stats' => $stats,
             'events' => $events,
             'auditableTypes' => $auditableTypes,
-        ])->layout('layouts.admin');
+        ]);
     }
 }

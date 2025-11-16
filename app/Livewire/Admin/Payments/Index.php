@@ -93,6 +93,6 @@ class Index extends Component
         return view('livewire.admin.payments.index', [
             'payments' => $payments,
             'properties' => $properties,
-        ])->layout('layouts.admin', ['title' => 'Payments Management']);
+        ]);
     }
 }

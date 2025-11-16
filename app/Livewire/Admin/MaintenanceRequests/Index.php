@@ -91,6 +91,6 @@ class Index extends Component
         return view('livewire.admin.maintenance-requests.index', [
             'requests' => $requests,
             'properties' => $properties,
-        ])->layout('layouts.admin', ['title' => 'Maintenance Requests']);
+        ]);
     }
 }

@@ -83,6 +83,6 @@ class Create extends Component
 
         return view('livewire.admin.service-providers.create', [
             'users' => $users,
-        ])->layout('layouts.admin');
+        ]);
     }
 }
