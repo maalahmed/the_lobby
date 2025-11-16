@@ -41,6 +41,6 @@ class Show extends Component
         /** @var \Illuminate\View\View $view */
         $view = view('livewire.admin.lease-contracts.show');
         
-        return $view->layout('layouts.admin');
+        return $view->layout('layouts.admin', ['title' => __('Lease Contract Details')]);
     }
 }

@@ -204,6 +204,7 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.invoices.edit')->layout('layouts.admin');
+        return view('livewire.admin.invoices.edit')
+            ->layout('layouts.admin', ['title' => __('Edit Invoice')]);
     }
 }

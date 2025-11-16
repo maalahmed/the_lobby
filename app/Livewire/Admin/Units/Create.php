@@ -137,6 +137,6 @@ class Create extends Component
             'properties' => $properties,
         ]);
         
-        return $view->layout('layouts.admin');
+        return $view->layout('layouts.admin', ['title' => __('Create Unit')]);
     }
 }

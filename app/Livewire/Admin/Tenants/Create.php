@@ -157,6 +157,6 @@ class Create extends Component
             'users' => $users,
         ]);
         
-        return $view->layout('layouts.admin');
+        return $view->layout('layouts.admin', ['title' => __('Create New Tenant')]);
     }
 }

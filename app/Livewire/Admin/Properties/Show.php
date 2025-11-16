@@ -43,6 +43,6 @@ class Show extends Component
         /** @var \Illuminate\View\View $view */
         $view = view('livewire.admin.properties.show');
         
-        return $view->layout('layouts.admin');
+        return $view->layout('layouts.admin', ['title' => __('Property Details')]);
     }
 }

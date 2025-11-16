@@ -137,6 +137,6 @@ class Create extends Component
             'properties' => $properties,
             'tenants' => $tenants,
             'users' => $users,
-        ])->layout('layouts.admin');
+        ])->layout('layouts.admin', ['title' => 'Create Maintenance Request']);
     }
 }

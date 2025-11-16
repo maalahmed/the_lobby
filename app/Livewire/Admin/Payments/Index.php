@@ -47,7 +47,7 @@ class Index extends Component
     public function delete($id)
     {
         $payment = Payment::findOrFail($id);
-
+        
         // Check if payment is completed - prevent deletion
         if ($payment->status === 'completed') {
             session()->flash('error', 'Cannot delete completed payments. Please refund instead.');
@@ -93,6 +93,6 @@ class Index extends Component
         return view('livewire.admin.payments.index', [
             'payments' => $payments,
             'properties' => $properties,
-        ])->layout('layouts.admin');
+        ])->layout('layouts.admin', ['title' => 'Payments Management']);
     }
 }

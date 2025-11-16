@@ -128,6 +128,6 @@ class Edit extends Component
         return view('livewire.admin.maintenance-jobs.edit', [
             'maintenanceRequests' => $maintenanceRequests,
             'serviceProviders' => $serviceProviders,
-        ])->layout('layouts.admin');
+        ])->layout('layouts.admin', ['title' => 'Edit Maintenance Job']);
     }
 }

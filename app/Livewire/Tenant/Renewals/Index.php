@@ -42,6 +42,6 @@ class Index extends Component
         return view('livewire.tenant.renewals.index', [
             'offers' => $offers,
             'stats' => $stats,
-        ]);
+        ])->layout('layouts.admin');
     }
 }

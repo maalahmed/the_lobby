@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class Edit extends Component
 {
     public SystemSetting $setting;
-
+    
     public $key;
     public $value;
     public $type;
@@ -25,13 +25,13 @@ class Edit extends Component
             'setting_type' => gettype($setting),
             'is_model' => $setting instanceof SystemSetting
         ]);
-
+        
         if ($setting instanceof SystemSetting) {
             $this->setting = $setting;
         } else {
             $this->setting = SystemSetting::findOrFail($setting);
         }
-
+        
         $this->key = $this->setting->key;
         $this->value = $this->setting->value;
         $this->type = $this->setting->type;
@@ -39,7 +39,7 @@ class Edit extends Component
         $this->description = $this->setting->description;
         $this->is_public = $this->setting->is_public;
         $this->is_editable = $this->setting->is_editable;
-
+        
         Log::info('SystemSettings Edit mount completed', ['setting_id' => $this->setting->id]);
     }
 
@@ -89,6 +89,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.admin.system-settings.edit')->layout('layouts.admin');
+        return view('livewire.admin.system-settings.edit');
     }
 }

@@ -28,7 +28,7 @@ class Index extends Component
     public function delete($id)
     {
         $setting = SystemSetting::findOrFail($id);
-
+        
         if (!$setting->is_editable) {
             session()->flash('error', 'This setting cannot be deleted.');
             return;
@@ -56,6 +56,6 @@ class Index extends Component
 
         return view('livewire.admin.system-settings.index', [
             'settings' => $settings,
-        ])->layout('layouts.admin');
+        ]);
     }
 }

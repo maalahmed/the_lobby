@@ -118,6 +118,6 @@ class Create extends Component
             'invoices' => $invoices,
             'tenants' => $tenants,
             'properties' => $properties,
-        ])->layout('layouts.admin');
+        ])->layout('layouts.admin', ['title' => 'Create Payment']);
     }
 }

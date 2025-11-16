@@ -132,6 +132,6 @@ class Index extends Component
             'users' => $users,
             'stats' => $stats,
             'roles' => $roles,
-        ])->layout('layouts.admin');
+        ])->layout('layouts.admin', ['title' => 'Users']);
     }
 }
