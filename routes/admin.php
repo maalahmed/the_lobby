@@ -74,8 +74,7 @@ use App\Livewire\Admin\Reports\Index as ReportsIndex;
 |--------------------------------------------------------------------------
 */
 
-// TODO: Add proper authentication middleware after implementing login
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
 
     // Dashboard
     Route::get('/', Dashboard::class)->name('dashboard');
