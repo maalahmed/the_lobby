@@ -269,7 +269,7 @@ class TenantController extends Controller
 
         $activeLease = $tenant->leaseContracts()
             ->where('status', 'active')
-            ->with(['unit.property', 'landlord.user'])
+            ->with(['unit.property', 'landlord'])
             ->first();
 
         $upcomingInvoices = $tenant->invoices()
@@ -305,7 +305,7 @@ class TenantController extends Controller
         }
 
         $leases = $tenant->leaseContracts()
-            ->with(['unit.property', 'landlord.user'])
+            ->with(['unit.property', 'landlord'])
             ->orderBy('start_date', 'desc')
             ->get();
 
@@ -326,7 +326,7 @@ class TenantController extends Controller
         }
 
         $lease = $tenant->leaseContracts()
-            ->with(['unit.property', 'landlord.user'])
+            ->with(['unit.property', 'landlord'])
             ->findOrFail($id);
 
         return response()->json([
