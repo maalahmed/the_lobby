@@ -195,6 +195,17 @@
                 {{ __('Settings') }}
             </a>
 
+            <!-- Roles & Permissions -->
+            @role('admin')
+            <a href="{{ route('admin.roles.index') }}"
+               class="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.roles.*') ? 'bg-gray-800 text-white' : '' }}">
+                <svg class="w-5 h-5 {{ app()->getLocale() === 'ar' ? 'ml-3' : 'mr-3' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+                {{ __('Roles & Permissions') }}
+            </a>
+            @endrole
+
             <!-- Audit Logs -->
             <a href="{{ route('admin.audit-logs.index') }}"
                class="flex items-center px-4 py-3 text-sm font-medium text-gray-300 rounded-lg hover:bg-gray-800 hover:text-white transition {{ request()->routeIs('admin.audit-logs.*') ? 'bg-gray-800 text-white' : '' }}">

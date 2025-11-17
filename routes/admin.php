@@ -218,6 +218,13 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     // Reports
     Route::get('/reports', ReportsIndex::class)->name('reports');
+
+    // Roles & Permissions Management
+    Route::middleware(['role:admin'])->prefix('roles')->name('roles.')->group(function () {
+        Route::get('/', \App\Livewire\Admin\Roles\Index::class)->name('index');
+        Route::get('/create', \App\Livewire\Admin\Roles\Create::class)->name('create');
+        Route::get('/{role}/edit', \App\Livewire\Admin\Roles\Edit::class)->name('edit');
+    });
 });
 
 // Language Switcher
