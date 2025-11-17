@@ -469,7 +469,7 @@ class TenantController extends Controller
     public function submitMaintenanceRequest(Request $request)
     {
         $validated = $request->validate([
-            'unit_id' => 'required|uuid|exists:property_units,id',
+            'unit_id' => 'required|uuid|exists:property_units,uuid',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'priority' => 'required|in:low,medium,high,urgent',
@@ -487,8 +487,11 @@ class TenantController extends Controller
             ], 404);
         }
 
+        // Find the unit by UUID
+        $unit = \App\Models\PropertyUnit::where('uuid', $validated['unit_id'])->first();
+
         $maintenanceRequest = $tenant->maintenanceRequests()->create([
-            'unit_id' => $validated['unit_id'],
+            'unit_id' => $unit->id,
             'title' => $validated['title'],
             'description' => $validated['description'],
             'priority' => $validated['priority'],
