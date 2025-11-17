@@ -100,6 +100,6 @@ class Tenant extends Model
      */
     public function maintenanceRequests()
     {
-        return $this->hasMany(MaintenanceRequest::class, 'reported_by');
+        return $this->hasMany(MaintenanceRequest::class, 'tenant_id');
     }
 }
