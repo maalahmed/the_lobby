@@ -491,6 +491,7 @@ class TenantController extends Controller
         $unit = \App\Models\PropertyUnit::where('uuid', $validated['unit_id'])->first();
 
         $maintenanceRequest = $tenant->maintenanceRequests()->create([
+            'property_id' => $unit->property_id,
             'unit_id' => $unit->id,
             'title' => $validated['title'],
             'description' => $validated['description'],
