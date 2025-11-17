@@ -91,4 +91,31 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('messages', MessageController::class);
     Route::get('messages/thread/{threadId}', [MessageController::class, 'thread']);
     Route::post('messages/{message}/read', [MessageController::class, 'markAsRead']);
+
+    // Tenant-specific routes
+    Route::prefix('tenant')->group(function () {
+        // Dashboard
+        Route::get('dashboard', [TenantController::class, 'dashboard']);
+
+        // Leases
+        Route::get('leases', [TenantController::class, 'leases']);
+        Route::get('leases/{lease}', [TenantController::class, 'leaseDetails']);
+
+        // Payments
+        Route::get('payments', [TenantController::class, 'payments']);
+        Route::post('payments/make', [TenantController::class, 'makePayment']);
+
+        // Invoices
+        Route::get('invoices', [TenantController::class, 'invoices']);
+        Route::get('invoices/{invoice}', [TenantController::class, 'invoiceDetails']);
+
+        // Maintenance Requests
+        Route::get('maintenance-requests', [TenantController::class, 'maintenanceRequests']);
+        Route::post('maintenance-requests/submit', [TenantController::class, 'submitMaintenanceRequest']);
+        Route::get('maintenance-requests/{request}', [TenantController::class, 'maintenanceRequestDetails']);
+
+        // Notifications
+        Route::get('notifications', [TenantController::class, 'notifications']);
+        Route::post('notifications/{notification}/read', [TenantController::class, 'markNotificationAsRead']);
+    });
 });
