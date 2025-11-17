@@ -524,7 +524,7 @@ class TenantController extends Controller
         }
 
         $maintenanceRequest = $tenant->maintenanceRequests()
-            ->with(['unit.property', 'assignedTo', 'images'])
+            ->with(['unit.property', 'assignee'])
             ->findOrFail($id);
 
         return response()->json([
