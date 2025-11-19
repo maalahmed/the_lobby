@@ -7,7 +7,7 @@
                     <h1 class="text-3xl font-bold text-gray-900">Roles & Permissions</h1>
                     <p class="mt-1 text-sm text-gray-600">Manage system roles and their capabilities</p>
                 </div>
-                <a href="{{ route('admin.roles.create') }}" 
+                <a href="{{ route('admin.roles.create') }}"
                    class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -30,9 +30,9 @@
 
             <!-- Search -->
             <div class="mb-6">
-                <input wire:model.live="search" 
-                       type="text" 
-                       placeholder="Search roles..." 
+                <input wire:model.live="search"
+                       type="text"
+                       placeholder="Search roles..."
                        class="w-full md:w-1/3 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
             </div>
 
@@ -77,7 +77,7 @@
                                     {{ $role->created_at->format('M d, Y') }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{{ route('admin.roles.edit', $role->id) }}" 
+                                    <a href="{{ route('admin.roles.edit', $role->id) }}"
                                        class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
                                     @if ($role->name !== 'admin')
                                         <button wire:click="delete"

@@ -27,8 +27,8 @@
                                     </span>
                                 @endif
                             </label>
-                            <input wire:model="name" 
-                                   type="text" 
+                            <input wire:model="name"
+                                   type="text"
                                    id="name"
                                    @if($role->name === 'admin') disabled @endif
                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-500 @enderror @if($role->name === 'admin') bg-gray-100 cursor-not-allowed @endif">
@@ -61,8 +61,8 @@
                                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                                             @foreach($permissions as $permission)
                                                 <label class="flex items-center space-x-2 text-sm hover:bg-gray-50 p-2 rounded cursor-pointer">
-                                                    <input type="checkbox" 
-                                                           wire:model="selectedPermissions" 
+                                                    <input type="checkbox"
+                                                           wire:model="selectedPermissions"
                                                            value="{{ $permission->name }}"
                                                            class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                                     <span class="text-gray-700">{{ ucwords(str_replace('-', ' ', $permission->name)) }}</span>
@@ -93,7 +93,7 @@
 
                     <!-- Actions -->
                     <div class="px-6 py-4 bg-white border-t border-gray-200 flex justify-between">
-                        <a href="{{ route('admin.roles.index') }}" 
+                        <a href="{{ route('admin.roles.index') }}"
                            class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150">
                             Cancel
                         </a>

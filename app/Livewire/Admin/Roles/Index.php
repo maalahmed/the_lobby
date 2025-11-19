@@ -29,7 +29,7 @@ class Index extends Component
     public function delete()
     {
         $role = Role::findOrFail($this->deleteId);
-        
+
         // Prevent deletion of admin role
         if ($role->name === 'admin') {
             session()->flash('error', 'Cannot delete the admin role.');
@@ -43,7 +43,7 @@ class Index extends Component
         }
 
         $role->delete();
-        
+
         session()->flash('success', 'Role deleted successfully.');
         $this->deleteId = null;
     }

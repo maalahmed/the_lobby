@@ -23,14 +23,14 @@ class Edit extends Component
         $this->role = Role::with('permissions')->findOrFail($role);
         $this->name = $this->role->name;
         $this->selectedPermissions = $this->role->permissions->pluck('name')->toArray();
-        
+
         $this->loadPermissions();
     }
 
     private function loadPermissions()
     {
         $permissions = Permission::all();
-        
+
         // Group permissions by prefix
         $this->permissionGroups = [
             'Users' => $permissions->filter(fn($p) => str_starts_with($p->name, 'view-users') || str_contains($p->name, '-users')),
@@ -60,12 +60,12 @@ class Edit extends Component
         ]);
 
         $this->role->update(['name' => strtolower($this->name)]);
-        
+
         // Sync permissions
         $this->role->syncPermissions($this->selectedPermissions);
 
         session()->flash('success', 'Role updated successfully.');
-        
+
         return redirect()->route('admin.roles.index');
     }
 

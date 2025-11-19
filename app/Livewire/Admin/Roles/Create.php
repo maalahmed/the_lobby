@@ -25,7 +25,7 @@ class Create extends Component
     private function loadPermissions()
     {
         $permissions = Permission::all();
-        
+
         // Group permissions by prefix
         $this->permissionGroups = [
             'Users' => $permissions->filter(fn($p) => str_starts_with($p->name, 'view-users') || str_contains($p->name, '-users')),
@@ -46,13 +46,13 @@ class Create extends Component
         $this->validate();
 
         $role = Role::create(['name' => strtolower($this->name)]);
-        
+
         if (!empty($this->selectedPermissions)) {
             $role->givePermissionTo($this->selectedPermissions);
         }
 
         session()->flash('success', 'Role created successfully.');
-        
+
         return redirect()->route('admin.roles.index');
     }
 

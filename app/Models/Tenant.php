@@ -42,7 +42,7 @@ class Tenant extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($tenant) {
             if (empty($tenant->uuid)) {
                 $tenant->uuid = \Illuminate\Support\Str::uuid();
