@@ -102,6 +102,10 @@ class MaintenanceJobController extends Controller
             'special_instructions' => 'nullable|string',
         ]);
 
+        // Map request_id to maintenance_request_id for database
+        $validated['maintenance_request_id'] = $validated['request_id'];
+        unset($validated['request_id']);
+
         $job = MaintenanceJob::create($validated);
 
         // Update maintenance request status
