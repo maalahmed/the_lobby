@@ -15,6 +15,7 @@ class ServiceCategoriesSeeder extends Seeder
     {
         $categories = [
             [
+                'uuid' => Str::uuid(),
                 'name' => 'General Maintenance',
                 'slug' => 'general-maintenance',
                 'description' => 'General maintenance and repair services',
@@ -26,6 +27,7 @@ class ServiceCategoriesSeeder extends Seeder
                 'requires_insurance' => false,
             ],
             [
+                'uuid' => Str::uuid(),
                 'name' => 'Plumbing',
                 'slug' => 'plumbing',
                 'description' => 'Plumbing installation, repair, and maintenance services',
@@ -41,6 +43,7 @@ class ServiceCategoriesSeeder extends Seeder
                 ],
             ],
             [
+                'uuid' => Str::uuid(),
                 'name' => 'Electrical',
                 'slug' => 'electrical',
                 'description' => 'Electrical installation, repair, and maintenance services',
@@ -56,6 +59,7 @@ class ServiceCategoriesSeeder extends Seeder
                 ],
             ],
             [
+                'uuid' => Str::uuid(),
                 'name' => 'HVAC',
                 'slug' => 'hvac',
                 'description' => 'Heating, ventilation, and air conditioning services',
@@ -71,6 +75,7 @@ class ServiceCategoriesSeeder extends Seeder
                 ],
             ],
             [
+                'uuid' => Str::uuid(),
                 'name' => 'Carpentry',
                 'slug' => 'carpentry',
                 'description' => 'Carpentry and woodwork services',
@@ -82,6 +87,7 @@ class ServiceCategoriesSeeder extends Seeder
                 'requires_insurance' => true,
             ],
             [
+                'uuid' => Str::uuid(),
                 'name' => 'Painting',
                 'slug' => 'painting',
                 'description' => 'Interior and exterior painting services',
@@ -93,6 +99,7 @@ class ServiceCategoriesSeeder extends Seeder
                 'requires_insurance' => true,
             ],
             [
+                'uuid' => Str::uuid(),
                 'name' => 'Landscaping',
                 'slug' => 'landscaping',
                 'description' => 'Landscaping, gardening, and outdoor maintenance',
@@ -104,6 +111,7 @@ class ServiceCategoriesSeeder extends Seeder
                 'requires_insurance' => true,
             ],
             [
+                'uuid' => Str::uuid(),
                 'name' => 'Pest Control',
                 'slug' => 'pest-control',
                 'description' => 'Pest control and extermination services',
@@ -119,6 +127,7 @@ class ServiceCategoriesSeeder extends Seeder
                 ],
             ],
             [
+                'uuid' => Str::uuid(),
                 'name' => 'Appliance Repair',
                 'slug' => 'appliance-repair',
                 'description' => 'Home and commercial appliance repair services',
@@ -130,6 +139,7 @@ class ServiceCategoriesSeeder extends Seeder
                 'requires_insurance' => true,
             ],
             [
+                'uuid' => Str::uuid(),
                 'name' => 'Cleaning',
                 'slug' => 'cleaning',
                 'description' => 'Professional cleaning services',
