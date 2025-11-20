@@ -68,6 +68,7 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'phone' => $validated['phone'] ?? null,
+            'user_type' => $validated['role'], // Set user_type based on role
             'status' => 'active',
         ]);
 
@@ -76,6 +77,7 @@ class AuthController extends Controller
 
         return response()->json([
             'user' => new UserResource($user),
+            'user_type' => $user->user_type,
             'token' => $token,
             'message' => __('auth.register_success'),
         ], 201);
@@ -126,6 +128,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'device_name' => 'nullable|string',
+            'app_type' => 'nullable|in:tenant,service_provider,landlord,admin', // Optional: to validate user can access this app
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -142,6 +145,15 @@ class AuthController extends Controller
             ]);
         }
 
+        // Validate user_type matches app_type if app_type is provided
+        if ($request->has('app_type') && $request->app_type !== $user->user_type) {
+            throw ValidationException::withMessages([
+                'email' => [__('auth.wrong_user_type', [
+                    'type' => ucfirst(str_replace('_', ' ', $user->user_type))
+                ])],
+            ]);
+        }
+
         $user->update([
             'last_login_at' => now(),
             'last_login_ip' => $request->ip(),
@@ -152,6 +164,7 @@ class AuthController extends Controller
 
         return response()->json([
             'user' => new UserResource($user->load('roles', 'profile')),
+            'user_type' => $user->user_type,
             'token' => $token,
             'message' => __('auth.login_success'),
         ]);

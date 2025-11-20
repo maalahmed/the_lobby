@@ -26,5 +26,6 @@ return [
     'current_password_incorrect' => 'The provided password does not match your current password.',
     'token_invalid' => 'Invalid or expired token.',
     'unauthorized' => 'Unauthorized access.',
+    'wrong_user_type' => 'This account is registered as a :type. Please use the correct application.',
 
 ];
