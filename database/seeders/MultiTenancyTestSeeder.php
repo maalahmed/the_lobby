@@ -90,6 +90,7 @@ class MultiTenancyTestSeeder extends Seeder
             'type' => 'residential',
             'address_line_1' => '123 Main Street',
             'city' => 'Dubai',
+            'state' => 'Dubai',
             'country' => 'UAE',
             'status' => 'active',
         ]);
@@ -103,6 +104,7 @@ class MultiTenancyTestSeeder extends Seeder
             'type' => 'residential',
             'address_line_1' => '456 Beach Road',
             'city' => 'Dubai',
+            'state' => 'Dubai',
             'country' => 'UAE',
             'status' => 'active',
         ]);
@@ -117,6 +119,7 @@ class MultiTenancyTestSeeder extends Seeder
             'type' => 'commercial',
             'address_line_1' => '789 City Center',
             'city' => 'Abu Dhabi',
+            'state' => 'Abu Dhabi',
             'country' => 'UAE',
             'status' => 'active',
         ]);
@@ -130,6 +133,7 @@ class MultiTenancyTestSeeder extends Seeder
             'type' => 'residential',
             'address_line_1' => '321 Green Avenue',
             'city' => 'Abu Dhabi',
+            'state' => 'Abu Dhabi',
             'country' => 'UAE',
             'status' => 'active',
         ]);
