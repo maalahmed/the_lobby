@@ -74,7 +74,7 @@ class MaintenanceRequest extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($request) {
             if (empty($request->uuid)) {
                 $request->uuid = \Illuminate\Support\Str::uuid();
@@ -154,8 +154,8 @@ class MaintenanceRequest extends Model
      */
     public function isOverdue()
     {
-        return $this->scheduled_date && 
-               $this->scheduled_date->isPast() && 
+        return $this->scheduled_date &&
+               $this->scheduled_date->isPast() &&
                !in_array($this->status, ['completed', 'cancelled']);
     }
 

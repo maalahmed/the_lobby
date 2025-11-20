@@ -54,7 +54,7 @@ class PropertyProvider extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($propertyProvider) {
             if (empty($propertyProvider->uuid)) {
                 $propertyProvider->uuid = \Illuminate\Support\Str::uuid();

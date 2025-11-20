@@ -65,7 +65,7 @@ class User extends Authenticatable
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($user) {
             if (empty($user->uuid)) {
                 $user->uuid = \Illuminate\Support\Str::uuid();

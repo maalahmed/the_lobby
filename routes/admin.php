@@ -38,6 +38,8 @@ use App\Livewire\Admin\ServiceProviders\Index as ServiceProvidersIndex;
 use App\Livewire\Admin\ServiceProviders\Create as ServiceProvidersCreate;
 use App\Livewire\Admin\ServiceProviders\Show as ServiceProvidersShow;
 use App\Livewire\Admin\ServiceProviders\Edit as ServiceProvidersEdit;
+use App\Livewire\Admin\PropertyProviders\Index as PropertyProvidersIndex;
+use App\Livewire\Admin\ServiceCategories\Index as ServiceCategoriesIndex;
 use App\Livewire\Admin\UserProfiles\Index as UserProfilesIndex;
 use App\Livewire\Admin\UserProfiles\Create as UserProfilesCreate;
 use App\Livewire\Admin\UserProfiles\Show as UserProfilesShow;
@@ -218,6 +220,16 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     // Reports
     Route::get('/reports', ReportsIndex::class)->name('reports');
+
+    // Property Providers Management
+    Route::prefix('property-providers')->name('property-providers.')->group(function () {
+        Route::get('/', PropertyProvidersIndex::class)->name('index');
+    });
+
+    // Service Categories Management
+    Route::prefix('service-categories')->name('service-categories.')->group(function () {
+        Route::get('/', ServiceCategoriesIndex::class)->name('index');
+    });
 
     // Roles & Permissions Management
     Route::middleware(['role:admin'])->prefix('roles')->name('roles.')->group(function () {

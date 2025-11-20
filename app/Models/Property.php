@@ -78,7 +78,7 @@ class Property extends Model implements HasMedia
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($property) {
             if (empty($property->uuid)) {
                 $property->uuid = \Illuminate\Support\Str::uuid();

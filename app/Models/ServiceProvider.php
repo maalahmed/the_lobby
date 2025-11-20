@@ -60,7 +60,7 @@ class ServiceProvider extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($provider) {
             if (empty($provider->uuid)) {
                 $provider->uuid = \Illuminate\Support\Str::uuid();
