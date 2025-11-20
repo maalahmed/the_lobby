@@ -54,12 +54,36 @@ class MultiTenancyTestSeeder extends Seeder
         $this->command->info("   ✅ Created: {$providerA->company_name}");
         $this->command->info("   ✅ Created: {$providerB->company_name}");
 
-        // Step 2: Create Properties
-        $this->command->info('2️⃣  Creating Properties...');
+        // Step 2: Create Landlord Users
+        $this->command->info('2️⃣  Creating Landlord Users...');
+
+        $landlordA = User::create([
+            'uuid' => Str::uuid(),
+            'name' => 'John Landlord',
+            'email' => 'john.landlord@abcproperties.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'landlord',
+            'status' => 'active',
+        ]);
+
+        $landlordB = User::create([
+            'uuid' => Str::uuid(),
+            'name' => 'Sarah Landlord',
+            'email' => 'sarah.landlord@xyzproperties.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'landlord',
+            'status' => 'active',
+        ]);
+
+        $this->command->info("   ✅ Created landlord users");
+
+        // Step 3: Create Properties
+        $this->command->info('3️⃣  Creating Properties...');
 
         // Provider A Properties
         $propertyA1 = Property::create([
             'uuid' => Str::uuid(),
+            'owner_id' => $landlordA->id,
             'property_provider_id' => $providerA->id,
             'property_code' => 'PROP-A-001',
             'name' => 'Sunset Apartments',
@@ -72,6 +96,7 @@ class MultiTenancyTestSeeder extends Seeder
 
         $propertyA2 = Property::create([
             'uuid' => Str::uuid(),
+            'owner_id' => $landlordA->id,
             'property_provider_id' => $providerA->id,
             'property_code' => 'PROP-A-002',
             'name' => 'Marina Towers',
@@ -85,6 +110,7 @@ class MultiTenancyTestSeeder extends Seeder
         // Provider B Properties
         $propertyB1 = Property::create([
             'uuid' => Str::uuid(),
+            'owner_id' => $landlordB->id,
             'property_provider_id' => $providerB->id,
             'property_code' => 'PROP-B-001',
             'name' => 'Downtown Plaza',
@@ -97,6 +123,7 @@ class MultiTenancyTestSeeder extends Seeder
 
         $propertyB2 = Property::create([
             'uuid' => Str::uuid(),
+            'owner_id' => $landlordB->id,
             'property_provider_id' => $providerB->id,
             'property_code' => 'PROP-B-002',
             'name' => 'Garden Residences',
@@ -114,8 +141,8 @@ class MultiTenancyTestSeeder extends Seeder
         $providerA->update(['properties_count' => 2]);
         $providerB->update(['properties_count' => 2]);
 
-        // Step 3: Get Service Categories
-        $this->command->info('3️⃣  Getting Service Categories...');
+        // Step 4: Get Service Categories
+        $this->command->info('4️⃣  Getting Service Categories...');
         
         $plumbing = ServiceCategory::where('slug', 'plumbing')->first();
         $electrical = ServiceCategory::where('slug', 'electrical')->first();
@@ -128,8 +155,8 @@ class MultiTenancyTestSeeder extends Seeder
         $this->command->info("   ✅ Found: Plumbing (ID: {$plumbing->id})");
         $this->command->info("   ✅ Found: Electrical (ID: {$electrical->id})");
 
-        // Step 4: Create Service Provider Users
-        $this->command->info('4️⃣  Creating Service Providers...');
+        // Step 5: Create Service Provider Users
+        $this->command->info('5️⃣  Creating Service Providers...');
 
         $user1 = User::create([
             'uuid' => Str::uuid(),
@@ -255,8 +282,8 @@ class MultiTenancyTestSeeder extends Seeder
         $providerB->serviceCategories()->attach($plumbing->id, ['is_active' => true]);
         $providerB->serviceCategories()->attach($electrical->id, ['is_active' => true]);
 
-        // Step 5: Create Maintenance Requests
-        $this->command->info('5️⃣  Creating Maintenance Requests...');
+        // Step 6: Create Maintenance Requests
+        $this->command->info('6️⃣  Creating Maintenance Requests...');
 
         // Provider A - Plumbing requests
         $requestA1 = MaintenanceRequest::create([
@@ -335,8 +362,8 @@ class MultiTenancyTestSeeder extends Seeder
 
         $this->command->info("   ✅ Created 6 maintenance requests");
 
-        // Step 6: Create Maintenance Jobs
-        $this->command->info('6️⃣  Creating Maintenance Jobs...');
+        // Step 7: Create Maintenance Jobs
+        $this->command->info('7️⃣  Creating Maintenance Jobs...');
 
         $job1 = MaintenanceJob::create([
             'uuid' => Str::uuid(),
@@ -366,6 +393,7 @@ class MultiTenancyTestSeeder extends Seeder
             ['Component', 'Count', 'Details'],
             [
                 ['Property Providers', 2, 'ABC Property Management, XYZ Property Services'],
+                ['Landlord Users', 2, 'John & Sarah (owners)'],
                 ['Properties', 4, '2 for each provider'],
                 ['Service Providers', 3, 'SP1 (Provider A, Plumbing), SP2 (Provider B, Electrical), SP3 (Both, Both)'],
                 ['Maintenance Requests', 6, '3 per provider, mixed categories'],
@@ -377,6 +405,8 @@ class MultiTenancyTestSeeder extends Seeder
         $this->command->info('   - mike@plumbing.com / password (Provider A, Plumbing)');
         $this->command->info('   - sarah@electrical.com / password (Provider B, Electrical)');
         $this->command->info('   - alex@multiskill.com / password (Both Providers, Both Categories)');
+        $this->command->info('   - john.landlord@abcproperties.com / password (Landlord A)');
+        $this->command->info('   - sarah.landlord@xyzproperties.com / password (Landlord B)');
         $this->command->newLine();
     }
 }
