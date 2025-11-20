@@ -15,6 +15,7 @@ class MaintenanceRequest extends Model
         'request_number',
         'property_id',
         'unit_id',
+        'service_category_id',
         'title',
         'description',
         'category',
@@ -93,6 +94,14 @@ class MaintenanceRequest extends Model
     }
 
     /**
+     * Get the service category for the maintenance request.
+     */
+    public function serviceCategory()
+    {
+        return $this->belongsTo(ServiceCategory::class);
+    }
+
+    /**
      * Get the unit for the maintenance request.
      */
     public function unit()
@@ -156,5 +165,48 @@ class MaintenanceRequest extends Model
     public function needsCostApproval()
     {
         return $this->cost_approval_required && !$this->cost_approved_at;
+    }
+
+    /**
+     * Scope: Filter by service category
+     */
+    public function scopeByCategory($query, $categoryId)
+    {
+        return $query->where('service_category_id', $categoryId);
+    }
+
+    /**
+     * Scope: Filter by property provider (via property relationship)
+     */
+    public function scopeByPropertyProvider($query, $propertyProviderId)
+    {
+        return $query->whereHas('property', function ($q) use ($propertyProviderId) {
+            $q->where('property_provider_id', $propertyProviderId);
+        });
+    }
+
+    /**
+     * Scope: Available for acceptance by service providers
+     */
+    public function scopeAvailableForAcceptance($query)
+    {
+        return $query->whereIn('status', ['pending', 'approved'])
+            ->whereNull('assigned_to');
+    }
+
+    /**
+     * Scope: Filter by status
+     */
+    public function scopeByStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
+
+    /**
+     * Get the property provider through property relationship
+     */
+    public function getPropertyProviderIdAttribute()
+    {
+        return $this->property?->property_provider_id;
     }
 }

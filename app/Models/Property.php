@@ -15,6 +15,7 @@ class Property extends Model implements HasMedia
     protected $fillable = [
         'uuid',
         'owner_id',
+        'property_provider_id',
         'property_code',
         'name',
         'name_ar',
@@ -97,6 +98,14 @@ class Property extends Model implements HasMedia
     }
 
     /**
+     * Get the property provider.
+     */
+    public function propertyProvider()
+    {
+        return $this->belongsTo(PropertyProvider::class);
+    }
+
+    /**
      * Get the manager of the property.
      */
     public function manager()
@@ -154,5 +163,21 @@ class Property extends Model implements HasMedia
             ->useFallbackPath(public_path('/images/property-placeholder.jpg'));
 
         $this->addMediaCollection('documents');
+    }
+
+    /**
+     * Scope: Filter by property provider
+     */
+    public function scopeByProvider($query, $providerId)
+    {
+        return $query->where('property_provider_id', $providerId);
+    }
+
+    /**
+     * Scope: Filter by owner
+     */
+    public function scopeByOwner($query, $ownerId)
+    {
+        return $query->where('owner_id', $ownerId);
     }
 }

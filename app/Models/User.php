@@ -28,6 +28,7 @@ class User extends Authenticatable
         'phone_verified_at',
         'two_factor_enabled',
         'two_factor_secret',
+        'user_type',
         'status',
         'last_login_at',
         'last_login_ip',
@@ -134,5 +135,77 @@ class User extends Authenticatable
     public function auditLogs()
     {
         return $this->hasMany(AuditLog::class);
+    }
+
+    /**
+     * Scope: Filter by user type
+     */
+    public function scopeByType($query, $type)
+    {
+        return $query->where('user_type', $type);
+    }
+
+    /**
+     * Scope: Tenants only
+     */
+    public function scopeTenants($query)
+    {
+        return $query->where('user_type', 'tenant');
+    }
+
+    /**
+     * Scope: Service providers only
+     */
+    public function scopeServiceProviders($query)
+    {
+        return $query->where('user_type', 'service_provider');
+    }
+
+    /**
+     * Scope: Landlords only
+     */
+    public function scopeLandlords($query)
+    {
+        return $query->where('user_type', 'landlord');
+    }
+
+    /**
+     * Scope: Admins only
+     */
+    public function scopeAdmins($query)
+    {
+        return $query->where('user_type', 'admin');
+    }
+
+    /**
+     * Check if user is a tenant
+     */
+    public function isTenant(): bool
+    {
+        return $this->user_type === 'tenant';
+    }
+
+    /**
+     * Check if user is a service provider
+     */
+    public function isServiceProvider(): bool
+    {
+        return $this->user_type === 'service_provider';
+    }
+
+    /**
+     * Check if user is a landlord
+     */
+    public function isLandlord(): bool
+    {
+        return $this->user_type === 'landlord';
+    }
+
+    /**
+     * Check if user is an admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->user_type === 'admin';
     }
 }
