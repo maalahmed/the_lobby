@@ -24,7 +24,7 @@ class MultiTenancyTestSeeder extends Seeder
 
         // Step 1: Create Property Providers
         $this->command->info('1️⃣  Creating Property Providers...');
-        
+
         $providerA = PropertyProvider::create([
             'uuid' => Str::uuid(),
             'company_name' => 'ABC Property Management',
@@ -147,7 +147,7 @@ class MultiTenancyTestSeeder extends Seeder
 
         // Step 4: Get Service Categories
         $this->command->info('4️⃣  Getting Service Categories...');
-        
+
         $plumbing = ServiceCategory::where('slug', 'plumbing')->first();
         $electrical = ServiceCategory::where('slug', 'electrical')->first();
 

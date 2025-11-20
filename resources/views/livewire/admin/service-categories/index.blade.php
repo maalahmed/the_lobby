@@ -11,9 +11,9 @@
                 <div class="p-6 text-gray-900">
                     <!-- Filters -->
                     <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <input wire:model.live="search" type="text" placeholder="Search categories..." 
+                        <input wire:model.live="search" type="text" placeholder="Search categories..."
                             class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                        
+
                         <select wire:model.live="isActive" class="border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="">All Categories</option>
                             <option value="1">Active Only</option>
