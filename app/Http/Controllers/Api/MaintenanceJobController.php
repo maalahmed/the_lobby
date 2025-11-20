@@ -44,7 +44,38 @@ class MaintenanceJobController extends Controller
      */
     public function index(Request $request)
     {
-        $query = MaintenanceJob::with(['maintenanceRequest', 'serviceProvider']);
+        $query = MaintenanceJob::with(['maintenanceRequest.property.propertyProvider', 'maintenanceRequest.serviceCategory', 'serviceProvider']);
+
+        $user = $request->user();
+
+        // If user is a service provider, filter by their categories and property providers
+        if ($user->isServiceProvider() && $user->serviceProvider) {
+            $serviceProvider = $user->serviceProvider;
+
+            // Get service provider's category IDs
+            $categoryIds = $serviceProvider->serviceCategories()->pluck('service_categories.id');
+
+            // Get property provider IDs this service provider works with
+            $propertyProviderIds = $serviceProvider->activePropertyProviders()->pluck('property_providers.id');
+
+            $query->whereHas('maintenanceRequest', function ($q) use ($categoryIds, $propertyProviderIds, $serviceProvider) {
+                // Filter by service categories the provider offers
+                $q->whereIn('service_category_id', $categoryIds);
+
+                // Filter by property providers the service provider works with
+                $q->whereHas('property', function ($q2) use ($propertyProviderIds) {
+                    $q2->whereIn('property_provider_id', $propertyProviderIds);
+                });
+            })
+            ->where(function ($q) use ($serviceProvider) {
+                // Show jobs assigned to this provider OR available for acceptance
+                $q->where('service_provider_id', $serviceProvider->id)
+                  ->orWhere(function ($q2) {
+                      $q2->whereIn('status', ['pending', 'available'])
+                         ->whereNull('service_provider_id');
+                  });
+            });
+        }
 
         if ($request->filled('request_id')) {
             $query->where('request_id', $request->request_id);
@@ -257,10 +288,37 @@ class MaintenanceJobController extends Controller
      */
     public function accept(Request $request, string $id)
     {
+        $user = $request->user();
+
         $job = MaintenanceJob::where('id', $id)
             ->orWhere('uuid', $id)
-            ->with(['maintenanceRequest', 'serviceProvider'])
+            ->with(['maintenanceRequest.property.propertyProvider', 'maintenanceRequest.serviceCategory', 'serviceProvider'])
             ->firstOrFail();
+
+        // Verify user is a service provider
+        if (!$user->isServiceProvider() || !$user->serviceProvider) {
+            return response()->json([
+                'message' => 'Only service providers can accept jobs.',
+            ], 403);
+        }
+
+        $serviceProvider = $user->serviceProvider;
+
+        // Verify service provider has the required category
+        if (!$serviceProvider->hasCategory($job->maintenanceRequest->service_category_id)) {
+            return response()->json([
+                'message' => 'You are not certified for this service category.',
+                'required_category' => $job->maintenanceRequest->serviceCategory->name,
+            ], 403);
+        }
+
+        // Verify service provider works with this property provider
+        $propertyProviderId = $job->maintenanceRequest->property->property_provider_id;
+        if (!$serviceProvider->activePropertyProviders()->where('property_provider_id', $propertyProviderId)->exists()) {
+            return response()->json([
+                'message' => 'You are not authorized to work for this property provider.',
+            ], 403);
+        }
 
         // Verify job is in assigned or rejected state (allow re-acceptance)
         if (!in_array($job->status, ['assigned', 'rejected'])) {
@@ -270,8 +328,9 @@ class MaintenanceJobController extends Controller
             ], 422);
         }
 
-        // Update job status
+        // Assign job to this service provider if not already assigned
         $job->update([
+            'service_provider_id' => $serviceProvider->id,
             'status' => 'accepted',
         ]);
 
@@ -315,10 +374,25 @@ class MaintenanceJobController extends Controller
             'reason' => 'nullable|string|max:1000'
         ]);
 
+        $user = $request->user();
+
         $job = MaintenanceJob::where('id', $id)
             ->orWhere('uuid', $id)
-            ->with(['maintenanceRequest', 'serviceProvider'])
+            ->with(['maintenanceRequest.property.propertyProvider', 'serviceProvider'])
             ->firstOrFail();
+
+        // Verify user is the assigned service provider
+        if (!$user->isServiceProvider() || !$user->serviceProvider) {
+            return response()->json([
+                'message' => 'Only service providers can reject jobs.',
+            ], 403);
+        }
+
+        if ($job->service_provider_id !== $user->serviceProvider->id) {
+            return response()->json([
+                'message' => 'You can only reject jobs assigned to you.',
+            ], 403);
+        }
 
         // Verify job is in assigned or accepted state
         if (!in_array($job->status, ['assigned', 'accepted'])) {
@@ -379,10 +453,25 @@ class MaintenanceJobController extends Controller
      */
     public function start(Request $request, string $id)
     {
+        $user = $request->user();
+
         $job = MaintenanceJob::where('id', $id)
             ->orWhere('uuid', $id)
-            ->with(['maintenanceRequest', 'serviceProvider'])
+            ->with(['maintenanceRequest.property.propertyProvider', 'serviceProvider'])
             ->firstOrFail();
+
+        // Verify user is the assigned service provider
+        if (!$user->isServiceProvider() || !$user->serviceProvider) {
+            return response()->json([
+                'message' => 'Only service providers can start jobs.',
+            ], 403);
+        }
+
+        if ($job->service_provider_id !== $user->serviceProvider->id) {
+            return response()->json([
+                'message' => 'You can only start jobs assigned to you.',
+            ], 403);
+        }
 
         // Verify job is accepted
         if ($job->status !== 'accepted') {
@@ -450,10 +539,25 @@ class MaintenanceJobController extends Controller
             'work_items.*.amount' => 'required|numeric|min:0',
         ]);
 
+        $user = $request->user();
+
         $job = MaintenanceJob::where('id', $id)
             ->orWhere('uuid', $id)
-            ->with(['maintenanceRequest', 'serviceProvider'])
+            ->with(['maintenanceRequest.property.propertyProvider', 'serviceProvider'])
             ->firstOrFail();
+
+        // Verify user is the assigned service provider
+        if (!$user->isServiceProvider() || !$user->serviceProvider) {
+            return response()->json([
+                'message' => 'Only service providers can complete jobs.',
+            ], 403);
+        }
+
+        if ($job->service_provider_id !== $user->serviceProvider->id) {
+            return response()->json([
+                'message' => 'You can only complete jobs assigned to you.',
+            ], 403);
+        }
 
         // Verify job is in progress
         if ($job->status !== 'in_progress') {
